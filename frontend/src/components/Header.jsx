@@ -34,62 +34,65 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-        isScrolled ? 'bg-black/95 backdrop-blur-xl border-b border-white/10 shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* <button
+          <button
             onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-105"
+            className="text-2xl font-bold text-white hover:text-cyan-400 transition-all duration-300"
           >
             AR
-          </button> */}
+          </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Menu - Centered */}
+          <div className="hidden md:flex items-center justify-center gap-8 flex-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative group"
+                className="text-gray-400 hover:text-cyan-400 transition-all duration-300 font-medium text-sm relative group"
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
           </div>
+
+          <div className="hidden md:block w-10"></div>
 
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-white hover:text-blue-400 transition-all duration-300"
+            className="md:hidden text-white hover:text-cyan-400 transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
           </Button>
         </div>
 
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden mt-4 overflow-hidden transition-all duration-500 ease-out ${
-            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="py-4 border-t border-white/10">
-            {navItems.map((item, index) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-3 text-gray-300 hover:text-blue-400 transition-all duration-300 transform hover:translate-x-2"
-                style={{ transitionDelay: `${index * 50}ms` }}
-              >
-                {item.label}
-              </button>
-            ))}
+        {/* Mobile Menu with backdrop */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 top-[72px] bg-black/95 backdrop-blur-xl z-40">
+            <div className="container mx-auto px-6 py-8">
+              {navItems.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left py-4 text-gray-300 hover:text-cyan-400 transition-all duration-300 text-lg border-b border-white/5"
+                  style={{ 
+                    transitionDelay: `${index * 50}ms`,
+                    animation: `slideIn 0.3s ease-out ${index * 50}ms both`
+                  }}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </nav>
     </header>
   );
