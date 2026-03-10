@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import ExperienceApple from './components/ExperienceApple';
-import SkillsApple from './components/SkillsApple';
-import ProjectsApple from './components/ProjectsApple';
-import CertificationsApple from './components/CertificationsApple';
+import ExperienceCarousel from './components/ExperienceCarousel';
+import SkillsMarquee from './components/SkillsMarquee';
+import ProjectsCarousel from './components/ProjectsCarousel';
+import AchievementsGrid from './components/AchievementsGrid';
 import Contact from './components/Contact';
 
 function App() {
@@ -13,10 +13,10 @@ function App() {
     <div className="App">
       <Header />
       <Hero />
-      <ExperienceApple />
-      <SkillsApple />
-      <ProjectsApple />
-      <CertificationsApple />
+      <ExperienceCarousel />
+      <SkillsMarquee />
+      <ProjectsCarousel />
+      <AchievementsGrid />
       <Contact />
     </div>
   );
