@@ -1,8 +1,8 @@
 // Mock data for portfolio
 
 export const personalInfo = {
-  name: "Alex Rivera",
-  title: "Full Stack Developer",
+  name: "Om Patel",
+  title: "Data Engineer",
   tagline: "Crafting digital experiences with clean code and creative solutions",
   bio: "Passionate developer with 5+ years of experience building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.",
   email: "alex.rivera@example.com",

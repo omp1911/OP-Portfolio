@@ -54,7 +54,9 @@ const Hero = () => {
 
             {/* Title with gradient */}
             <div className="text-2xl md:text-3xl font-semibold">
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-clip-text text-transparent" style={{
+                color: "rgba(6, 182, 212)"
+              }}>
                 {personalInfo.title}
               </span>
               <span className="text-cyan-400"> 👨‍💻</span>
@@ -66,14 +68,14 @@ const Hero = () => {
             </p>
 
             {/* CTA Button */}
-            <div className="pt-4">
+            {/* <div className="pt-4">
               <Button
                 onClick={() => scrollToNext()}
                 className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-6 text-lg rounded-full transition-all duration-300 hover:scale-105"
               >
                 Hire Me
               </Button>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Side - Simple 3D Photo */}
@@ -88,14 +90,15 @@ const Hero = () => {
                 perspective: '1000px'
               }}
             >
-              {/* Simple photo with 3D transform on scroll */}
+              Simple photo with 3D transform on scroll
               <img
                 src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
                 alt="Professional portrait"
-                className="w-full h-auto transition-transform duration-300 ease-out"
+                className="h-auto"
                 style={{
-                  transform: `rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateZ(20px)`,
-                  transformStyle: 'preserve-3d',
+                  // transform: `rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateZ(20px)`,
+                  // transformStyle: 'preserve-3d',
+                  width: '1000px',
                   filter: 'drop-shadow(0 10px 30px rgba(6, 182, 212, 0.2))'
                 }}
               />
