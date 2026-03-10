@@ -1,0 +1,123 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { Briefcase } from 'lucide-react';
+import { experiences } from '../data/mockData';
+
+const ExperienceCard = ({ experience, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`relative pl-8 md:pl-12 pb-12 transform transition-all duration-700 delay-${index * 100} ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+      }`}
+    >
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-0 w-4 h-4 bg-emerald-400 rounded-full border-4 border-black"></div>
+      
+      {/* Timeline line */}
+      {index < experiences.length - 1 && (
+        <div className="absolute left-[7px] top-4 bottom-0 w-0.5 bg-gray-800"></div>
+      )}
+
+      <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-lg p-6 hover:border-emerald-400/50 transition-all duration-300 hover:transform hover:scale-[1.02]">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="p-2 bg-emerald-500/10 rounded-lg">
+            <Briefcase className="text-emerald-400" size={24} />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-white mb-1">{experience.role}</h3>
+            <div className="text-emerald-400 font-medium">{experience.company}</div>
+            <div className="text-gray-500 text-sm mt-1">{experience.duration}</div>
+          </div>
+        </div>
+        
+        <p className="text-gray-400 mb-4 leading-relaxed">{experience.description}</p>
+        
+        <div className="flex flex-wrap gap-2">
+          {experience.technologies.map((tech, idx) => (
+            <span
+              key={idx}
+              className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm border border-gray-700"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Experience = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <section id="experience" ref={sectionRef} className="min-h-screen bg-black py-20 md:py-32">
+      <div className="container mx-auto px-6">
+        <div
+          className={`text-center mb-16 transform transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Experience</h2>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            My professional journey and the companies I've worked with
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          {experiences.map((experience, index) => (
+            <ExperienceCard key={experience.id} experience={experience} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Experience;
