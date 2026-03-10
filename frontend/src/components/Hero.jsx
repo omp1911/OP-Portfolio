@@ -72,23 +72,29 @@ const Hero = () => {
               isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
             }`}
           >
-            <div className="relative w-full max-w-lg lg:max-w-xl">
-              {/* Glow effect behind image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full blur-3xl scale-110"></div>
+            <div className="relative w-full max-w-md lg:max-w-lg">
+              {/* Animated gradient glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/40 via-blue-500/40 to-purple-500/40 rounded-full blur-3xl animate-pulse"></div>
               
-              {/* Professional Photo with styling */}
+              {/* Professional Photo with transparent background effect */}
               <div className="relative">
-                <img
-                  src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
-                  alt="Professional portrait"
-                  className="relative w-full h-auto object-cover rounded-full shadow-2xl shadow-cyan-500/20 border-4 border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105"
-                  style={{
-                    mixBlendMode: 'normal',
-                    filter: 'contrast(1.1) brightness(1.05) saturate(1.1)'
-                  }}
-                />
-                {/* Additional glow on hover */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-400/0 via-blue-400/0 to-purple-400/0 hover:from-cyan-400/10 hover:via-blue-400/10 hover:to-purple-400/10 transition-all duration-500"></div>
+                <div className="relative overflow-hidden rounded-full">
+                  <img
+                    src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
+                    alt="Professional portrait"
+                    className="relative w-full h-auto object-cover shadow-2xl shadow-cyan-500/30 transition-all duration-500 hover:scale-105"
+                    style={{
+                      mixBlendMode: 'lighten',
+                      filter: 'contrast(1.15) brightness(1.1) saturate(1.2)',
+                      maskImage: 'radial-gradient(circle, black 40%, transparent 70%)',
+                      WebkitMaskImage: 'radial-gradient(circle, black 40%, transparent 70%)'
+                    }}
+                  />
+                </div>
+                
+                {/* Glowing border ring */}
+                <div className="absolute inset-0 rounded-full border-4 border-cyan-400/40 animate-pulse"></div>
+                <div className="absolute inset-0 rounded-full border-2 border-blue-500/30"></div>
               </div>
             </div>
           </div>
