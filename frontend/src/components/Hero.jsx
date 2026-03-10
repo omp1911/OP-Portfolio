@@ -5,9 +5,17 @@ import { Button } from './ui/button';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToNext = () => {
@@ -17,10 +25,12 @@ const Hero = () => {
     }
   };
 
+  // Calculate rotation based on scroll (max 15 degrees)
+  const rotateY = Math.min(scrollY / 30, 15);
+  const rotateX = Math.min(scrollY / 50, 5);
+
   return (
     <section id="hero" className="min-h-screen bg-[#0a0a0a] flex items-center relative overflow-hidden">
-      {/* Clean background - no shapes */}
-      
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen py-20">
           
@@ -59,43 +69,36 @@ const Hero = () => {
             <div className="pt-4">
               <Button
                 onClick={() => scrollToNext()}
-                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-6 text-lg rounded-full shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-6 text-lg rounded-full transition-all duration-300 hover:scale-105"
               >
                 Hire Me
               </Button>
             </div>
           </div>
 
-          {/* Right Side - Professional Photo */}
+          {/* Right Side - Simple 3D Photo */}
           <div
             className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}
           >
-            <div className="relative w-full max-w-md lg:max-w-lg">
-              {/* Animated gradient glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/40 via-blue-500/40 to-purple-500/40 rounded-full blur-3xl animate-pulse"></div>
-              
-              {/* Professional Photo with transparent background effect */}
-              <div className="relative">
-                <div className="relative overflow-hidden rounded-full">
-                  <img
-                    src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
-                    alt="Professional portrait"
-                    className="relative w-full h-auto object-cover shadow-2xl shadow-cyan-500/30 transition-all duration-500 hover:scale-105"
-                    style={{
-                      mixBlendMode: 'lighten',
-                      filter: 'contrast(1.15) brightness(1.1) saturate(1.2)',
-                      maskImage: 'radial-gradient(circle, black 40%, transparent 70%)',
-                      WebkitMaskImage: 'radial-gradient(circle, black 40%, transparent 70%)'
-                    }}
-                  />
-                </div>
-                
-                {/* Glowing border ring */}
-                <div className="absolute inset-0 rounded-full border-4 border-cyan-400/40 animate-pulse"></div>
-                <div className="absolute inset-0 rounded-full border-2 border-blue-500/30"></div>
-              </div>
+            <div 
+              className="relative w-full max-w-md lg:max-w-lg"
+              style={{
+                perspective: '1000px'
+              }}
+            >
+              {/* Simple photo with 3D transform on scroll */}
+              <img
+                src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
+                alt="Professional portrait"
+                className="w-full h-auto transition-transform duration-300 ease-out"
+                style={{
+                  transform: `rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateZ(20px)`,
+                  transformStyle: 'preserve-3d',
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
+                }}
+              />
             </div>
           </div>
         </div>
