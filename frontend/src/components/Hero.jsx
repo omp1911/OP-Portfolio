@@ -88,17 +88,15 @@ const Hero = () => {
                 perspective: '1000px'
               }}
             >
-              {/* Simple photo with 3D transform and background removed */}
+              {/* Simple photo with 3D transform on scroll */}
               <img
-                src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
+                src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
                 alt="Professional portrait"
                 className="w-full h-auto transition-transform duration-300 ease-out"
                 style={{
                   transform: `rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateZ(20px)`,
                   transformStyle: 'preserve-3d',
-                  filter: 'drop-shadow(0 10px 30px rgba(6, 182, 212, 0.2))',
-                  maskImage: 'radial-gradient(ellipse 45% 48% at 50% 45%, black 55%, transparent 75%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse 45% 48% at 50% 45%, black 55%, transparent 75%)'
+                  filter: 'drop-shadow(0 10px 30px rgba(6, 182, 212, 0.2))'
                 }}
               />
             </div>
