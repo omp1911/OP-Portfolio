@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import ExperienceModern from './components/ExperienceModern';
-import TechStack from './components/TechStack';
-import Projects from './components/Projects';
-import Certifications from './components/Certifications';
+import ExperienceApple from './components/ExperienceApple';
+import SkillsApple from './components/SkillsApple';
+import ProjectsApple from './components/ProjectsApple';
+import CertificationsApple from './components/CertificationsApple';
 import Contact from './components/Contact';
 
 function App() {
@@ -13,10 +13,10 @@ function App() {
     <div className="App">
       <Header />
       <Hero />
-      <ExperienceModern />
-      <TechStack />
-      <Projects />
-      <Certifications />
+      <ExperienceApple />
+      <SkillsApple />
+      <ProjectsApple />
+      <CertificationsApple />
       <Contact />
     </div>
   );

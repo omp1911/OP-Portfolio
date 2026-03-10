@@ -41,7 +41,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold text-white hover:text-cyan-400 transition-all duration-300"
+            className="text-2xl font-bold text-white hover:text-gray-300 transition-all duration-300"
           >
             AR
           </button>
@@ -52,10 +52,10 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-400 hover:text-cyan-400 transition-all duration-300 font-medium text-sm relative group"
+                className="text-gray-400 hover:text-white transition-all duration-300 font-medium text-sm relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
           </div>
@@ -66,7 +66,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-white hover:text-cyan-400 transition-all duration-300"
+            className="md:hidden text-white hover:text-gray-300 transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
@@ -81,7 +81,7 @@ const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left py-4 text-gray-300 hover:text-cyan-400 transition-all duration-300 text-lg border-b border-white/5"
+                  className="block w-full text-left py-4 text-gray-300 hover:text-white transition-all duration-300 text-lg border-b border-white/5"
                   style={{ 
                     transitionDelay: `${index * 50}ms`,
                     animation: `slideIn 0.3s ease-out ${index * 50}ms both`

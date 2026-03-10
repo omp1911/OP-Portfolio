@@ -51,8 +51,12 @@ const Contact = () => {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Get in Touch</h2>
-          <p className="text-gray-500 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8">
+            <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
+              Get in Touch
+            </span>
+          </h2>
+          <p className="text-gray-500 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
             {personalInfo.bio}
           </p>
 
@@ -62,14 +66,14 @@ const Contact = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            <div className="flex items-center gap-2 text-gray-400 transition-all duration-300 hover:text-cyan-400">
-              <Mail className="text-cyan-400" size={20} />
-              <a href={`mailto:${personalInfo.email}`} className="hover:text-cyan-400 transition-colors duration-300">
+            <div className="flex items-center gap-2 text-gray-400 transition-all duration-300 hover:text-white">
+              <Mail className="text-white" size={20} />
+              <a href={`mailto:${personalInfo.email}`} className="hover:text-white transition-colors duration-300">
                 {personalInfo.email}
               </a>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
-              <MapPin className="text-cyan-400" size={20} />
+              <MapPin className="text-white" size={20} />
               <span>{personalInfo.location}</span>
             </div>
           </div>
@@ -85,7 +89,7 @@ const Contact = () => {
                 key={social.name}
                 variant="outline"
                 size="icon"
-                className="border-white/10 hover:border-cyan-500/30 hover:text-cyan-400 text-gray-400 transition-all duration-300 bg-white/[0.02] hover:bg-cyan-500/10"
+                className="border-white/20 hover:border-white hover:text-white text-gray-400 transition-all duration-300 bg-white/[0.02] hover:bg-white/10"
                 onClick={() => window.open(social.url, '_blank')}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
