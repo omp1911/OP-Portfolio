@@ -33,15 +33,15 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        isScrolled ? 'bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-lg' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold text-white hover:text-emerald-400 transition-colors"
+            className="text-2xl font-bold text-white hover:text-blue-400 transition-all duration-300 transform hover:scale-105"
           >
             AR
           </button>
@@ -52,9 +52,10 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-300 hover:text-emerald-400 transition-colors font-medium"
+                className="text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative group"
               >
                 {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-300"></span>
               </button>
             ))}
           </div>
@@ -63,7 +64,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-white"
+            className="md:hidden text-white hover:text-blue-400 transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
@@ -71,19 +72,24 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-white/10">
-            {navItems.map((item) => (
+        <div
+          className={`md:hidden mt-4 overflow-hidden transition-all duration-500 ease-out ${
+            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="py-4 border-t border-white/10">
+            {navItems.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left py-2 text-gray-300 hover:text-emerald-400 transition-colors"
+                className="block w-full text-left py-3 text-gray-300 hover:text-blue-400 transition-all duration-300 transform hover:translate-x-2"
+                style={{ transitionDelay: `${index * 50}ms` }}
               >
                 {item.label}
               </button>
             ))}
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
