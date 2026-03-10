@@ -66,19 +66,29 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Side - Large Modern Male Animoji */}
+          {/* Right Side - Professional Photo */}
           <div
             className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
             }`}
           >
-            <div className="relative">
-              {/* Glow effect behind emoji */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
+            <div className="relative w-full max-w-lg lg:max-w-xl">
+              {/* Glow effect behind image */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-full blur-3xl scale-110"></div>
               
-              {/* Large male emoji */}
-              <div className="relative text-[20rem] md:text-[25rem] lg:text-[30rem] leading-none">
-                🧑‍💻
+              {/* Professional Photo with styling */}
+              <div className="relative">
+                <img
+                  src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
+                  alt="Professional portrait"
+                  className="relative w-full h-auto object-cover rounded-full shadow-2xl shadow-cyan-500/20 border-4 border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-500 hover:scale-105"
+                  style={{
+                    mixBlendMode: 'normal',
+                    filter: 'contrast(1.1) brightness(1.05) saturate(1.1)'
+                  }}
+                />
+                {/* Additional glow on hover */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-400/0 via-blue-400/0 to-purple-400/0 hover:from-cyan-400/10 hover:via-blue-400/10 hover:to-purple-400/10 transition-all duration-500"></div>
               </div>
             </div>
           </div>
