@@ -5,17 +5,9 @@ import { Button } from './ui/button';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 100);
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToNext = () => {
@@ -24,10 +16,6 @@ const Hero = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  // Subtle 3D rotation based on scroll
-  const rotateY = Math.min(scrollY / 30, 15);
-  const rotateX = Math.min(scrollY / 50, 5);
 
   return (
     <section id="hero" className="min-h-screen bg-[#0f0f0f] flex items-center relative overflow-hidden">
@@ -47,20 +35,20 @@ const Hero = () => {
               <span>I'M</span>
             </div>
 
-            {/* Name */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-              {personalInfo.name}
+            {/* Name with gradient */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
+                {personalInfo.name}
+              </span>
             </h1>
 
-            {/* Title with gradient */}
-            <div className="text-xl md:text-2xl lg:text-3xl font-semibold">
-              <span className="text-cyan-400">
-                {personalInfo.title}
-              </span>
+            {/* Title */}
+            <div className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-400">
+              {personalInfo.title}
             </div>
 
             {/* Description */}
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl">
+            <p className="text-gray-500 text-base md:text-lg leading-relaxed max-w-xl">
               {personalInfo.bio}
             </p>
 
@@ -68,35 +56,24 @@ const Hero = () => {
             <div className="pt-4">
               <Button
                 onClick={() => scrollToSection('contact')}
-                className="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold px-8 py-6 text-base rounded-full transition-all duration-300"
+                className="bg-white hover:bg-gray-200 text-black font-semibold px-8 py-6 text-base rounded-full transition-all duration-300"
               >
                 Hire Me
               </Button>
             </div>
           </div>
 
-          {/* Right Side - 3D Animoji */}
+          {/* Right Side - Simple Image (No 3D) */}
           <div
             className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}
           >
-            <div 
-              className="relative w-full max-w-md lg:max-w-xl"
-              style={{
-                perspective: '1000px'
-              }}
-            >
-              {/* 3D Animoji with smooth rotation */}
+            <div className="relative w-full max-w-md lg:max-w-xl">
               <img
                 src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
                 alt="Professional portrait"
-                className="w-full h-auto transition-transform duration-300 ease-out"
-                style={{
-                  transform: `rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateZ(20px)`,
-                  transformStyle: 'preserve-3d',
-                  filter: 'drop-shadow(0 20px 60px rgba(6, 182, 212, 0.15))'
-                }}
+                className="w-full h-auto"
               />
             </div>
           </div>
@@ -107,7 +84,7 @@ const Hero = () => {
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
         <button
           onClick={scrollToNext}
-          className={`text-gray-600 hover:text-cyan-400 transition-all duration-500 ease-out transform ${
+          className={`text-gray-600 hover:text-white transition-all duration-500 ease-out transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           } delay-1000`}
         >
