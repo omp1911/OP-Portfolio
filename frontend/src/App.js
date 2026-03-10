@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Experience from './components/Experience';
+import ExperienceModern from './components/ExperienceModern';
 import TechStack from './components/TechStack';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Header />
       <Hero />
-      <Experience />
+      <ExperienceModern />
       <TechStack />
       <Projects />
       <Certifications />
