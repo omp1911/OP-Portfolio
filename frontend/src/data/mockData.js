@@ -24,7 +24,12 @@ export const experiences = [
     role: "Senior Full Stack Developer",
     duration: "2022 - Present",
     description: "Leading development of cloud-based SaaS platform serving 10K+ users. Architected microservices infrastructure and implemented CI/CD pipelines.",
-    technologies: ["React", "Node.js", "AWS", "MongoDB"]
+    technologies: ["React", "Node.js", "AWS", "MongoDB"],
+    project: {
+      name: "Cloud Analytics Platform",
+      description: "Built a real-time analytics dashboard processing 1M+ events daily. Implemented microservices architecture with auto-scaling capabilities, reducing infrastructure costs by 40%.",
+      technologies: ["React", "Node.js", "AWS Lambda", "DynamoDB", "Redis"]
+    }
   },
   {
     id: 2,
