@@ -23,18 +23,18 @@ const Header = () => {
   };
 
   const navItems = [
-    { label: 'Home', id: 'hero' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Tech Stack', id: 'tech-stack' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Certifications', id: 'certifications' },
-    { label: 'Contact', id: 'contact' }
+    { label: 'About', id: 'hero' },
+    { label: 'Work Experience', id: 'experience' },
+    { label: 'Skills', id: 'tech-stack' },
+    { label: 'Portfolio', id: 'projects' },
+    { label: 'Achievements', id: 'certifications' },
+    { label: 'Get in Touch', id: 'contact' }
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-        isScrolled ? 'bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-black/95 backdrop-blur-xl border-b border-white/10 shadow-lg' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
