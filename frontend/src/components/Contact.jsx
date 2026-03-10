@@ -44,10 +44,13 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" ref={sectionRef} className="min-h-screen bg-black py-20 md:py-32 flex items-center">
-      <div className="container mx-auto px-6">
+    <section id="contact" ref={sectionRef} className="min-h-screen bg-black py-20 md:py-32 flex items-center relative">
+      {/* Background decoration */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl"></div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div
-          className={`max-w-4xl mx-auto text-center transform transition-all duration-700 ${
+          className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -57,28 +60,37 @@ const Contact = () => {
           </p>
 
           {/* Contact Info */}
-          <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <div className="flex items-center gap-2 text-gray-400">
-              <Mail className="text-emerald-400" size={20} />
-              <a href={`mailto:${personalInfo.email}`} className="hover:text-emerald-400 transition-colors">
+          <div
+            className={`flex flex-wrap justify-center gap-6 mb-12 transform transition-all duration-1000 ease-out delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <div className="flex items-center gap-2 text-gray-400 transition-all duration-300 hover:text-blue-400 hover:scale-105">
+              <Mail className="text-blue-400" size={20} />
+              <a href={`mailto:${personalInfo.email}`} className="hover:text-blue-400 transition-colors duration-300">
                 {personalInfo.email}
               </a>
             </div>
-            <div className="flex items-center gap-2 text-gray-400">
-              <MapPin className="text-emerald-400" size={20} />
+            <div className="flex items-center gap-2 text-gray-400 transition-all duration-300 hover:text-blue-400 hover:scale-105">
+              <MapPin className="text-blue-400" size={20} />
               <span>{personalInfo.location}</span>
             </div>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center gap-4 mb-16">
-            {socialLinks.map((social) => (
+          <div
+            className={`flex justify-center gap-4 mb-16 transform transition-all duration-1000 ease-out delay-300 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            {socialLinks.map((social, index) => (
               <Button
                 key={social.name}
                 variant="outline"
                 size="icon"
-                className="border-gray-700 hover:border-emerald-400 hover:text-emerald-400 text-gray-400 transition-all duration-300"
+                className="border-gray-700 hover:border-blue-400 hover:text-blue-400 text-gray-400 transition-all duration-500 ease-out hover:scale-110 hover:shadow-lg hover:shadow-blue-400/20"
                 onClick={() => window.open(social.url, '_blank')}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {getSocialIcon(social.icon)}
               </Button>
@@ -86,7 +98,11 @@ const Contact = () => {
           </div>
 
           {/* Footer */}
-          <div className="border-t border-gray-800 pt-8">
+          <div
+            className={`border-t border-gray-800 pt-8 transform transition-all duration-1000 ease-out delay-500 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <p className="text-gray-600 text-sm">
               © {new Date().getFullYear()} {personalInfo.name}. Built with React & FastAPI.
             </p>
