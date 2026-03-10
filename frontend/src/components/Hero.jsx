@@ -88,7 +88,7 @@ const Hero = () => {
                 perspective: '1000px'
               }}
             >
-              {/* Simple photo with 3D transform on scroll */}
+              {/* Simple photo with 3D transform on scroll - blended background */}
               <img
                 src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/ll8qcwg7_IMG_3290.jpg"
                 alt="Professional portrait"
@@ -96,7 +96,8 @@ const Hero = () => {
                 style={{
                   transform: `rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateZ(20px)`,
                   transformStyle: 'preserve-3d',
-                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
+                  mixBlendMode: 'lighten',
+                  filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.5))'
                 }}
               />
             </div>
