@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
-import { Button } from './ui/button';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,12 +18,12 @@ const Hero = () => {
 
   return (
     <section id="hero" className="min-h-screen bg-[#0f0f0f] flex items-center relative overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-20">
+      <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen py-24">
           
           {/* Left Side - Text Content */}
           <div
-            className={`space-y-6 transform transition-all duration-1000 ease-out ${
+            className={`space-y-8 transform transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
             }`}
           >
@@ -36,40 +35,30 @@ const Hero = () => {
             </div>
 
             {/* Name with gradient */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
                 {personalInfo.name}
               </span>
             </h1>
 
             {/* Title */}
-            <div className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-400">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-400">
               {personalInfo.title}
             </div>
 
             {/* Description */}
-            <p className="text-gray-500 text-base md:text-lg leading-relaxed max-w-xl">
+            <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-xl">
               {personalInfo.bio}
             </p>
-
-            {/* CTA Button */}
-            <div className="pt-4">
-              <Button
-                onClick={() => scrollToSection('contact')}
-                className="bg-white hover:bg-gray-200 text-black font-semibold px-8 py-6 text-base rounded-full transition-all duration-300"
-              >
-                Hire Me
-              </Button>
-            </div>
           </div>
 
-          {/* Right Side - Simple Image (No 3D) */}
+          {/* Right Side - Simple Image */}
           <div
             className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}
           >
-            <div className="relative w-full max-w-md lg:max-w-xl">
+            <div className="relative w-full max-w-lg lg:max-w-xl">
               <img
                 src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
                 alt="Professional portrait"
@@ -93,13 +82,6 @@ const Hero = () => {
       </div>
     </section>
   );
-};
-
-const scrollToSection = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
 };
 
 export default Hero;

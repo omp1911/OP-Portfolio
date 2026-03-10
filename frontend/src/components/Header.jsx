@@ -38,16 +38,9 @@ const Header = () => {
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold text-white hover:text-gray-300 transition-all duration-300"
-          >
-            AR
-          </button>
-
+        <div className="flex items-center justify-center">
           {/* Desktop Menu - Centered */}
-          <div className="hidden md:flex items-center justify-center gap-8 flex-1">
+          <div className="hidden md:flex items-center justify-center gap-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -59,8 +52,6 @@ const Header = () => {
               </button>
             ))}
           </div>
-
-          <div className="hidden md:block w-10"></div>
 
           {/* Mobile Menu Button */}
           <Button
