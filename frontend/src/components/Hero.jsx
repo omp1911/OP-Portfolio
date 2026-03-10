@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
+import { Button } from './ui/button';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,69 +18,83 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
-      {/* Subtle ambient glow - no grid */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-black to-purple-500/5"></div>
+    <section id="hero" className="min-h-screen bg-[#0a0a0a] flex items-center relative overflow-hidden">
+      {/* Clean background - no shapes */}
       
-      {/* Floating orbs for depth */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto flex flex-col items-center justify-center">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen py-20">
           
-          {/* Large Animoji with Overlay Text */}
-          <div className="relative mb-12">
-            {/* Big Animoji */}
-            <div
-              className={`text-[20rem] md:text-[25rem] leading-none transform transition-all duration-1500 ease-out ${
-                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-              }`}
-            >
-              {personalInfo.animoji}
+          {/* Left Side - Text Content */}
+          <div
+            className={`space-y-6 transform transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}
+          >
+            {/* Greeting */}
+            <div className="flex items-center gap-2 text-gray-400 text-lg">
+              <span>HI THERE</span>
+              <span className="text-2xl">👋</span>
+              <span>I'M</span>
             </div>
-            
-            {/* Overlaid Text on Animoji */}
-            <div
-              className={`absolute inset-0 flex items-center justify-center transform transition-all duration-1500 delay-300 ease-out ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-              <div className="text-center px-8">
-                <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl">
-                  {personalInfo.name}
-                </h1>
-                <p className="text-xl md:text-2xl text-blue-400 font-semibold drop-shadow-lg">
-                  {personalInfo.title}
-                </p>
+
+            {/* Name */}
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
+              {personalInfo.name}
+            </h1>
+
+            {/* Title with gradient */}
+            <div className="text-2xl md:text-3xl font-semibold">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {personalInfo.title}
+              </span>
+              <span className="text-cyan-400"> 👨‍💻</span>
+            </div>
+
+            {/* Description */}
+            <p className="text-gray-400 text-lg leading-relaxed max-w-xl">
+              {personalInfo.bio}
+            </p>
+
+            {/* CTA Button */}
+            <div className="pt-4">
+              <Button
+                onClick={() => scrollToNext()}
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-6 text-lg rounded-full shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:scale-105"
+              >
+                Hire Me
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Side - Large Modern Male Animoji */}
+          <div
+            className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}
+          >
+            <div className="relative">
+              {/* Glow effect behind emoji */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
+              
+              {/* Large male emoji */}
+              <div className="relative text-[20rem] md:text-[25rem] lg:text-[30rem] leading-none">
+                🧑‍💻
               </div>
             </div>
           </div>
-
-          {/* Brief About Section */}
-          <div
-            className={`text-center max-w-3xl transform transition-all duration-1500 delay-600 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-              {personalInfo.bio}
-            </p>
-            <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-              {personalInfo.tagline}
-            </p>
-          </div>
-
-          {/* Scroll indicator */}
-          <button
-            onClick={scrollToNext}
-            className={`mt-16 text-white/60 hover:text-blue-400 transition-all duration-500 ease-out transform ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            } delay-1000 animate-bounce-slow hover:scale-110`}
-          >
-            <ChevronDown size={40} />
-          </button>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+        <button
+          onClick={scrollToNext}
+          className={`text-white/40 hover:text-cyan-400 transition-all duration-500 ease-out transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          } delay-1000 animate-bounce-slow hover:scale-110`}
+        >
+          <ChevronDown size={40} />
+        </button>
       </div>
     </section>
   );
