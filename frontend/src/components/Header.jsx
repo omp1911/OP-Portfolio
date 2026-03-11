@@ -32,60 +32,62 @@ const Header = () => {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-        isScrolled || isMobileMenuOpen ? 'bg-black/90 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
-      }`}
-    >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-center">
-          {/* Desktop Menu - Centered */}
-          <div className="hidden md:flex items-center justify-center gap-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-400 hover:text-white transition-all duration-300 font-medium text-sm relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-white hover:text-gray-300 transition-all duration-300"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
-        </div>
-
-        {/* Mobile Menu with backdrop - always has background when open */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 top-[72px] bg-black/95 backdrop-blur-xl z-40">
-            <div className="container mx-auto px-6 py-8">
-              {navItems.map((item, index) => (
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+          isScrolled ? 'bg-black/90 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
+        }`}
+      >
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-center">
+            {/* Desktop Menu - Centered */}
+            <div className="hidden md:flex items-center justify-center gap-8">
+              {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left py-4 text-gray-300 hover:text-white transition-all duration-300 text-lg border-b border-white/5"
-                  style={{ 
-                    transitionDelay: `${index * 50}ms`,
-                    animation: `slideIn 0.3s ease-out ${index * 50}ms both`
-                  }}
+                  className="text-gray-400 hover:text-white transition-all duration-300 font-medium text-sm relative group"
                 >
                   {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
                 </button>
               ))}
             </div>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-white hover:text-gray-300 transition-all duration-300 z-[60]"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </Button>
           </div>
-        )}
-      </nav>
-    </header>
+        </nav>
+      </header>
+
+      {/* Mobile Menu - Full screen dark background */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 bg-black z-40">
+          <div className="container mx-auto px-6 pt-24 pb-8">
+            {navItems.map((item, index) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="block w-full text-left py-4 text-gray-300 hover:text-white transition-all duration-300 text-lg border-b border-white/5"
+                style={{ 
+                  transitionDelay: `${index * 50}ms`,
+                  animation: `slideIn 0.3s ease-out ${index * 50}ms both`
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

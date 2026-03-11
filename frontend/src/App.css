@@ -64,7 +64,7 @@ body {
   animation: marquee-left 30s linear infinite;
 }
 
-/* Slide animations from page bottom - Apple style */
+/* Slide animations from page bottom - Apple style - faster */
 @keyframes slide-from-bottom {
   0% {
     opacity: 0;
@@ -76,7 +76,7 @@ body {
   }
 }
 
-/* Slide animations from page top - Apple style */
+/* Slide animations from page top - Apple style - faster */
 @keyframes slide-from-top {
   0% {
     opacity: 0;
@@ -89,11 +89,11 @@ body {
 }
 
 .animate-slide-from-bottom {
-  animation: slide-from-bottom 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-from-bottom 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-from-top {
-  animation: slide-from-top 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-from-top 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Fade in on scroll */
