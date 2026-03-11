@@ -64,6 +64,17 @@ body {
   animation: marquee-left 30s linear infinite;
 }
 
+/* Faster marquee on mobile */
+@media (max-width: 768px) {
+  .animate-marquee-right {
+    animation: marquee-right 12s linear infinite;
+  }
+  
+  .animate-marquee-left {
+    animation: marquee-left 12s linear infinite;
+  }
+}
+
 /* Slide animations from page bottom - Apple style - faster */
 @keyframes slide-from-bottom {
   0% {
