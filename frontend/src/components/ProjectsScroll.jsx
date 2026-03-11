@@ -4,17 +4,20 @@ import { projects } from '../data/mockData';
 const ProjectsScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isInSection, setIsInSection] = useState(false);
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
+  const scrollTimeout = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        setIsInSection(entry.isIntersecting);
         if (entry.isIntersecting) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -30,35 +33,58 @@ const ProjectsScroll = () => {
 
   useEffect(() => {
     const handleWheel = (e) => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !isInSection) return;
       
       const rect = containerRef.current.getBoundingClientRect();
       const isInView = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
       
       if (isInView) {
-        e.preventDefault();
-        
-        if (e.deltaY > 0) {
-          setCurrentIndex(prev => {
-            if (prev < projects.length - 1) {
-              return prev + 1;
-            }
-            return prev;
-          });
-        } else {
-          setCurrentIndex(prev => {
-            if (prev > 0) {
-              return prev - 1;
-            }
-            return prev;
-          });
+        // Clear previous timeout
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current);
+        }
+
+        // Debounce scroll events for smooth transition
+        scrollTimeout.current = setTimeout(() => {
+          if (e.deltaY > 0) {
+            // Scrolling down
+            setCurrentIndex(prev => {
+              if (prev < projects.length - 1) {
+                e.preventDefault();
+                return prev + 1;
+              }
+              // Allow normal scroll to next section
+              return prev;
+            });
+          } else {
+            // Scrolling up
+            setCurrentIndex(prev => {
+              if (prev > 0) {
+                e.preventDefault();
+                return prev - 1;
+              }
+              // Allow normal scroll to previous section
+              return prev;
+            });
+          }
+        }, 100);
+
+        // Only prevent if not at boundaries
+        if ((e.deltaY > 0 && currentIndex < projects.length - 1) ||
+            (e.deltaY < 0 && currentIndex > 0)) {
+          e.preventDefault();
         }
       }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, []);
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [isInSection, currentIndex]);
 
   const currentProject = projects[currentIndex];
 
@@ -77,12 +103,26 @@ const ProjectsScroll = () => {
           </h2>
         </div>
 
+        {/* Dot Indicators - Only visible when in section */}
+        {isInSection && (
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
+            {projects.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                  idx === currentIndex ? 'bg-white h-8' : 'bg-gray-600'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
         {/* Single Project - Replaces on Scroll */}
         <div className="max-w-6xl mx-auto" key={currentIndex}>
           <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
             currentIndex % 2 === 0 ? '' : 'lg:grid-flow-dense'
           }`}>
-            {/* Image with complete blend - both fade opacity and radial gradient */}
+            {/* Image with complete blend */}
             <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-2'}`}>
               <div className="relative max-w-md mx-auto">
                 <img

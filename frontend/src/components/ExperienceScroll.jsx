@@ -4,17 +4,20 @@ import { experiences } from '../data/mockData';
 const ExperienceScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isInSection, setIsInSection] = useState(false);
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
+  const scrollTimeout = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        setIsInSection(entry.isIntersecting);
         if (entry.isIntersecting) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -30,37 +33,58 @@ const ExperienceScroll = () => {
 
   useEffect(() => {
     const handleWheel = (e) => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !isInSection) return;
       
       const rect = containerRef.current.getBoundingClientRect();
       const isInView = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
       
       if (isInView) {
-        e.preventDefault();
-        
-        if (e.deltaY > 0) {
-          // Scrolling down
-          setCurrentIndex(prev => {
-            if (prev < experiences.length - 1) {
-              return prev + 1;
-            }
-            return prev;
-          });
-        } else {
-          // Scrolling up
-          setCurrentIndex(prev => {
-            if (prev > 0) {
-              return prev - 1;
-            }
-            return prev;
-          });
+        // Clear previous timeout
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current);
+        }
+
+        // Debounce scroll events for smooth transition
+        scrollTimeout.current = setTimeout(() => {
+          if (e.deltaY > 0) {
+            // Scrolling down
+            setCurrentIndex(prev => {
+              if (prev < experiences.length - 1) {
+                e.preventDefault();
+                return prev + 1;
+              }
+              // Allow normal scroll to next section
+              return prev;
+            });
+          } else {
+            // Scrolling up
+            setCurrentIndex(prev => {
+              if (prev > 0) {
+                e.preventDefault();
+                return prev - 1;
+              }
+              // Allow normal scroll to previous section
+              return prev;
+            });
+          }
+        }, 100);
+
+        // Only prevent if not at boundaries
+        if ((e.deltaY > 0 && currentIndex < experiences.length - 1) ||
+            (e.deltaY < 0 && currentIndex > 0)) {
+          e.preventDefault();
         }
       }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, []);
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [isInSection, currentIndex]);
 
   const currentExperience = experiences[currentIndex];
 
@@ -80,22 +104,24 @@ const ExperienceScroll = () => {
           </h2>
         </div>
 
-        {/* Dot Indicators - Left Side */}
-        <div className="fixed left-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
-          {experiences.map((_, idx) => (
-            <div
-              key={idx}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                idx === currentIndex ? 'bg-white h-8' : 'bg-gray-600'
-              }`}
-            />
-          ))}
-        </div>
+        {/* Dot Indicators - Only visible when in section */}
+        {isInSection && (
+          <div className="absolute left-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
+            {experiences.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                  idx === currentIndex ? 'bg-white h-8' : 'bg-gray-600'
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Single Experience - Replaces on Scroll */}
         <div className="max-w-4xl mx-auto">
           <div
-            className="text-center py-8 transform transition-all duration-700 ease-out"
+            className="text-center py-8 transform transition-all duration-700 ease-out opacity-100"
             key={currentIndex}
           >
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
