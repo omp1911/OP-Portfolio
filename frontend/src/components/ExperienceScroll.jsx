@@ -5,6 +5,7 @@ const ExperienceScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isInSection, setIsInSection] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('up');
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const scrollTimeout = useRef(null);
@@ -39,41 +40,33 @@ const ExperienceScroll = () => {
       const isInView = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
       
       if (isInView) {
-        // Clear previous timeout
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current);
-        }
-
-        // Debounce scroll events for smooth transition
-        scrollTimeout.current = setTimeout(() => {
-          if (e.deltaY > 0) {
-            // Scrolling down
-            setCurrentIndex(prev => {
-              if (prev < experiences.length - 1) {
-                e.preventDefault();
-                return prev + 1;
-              }
-              // Allow normal scroll to next section
-              return prev;
-            });
-          } else {
-            // Scrolling up
-            setCurrentIndex(prev => {
-              if (prev > 0) {
-                e.preventDefault();
-                return prev - 1;
-              }
-              // Allow normal scroll to previous section
-              return prev;
-            });
-          }
-        }, 100);
-
         // Only prevent if not at boundaries
         if ((e.deltaY > 0 && currentIndex < experiences.length - 1) ||
             (e.deltaY < 0 && currentIndex > 0)) {
           e.preventDefault();
         }
+
+        // Clear previous timeout
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current);
+        }
+
+        // Increased debounce for smoother transitions
+        scrollTimeout.current = setTimeout(() => {
+          if (e.deltaY > 0) {
+            // Scrolling down - next item comes from bottom
+            if (currentIndex < experiences.length - 1) {
+              setSlideDirection('up');
+              setCurrentIndex(prev => prev + 1);
+            }
+          } else {
+            // Scrolling up - previous item comes from top
+            if (currentIndex > 0) {
+              setSlideDirection('down');
+              setCurrentIndex(prev => prev - 1);
+            }
+          }
+        }, 400);
       }
     };
 
@@ -91,7 +84,7 @@ const ExperienceScroll = () => {
   return (
     <section id="experience" ref={sectionRef} className="bg-[#0f0f0f] py-16 relative min-h-screen flex items-center">
       <div className="container mx-auto px-6 md:px-12 lg:px-20" ref={containerRef}>
-        {/* Section Title */}
+        {/* Section Title - Fixed */}
         <div
           className={`mb-12 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
@@ -118,10 +111,14 @@ const ExperienceScroll = () => {
           </div>
         )}
 
-        {/* Single Experience - Replaces on Scroll */}
+        {/* Single Experience - Slides in from bottom or top */}
         <div className="max-w-4xl mx-auto">
           <div
-            className="text-center py-8 transform transition-all duration-700 ease-out opacity-100"
+            className={`text-center py-8 transition-all duration-700 ease-out ${
+              slideDirection === 'up' 
+                ? 'animate-slide-up' 
+                : 'animate-slide-down'
+            }`}
             key={currentIndex}
           >
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">

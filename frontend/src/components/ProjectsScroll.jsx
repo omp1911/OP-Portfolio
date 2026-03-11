@@ -5,6 +5,7 @@ const ProjectsScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isInSection, setIsInSection] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('up');
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const scrollTimeout = useRef(null);
@@ -39,41 +40,33 @@ const ProjectsScroll = () => {
       const isInView = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
       
       if (isInView) {
-        // Clear previous timeout
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current);
-        }
-
-        // Debounce scroll events for smooth transition
-        scrollTimeout.current = setTimeout(() => {
-          if (e.deltaY > 0) {
-            // Scrolling down
-            setCurrentIndex(prev => {
-              if (prev < projects.length - 1) {
-                e.preventDefault();
-                return prev + 1;
-              }
-              // Allow normal scroll to next section
-              return prev;
-            });
-          } else {
-            // Scrolling up
-            setCurrentIndex(prev => {
-              if (prev > 0) {
-                e.preventDefault();
-                return prev - 1;
-              }
-              // Allow normal scroll to previous section
-              return prev;
-            });
-          }
-        }, 100);
-
         // Only prevent if not at boundaries
         if ((e.deltaY > 0 && currentIndex < projects.length - 1) ||
             (e.deltaY < 0 && currentIndex > 0)) {
           e.preventDefault();
         }
+
+        // Clear previous timeout
+        if (scrollTimeout.current) {
+          clearTimeout(scrollTimeout.current);
+        }
+
+        // Increased debounce for smoother transitions
+        scrollTimeout.current = setTimeout(() => {
+          if (e.deltaY > 0) {
+            // Scrolling down - next item comes from bottom
+            if (currentIndex < projects.length - 1) {
+              setSlideDirection('up');
+              setCurrentIndex(prev => prev + 1);
+            }
+          } else {
+            // Scrolling up - previous item comes from top
+            if (currentIndex > 0) {
+              setSlideDirection('down');
+              setCurrentIndex(prev => prev - 1);
+            }
+          }
+        }, 400);
       }
     };
 
@@ -91,6 +84,7 @@ const ProjectsScroll = () => {
   return (
     <section id="projects" ref={sectionRef} className="bg-[#0f0f0f] py-16 relative min-h-screen flex items-center">
       <div className="container mx-auto px-6 md:px-12 lg:px-20" ref={containerRef}>
+        {/* Section Title - Fixed */}
         <div
           className={`mb-12 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
@@ -117,11 +111,18 @@ const ProjectsScroll = () => {
           </div>
         )}
 
-        {/* Single Project - Replaces on Scroll */}
-        <div className="max-w-6xl mx-auto" key={currentIndex}>
-          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-            currentIndex % 2 === 0 ? '' : 'lg:grid-flow-dense'
-          }`}>
+        {/* Single Project - Slides in from bottom or top */}
+        <div className="max-w-6xl mx-auto">
+          <div 
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center transition-all duration-700 ease-out ${
+              currentIndex % 2 === 0 ? '' : 'lg:grid-flow-dense'
+            } ${
+              slideDirection === 'up' 
+                ? 'animate-slide-up' 
+                : 'animate-slide-down'
+            }`}
+            key={currentIndex}
+          >
             {/* Image with complete blend */}
             <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-2'}`}>
               <div className="relative max-w-md mx-auto">

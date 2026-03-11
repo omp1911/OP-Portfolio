@@ -64,6 +64,38 @@ body {
   animation: marquee-left 30s linear infinite;
 }
 
+/* Slide animations - from bottom */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide animations - from top */
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.7s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.7s ease-out forwards;
+}
+
 /* Fade in on scroll */
 .fade-in {
   opacity: 0;
