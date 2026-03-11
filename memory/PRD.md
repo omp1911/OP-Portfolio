@@ -45,12 +45,14 @@ Build a modern, sleek, personal portfolio website inspired by Apple's product pa
 ## Bug Fixes (March 11, 2026)
 - [x] Fixed: Page skipping all work experiences when scrolling fast
 - [x] Fixed: Background scrolling while in Work Experience/Portfolio sections
-- [x] Implemented proper `position: sticky` scroll-hijacking mechanism
+- [x] Implemented proper `position: sticky` scroll-hijacking mechanism (desktop only)
 - [x] Added scroll accumulator to prevent accidental fast skipping
-- [x] Fixed: Mobile touch navigation not working - added touch event handlers
-- [x] Added mobile dot indicators for Work Experience and Portfolio sections
+- [x] Fixed: Mobile touch navigation not working - completely rewrote mobile approach
+- [x] Mobile: Removed sticky positioning (doesn't work well on mobile browsers)
+- [x] Mobile: Dot indicators now positioned below section title (properly accessible)
+- [x] Mobile: Added swipe hint text for user guidance
 - [x] Increased marquee speed on mobile (30s → 12s)
-- [x] Simplified scroll logic for better mobile performance
+- [x] Simplified scroll logic with separate desktop/mobile behavior
 
 ## Technical Implementation Notes
 - **Scroll Hijacking:** Uses `position: sticky` with `top: 0` to lock the content viewport
