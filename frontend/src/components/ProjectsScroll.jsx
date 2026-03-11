@@ -9,6 +9,7 @@ const ProjectsScroll = () => {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const scrollTimeout = useRef(null);
+  const isTransitioning = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,7 +35,7 @@ const ProjectsScroll = () => {
 
   useEffect(() => {
     const handleWheel = (e) => {
-      if (!containerRef.current || !isInSection) return;
+      if (!containerRef.current || !isInSection || isTransitioning.current) return;
       
       const rect = containerRef.current.getBoundingClientRect();
       const isInView = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
@@ -51,22 +52,32 @@ const ProjectsScroll = () => {
           clearTimeout(scrollTimeout.current);
         }
 
-        // Increased debounce for smoother transitions
+        // Increased debounce to prevent fast scrolling skipping items
         scrollTimeout.current = setTimeout(() => {
+          if (isTransitioning.current) return;
+
           if (e.deltaY > 0) {
             // Scrolling down - next item comes from bottom
             if (currentIndex < projects.length - 1) {
+              isTransitioning.current = true;
               setSlideDirection('up');
               setCurrentIndex(prev => prev + 1);
+              setTimeout(() => {
+                isTransitioning.current = false;
+              }, 1000);
             }
           } else {
             // Scrolling up - previous item comes from top
             if (currentIndex > 0) {
+              isTransitioning.current = true;
               setSlideDirection('down');
               setCurrentIndex(prev => prev - 1);
+              setTimeout(() => {
+                isTransitioning.current = false;
+              }, 1000);
             }
           }
-        }, 400);
+        }, 800);
       }
     };
 
@@ -78,6 +89,17 @@ const ProjectsScroll = () => {
       }
     };
   }, [isInSection, currentIndex]);
+
+  const handleDotClick = (index) => {
+    if (index !== currentIndex && !isTransitioning.current) {
+      isTransitioning.current = true;
+      setSlideDirection(index > currentIndex ? 'up' : 'down');
+      setCurrentIndex(index);
+      setTimeout(() => {
+        isTransitioning.current = false;
+      }, 1000);
+    }
+  };
 
   const currentProject = projects[currentIndex];
 
@@ -97,29 +119,31 @@ const ProjectsScroll = () => {
           </h2>
         </div>
 
-        {/* Dot Indicators - Only visible when in section */}
+        {/* Dot Indicators - Clickable */}
         {isInSection && (
           <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
             {projects.map((_, idx) => (
-              <div
+              <button
                 key={idx}
-                className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                onClick={() => handleDotClick(idx)}
+                className={`w-2 h-2 rounded-full transition-all duration-500 cursor-pointer hover:bg-gray-400 ${
                   idx === currentIndex ? 'bg-white h-8' : 'bg-gray-600'
                 }`}
+                aria-label={`Go to project ${idx + 1}`}
               />
             ))}
           </div>
         )}
 
-        {/* Single Project - Slides in from bottom or top */}
-        <div className="max-w-6xl mx-auto">
+        {/* Single Project - Slides from page end */}
+        <div className="max-w-6xl mx-auto overflow-hidden">
           <div 
-            className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center transition-all duration-700 ease-out ${
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center transition-all duration-1000 ease-out ${
               currentIndex % 2 === 0 ? '' : 'lg:grid-flow-dense'
             } ${
               slideDirection === 'up' 
-                ? 'animate-slide-up' 
-                : 'animate-slide-down'
+                ? 'animate-slide-from-bottom' 
+                : 'animate-slide-from-top'
             }`}
             key={currentIndex}
           >

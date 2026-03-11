@@ -64,11 +64,11 @@ body {
   animation: marquee-left 30s linear infinite;
 }
 
-/* Slide animations - from bottom */
-@keyframes slide-up {
+/* Slide animations from page bottom - Apple style */
+@keyframes slide-from-bottom {
   0% {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(100vh);
   }
   100% {
     opacity: 1;
@@ -76,11 +76,11 @@ body {
   }
 }
 
-/* Slide animations - from top */
-@keyframes slide-down {
+/* Slide animations from page top - Apple style */
+@keyframes slide-from-top {
   0% {
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translateY(-100vh);
   }
   100% {
     opacity: 1;
@@ -88,12 +88,12 @@ body {
   }
 }
 
-.animate-slide-up {
-  animation: slide-up 0.7s ease-out forwards;
+.animate-slide-from-bottom {
+  animation: slide-from-bottom 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.animate-slide-down {
-  animation: slide-down 0.7s ease-out forwards;
+.animate-slide-from-top {
+  animation: slide-from-top 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Fade in on scroll */

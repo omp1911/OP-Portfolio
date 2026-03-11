@@ -34,7 +34,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-        isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
+        isScrolled || isMobileMenuOpen ? 'bg-black/90 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
@@ -64,7 +64,7 @@ const Header = () => {
           </Button>
         </div>
 
-        {/* Mobile Menu with backdrop */}
+        {/* Mobile Menu with backdrop - always has background when open */}
         {isMobileMenuOpen && (
           <div className="md:hidden fixed inset-0 top-[72px] bg-black/95 backdrop-blur-xl z-40">
             <div className="container mx-auto px-6 py-8">
