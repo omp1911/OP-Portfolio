@@ -77,10 +77,10 @@ const AchievementsGrid = () => {
   }, []);
 
   return (
-    <section id="certifications" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-20 relative">
+    <section id="certifications" ref={sectionRef} className="bg-[#0f0f0f] py-16 relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div
-          className={`mb-16 transform transition-all duration-1000 ease-out ${
+          className={`mb-12 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >
@@ -91,7 +91,6 @@ const AchievementsGrid = () => {
           </h2>
         </div>
 
-        {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 max-w-5xl">
           {certifications.map((cert, index) => (
             <AchievementItem key={cert.id} cert={cert} index={index} />

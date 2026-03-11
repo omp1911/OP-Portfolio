@@ -44,7 +44,7 @@ const Contact = () => {
   }, []);
 
   return (
-    <section id="contact" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-20 flex items-center relative">
+    <section id="contact" ref={sectionRef} className="bg-[#0f0f0f] py-16 flex items-center relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
         <div
           className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ease-out ${
@@ -60,7 +60,6 @@ const Contact = () => {
             {personalInfo.bio}
           </p>
 
-          {/* Contact Info */}
           <div
             className={`flex flex-wrap justify-center gap-8 mb-12 transform transition-all duration-1000 ease-out delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -78,7 +77,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Social Links */}
           <div
             className={`flex justify-center gap-4 mb-16 transform transition-all duration-1000 ease-out delay-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -98,7 +96,6 @@ const Contact = () => {
             ))}
           </div>
 
-          {/* Footer */}
           <div
             className={`border-t border-white/5 pt-8 transform transition-all duration-1000 ease-out delay-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'

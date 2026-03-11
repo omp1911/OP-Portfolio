@@ -29,10 +29,10 @@ const SkillsMarquee = () => {
   const duplicatedSkills = [...techStack, ...techStack, ...techStack];
 
   return (
-    <section id="tech-stack" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-20 relative flex items-center">
+    <section id="tech-stack" ref={sectionRef} className="bg-[#0f0f0f] py-16 relative flex items-center">
       <div className="w-full">
         <div
-          className={`mb-16 container mx-auto px-6 md:px-12 lg:px-20 transform transition-all duration-1000 ease-out ${
+          className={`mb-12 container mx-auto px-6 md:px-12 lg:px-20 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >
@@ -43,9 +43,7 @@ const SkillsMarquee = () => {
           </h2>
         </div>
 
-        {/* Scrolling Lines with smaller font */}
         <div className="space-y-8 overflow-hidden">
-          {/* Line 1 - Left to Right */}
           <div className="relative">
             <div className="flex animate-marquee-right">
               {duplicatedSkills.map((tech, idx) => (
@@ -58,7 +56,6 @@ const SkillsMarquee = () => {
             </div>
           </div>
 
-          {/* Line 2 - Right to Left */}
           <div className="relative">
             <div className="flex animate-marquee-left">
               {duplicatedSkills.map((tech, idx) => (
@@ -71,7 +68,6 @@ const SkillsMarquee = () => {
             </div>
           </div>
 
-          {/* Line 3 - Left to Right */}
           <div className="relative">
             <div className="flex animate-marquee-right">
               {duplicatedSkills.map((tech, idx) => (
