@@ -4,25 +4,19 @@ import { projects } from '../data/mockData';
 const ProjectsScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [isLocked, setIsLocked] = useState(false);
   const [slideDirection, setSlideDirection] = useState('up');
   const sectionRef = useRef(null);
   const stickyRef = useRef(null);
   const isTransitioning = useRef(false);
   const scrollAccumulator = useRef(0);
   const touchStartY = useRef(0);
-  const touchEndY = useRef(0);
 
-  // Check if we should lock scrolling based on sticky element position
-  const checkLockStatus = useCallback(() => {
+  // Check if sticky element is at top of viewport
+  const isStuck = useCallback(() => {
     if (!stickyRef.current || !sectionRef.current) return false;
-    
     const stickyRect = stickyRef.current.getBoundingClientRect();
     const sectionRect = sectionRef.current.getBoundingClientRect();
-    
-    // Lock when sticky element is at the top of viewport AND section hasn't scrolled past
-    const isStuck = stickyRect.top <= 0 && sectionRect.bottom > window.innerHeight;
-    return isStuck;
+    return stickyRect.top <= 5 && sectionRect.bottom > window.innerHeight;
   }, []);
 
   useEffect(() => {
@@ -42,32 +36,39 @@ const ProjectsScroll = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const shouldLock = checkLockStatus();
-      setIsLocked(shouldLock);
-    };
+  // Navigate to next/previous item
+  const navigateToItem = useCallback((direction) => {
+    if (isTransitioning.current) return false;
+    
+    const canGoNext = currentIndex < projects.length - 1;
+    const canGoPrev = currentIndex > 0;
+    
+    if (direction === 'next' && canGoNext) {
+      isTransitioning.current = true;
+      setSlideDirection('up');
+      setCurrentIndex(prev => prev + 1);
+      setTimeout(() => { isTransitioning.current = false; }, 500);
+      return true;
+    } else if (direction === 'prev' && canGoPrev) {
+      isTransitioning.current = true;
+      setSlideDirection('down');
+      setCurrentIndex(prev => prev - 1);
+      setTimeout(() => { isTransitioning.current = false; }, 500);
+      return true;
+    }
+    return false;
+  }, [currentIndex]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [checkLockStatus]);
-
+  // Desktop wheel event
   useEffect(() => {
     const handleWheel = (e) => {
-      if (!stickyRef.current) return;
+      if (!isStuck()) return;
       
-      const stickyRect = stickyRef.current.getBoundingClientRect();
-      const isAtTop = Math.abs(stickyRect.top) < 10;
+      const canGoNext = currentIndex < projects.length - 1;
+      const canGoPrev = currentIndex > 0;
       
-      if (!isAtTop) return;
-      
-      const canScrollDown = currentIndex < projects.length - 1;
-      const canScrollUp = currentIndex > 0;
-      
-      // Always prevent default when we're stuck and can navigate
-      if ((e.deltaY > 0 && canScrollDown) || (e.deltaY < 0 && canScrollUp)) {
+      if ((e.deltaY > 0 && canGoNext) || (e.deltaY < 0 && canGoPrev)) {
         e.preventDefault();
-        e.stopPropagation();
         
         if (isTransitioning.current) return;
         
@@ -75,119 +76,49 @@ const ProjectsScroll = () => {
         
         if (scrollAccumulator.current >= 80) {
           scrollAccumulator.current = 0;
-          isTransitioning.current = true;
-          
-          if (e.deltaY > 0 && canScrollDown) {
-            setSlideDirection('up');
-            setCurrentIndex(prev => prev + 1);
-          } else if (e.deltaY < 0 && canScrollUp) {
-            setSlideDirection('down');
-            setCurrentIndex(prev => prev - 1);
-          }
-          
-          setTimeout(() => {
-            isTransitioning.current = false;
-          }, 500);
+          navigateToItem(e.deltaY > 0 ? 'next' : 'prev');
         }
       }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [currentIndex]);
+  }, [currentIndex, isStuck, navigateToItem]);
 
-  // Touch events for mobile
-  useEffect(() => {
-    const handleTouchStart = (e) => {
-      if (!stickyRef.current) return;
-      const stickyRect = stickyRef.current.getBoundingClientRect();
-      const isAtTop = Math.abs(stickyRect.top) < 10;
-      if (isAtTop) {
-        touchStartY.current = e.touches[0].clientY;
-      }
-    };
+  // Mobile touch handlers - attached to the sticky container
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
 
-    const handleTouchMove = (e) => {
-      if (!stickyRef.current) return;
-      const stickyRect = stickyRef.current.getBoundingClientRect();
-      const isAtTop = Math.abs(stickyRect.top) < 10;
-      
-      if (!isAtTop) return;
-      
-      touchEndY.current = e.touches[0].clientY;
-      const deltaY = touchStartY.current - touchEndY.current;
-      
-      const canScrollDown = currentIndex < projects.length - 1;
-      const canScrollUp = currentIndex > 0;
-      
-      // Prevent default scroll if we can navigate
-      if ((deltaY > 0 && canScrollDown) || (deltaY < 0 && canScrollUp)) {
-        e.preventDefault();
-      }
-    };
-
-    const handleTouchEnd = () => {
-      if (!stickyRef.current || isTransitioning.current) return;
-      
-      const stickyRect = stickyRef.current.getBoundingClientRect();
-      const isAtTop = Math.abs(stickyRect.top) < 10;
-      
-      if (!isAtTop) return;
-      
-      const deltaY = touchStartY.current - touchEndY.current;
-      const minSwipeDistance = 50; // Minimum swipe distance in pixels
-      
-      const canScrollDown = currentIndex < projects.length - 1;
-      const canScrollUp = currentIndex > 0;
-      
-      if (Math.abs(deltaY) > minSwipeDistance) {
-        isTransitioning.current = true;
-        
-        if (deltaY > 0 && canScrollDown) {
-          // Swiped up - go to next
-          setSlideDirection('up');
-          setCurrentIndex(prev => prev + 1);
-        } else if (deltaY < 0 && canScrollUp) {
-          // Swiped down - go to previous
-          setSlideDirection('down');
-          setCurrentIndex(prev => prev - 1);
-        }
-        
-        setTimeout(() => {
-          isTransitioning.current = false;
-        }, 500);
-      }
-      
-      // Reset touch positions
-      touchStartY.current = 0;
-      touchEndY.current = 0;
-    };
-
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+  const handleTouchEnd = (e) => {
+    if (!isStuck() || isTransitioning.current) return;
     
-    return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [currentIndex]);
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaY = touchStartY.current - touchEndY;
+    const minSwipeDistance = 30;
+    
+    const canGoNext = currentIndex < projects.length - 1;
+    const canGoPrev = currentIndex > 0;
+    
+    if (Math.abs(deltaY) > minSwipeDistance) {
+      if (deltaY > 0 && canGoNext) {
+        navigateToItem('next');
+      } else if (deltaY < 0 && canGoPrev) {
+        navigateToItem('prev');
+      }
+    }
+  };
 
   const handleDotClick = (index) => {
     if (index !== currentIndex && !isTransitioning.current) {
       isTransitioning.current = true;
       setSlideDirection(index > currentIndex ? 'up' : 'down');
       setCurrentIndex(index);
-      setTimeout(() => {
-        isTransitioning.current = false;
-      }, 500);
+      setTimeout(() => { isTransitioning.current = false; }, 500);
     }
   };
 
   const currentProject = projects[currentIndex];
-  
-  // Calculate spacer height: (number of items - 1) * viewport height
   const spacerHeight = (projects.length - 1) * 100;
 
   return (
@@ -199,7 +130,9 @@ const ProjectsScroll = () => {
     >
       <div 
         ref={stickyRef}
-        className="sticky top-0 h-screen flex items-center overflow-hidden"
+        className="sticky top-0 h-screen flex items-center overflow-hidden touch-pan-y"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="container mx-auto px-6 md:px-12 lg:px-20 w-full">
           {/* Section Title */}
@@ -215,7 +148,7 @@ const ProjectsScroll = () => {
             </h2>
           </div>
 
-          {/* Dot Indicators - Clickable */}
+          {/* Dot Indicators - Desktop only */}
           <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
             {projects.map((_, idx) => (
               <button
@@ -230,15 +163,29 @@ const ProjectsScroll = () => {
             ))}
           </div>
 
+          {/* Mobile dot indicators */}
+          <div className="flex md:hidden justify-center gap-2 absolute bottom-16 left-1/2 -translate-x-1/2">
+            {projects.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleDotClick(idx)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-white w-6' : 'bg-gray-600'
+                }`}
+                aria-label={`Go to project ${idx + 1}`}
+              />
+            ))}
+          </div>
+
           {/* Progress indicator */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500 text-sm">
             {currentIndex + 1} / {projects.length}
           </div>
 
-          {/* Single Project - Slides with animation */}
+          {/* Single Project Content */}
           <div className="max-w-6xl mx-auto overflow-hidden">
             <div 
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center transition-all duration-500 ease-out ${
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center transition-all duration-500 ease-out ${
                 currentIndex % 2 === 0 ? '' : 'lg:grid-flow-dense'
               } ${
                 slideDirection === 'up' 
@@ -247,7 +194,7 @@ const ProjectsScroll = () => {
               }`}
               key={currentIndex}
             >
-              {/* Image with complete blend */}
+              {/* Image */}
               <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-2'}`}>
                 <div className="relative max-w-md mx-auto">
                   <img
