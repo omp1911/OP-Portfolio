@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import ExperienceVertical from './components/ExperienceVertical';
+import ExperienceScroll from './components/ExperienceScroll';
 import SkillsMarquee from './components/SkillsMarquee';
-import ProjectsVertical from './components/ProjectsVertical';
+import ProjectsScroll from './components/ProjectsScroll';
 import AchievementsGrid from './components/AchievementsGrid';
 import Contact from './components/Contact';
 
@@ -13,9 +13,9 @@ function App() {
     <div className="App">
       <Header />
       <Hero />
-      <ExperienceVertical />
+      <ExperienceScroll />
       <SkillsMarquee />
-      <ProjectsVertical />
+      <ProjectsScroll />
       <AchievementsGrid />
       <Contact />
     </div>
