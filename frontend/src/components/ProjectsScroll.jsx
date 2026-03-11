@@ -10,6 +10,8 @@ const ProjectsScroll = () => {
   const stickyRef = useRef(null);
   const isTransitioning = useRef(false);
   const scrollAccumulator = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
 
   // Check if we should lock scrolling based on sticky element position
   const checkLockStatus = useCallback(() => {
@@ -92,6 +94,84 @@ const ProjectsScroll = () => {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
+  }, [currentIndex]);
+
+  // Touch events for mobile
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      if (!stickyRef.current) return;
+      const stickyRect = stickyRef.current.getBoundingClientRect();
+      const isAtTop = Math.abs(stickyRect.top) < 10;
+      if (isAtTop) {
+        touchStartY.current = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (!stickyRef.current) return;
+      const stickyRect = stickyRef.current.getBoundingClientRect();
+      const isAtTop = Math.abs(stickyRect.top) < 10;
+      
+      if (!isAtTop) return;
+      
+      touchEndY.current = e.touches[0].clientY;
+      const deltaY = touchStartY.current - touchEndY.current;
+      
+      const canScrollDown = currentIndex < projects.length - 1;
+      const canScrollUp = currentIndex > 0;
+      
+      // Prevent default scroll if we can navigate
+      if ((deltaY > 0 && canScrollDown) || (deltaY < 0 && canScrollUp)) {
+        e.preventDefault();
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (!stickyRef.current || isTransitioning.current) return;
+      
+      const stickyRect = stickyRef.current.getBoundingClientRect();
+      const isAtTop = Math.abs(stickyRect.top) < 10;
+      
+      if (!isAtTop) return;
+      
+      const deltaY = touchStartY.current - touchEndY.current;
+      const minSwipeDistance = 50; // Minimum swipe distance in pixels
+      
+      const canScrollDown = currentIndex < projects.length - 1;
+      const canScrollUp = currentIndex > 0;
+      
+      if (Math.abs(deltaY) > minSwipeDistance) {
+        isTransitioning.current = true;
+        
+        if (deltaY > 0 && canScrollDown) {
+          // Swiped up - go to next
+          setSlideDirection('up');
+          setCurrentIndex(prev => prev + 1);
+        } else if (deltaY < 0 && canScrollUp) {
+          // Swiped down - go to previous
+          setSlideDirection('down');
+          setCurrentIndex(prev => prev - 1);
+        }
+        
+        setTimeout(() => {
+          isTransitioning.current = false;
+        }, 500);
+      }
+      
+      // Reset touch positions
+      touchStartY.current = 0;
+      touchEndY.current = 0;
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
   }, [currentIndex]);
 
   const handleDotClick = (index) => {
