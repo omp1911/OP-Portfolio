@@ -164,13 +164,13 @@ const ProjectsScroll = () => {
           </div>
 
           {/* Mobile dot indicators */}
-          <div className="flex md:hidden justify-center gap-2 absolute bottom-16 left-1/2 -translate-x-1/2">
+          <div className="flex md:hidden justify-center gap-3 absolute bottom-20 left-1/2 -translate-x-1/2 z-30">
             {projects.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleDotClick(idx)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'bg-white w-6' : 'bg-gray-600'
+                className={`h-3 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-white w-8' : 'bg-gray-600 w-3'
                 }`}
                 aria-label={`Go to project ${idx + 1}`}
               />
@@ -178,7 +178,7 @@ const ProjectsScroll = () => {
           </div>
 
           {/* Progress indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-500 text-sm">
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-sm z-30">
             {currentIndex + 1} / {projects.length}
           </div>
 
