@@ -5,19 +5,29 @@ const ProjectsScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [slideDirection, setSlideDirection] = useState('up');
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   const stickyRef = useRef(null);
   const isTransitioning = useRef(false);
   const scrollAccumulator = useRef(0);
   const touchStartY = useRef(0);
 
-  // Check if sticky element is at top of viewport
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Check if sticky element is at top of viewport (desktop only)
   const isStuck = useCallback(() => {
+    if (isMobile) return false;
     if (!stickyRef.current || !sectionRef.current) return false;
     const stickyRect = stickyRef.current.getBoundingClientRect();
     const sectionRect = sectionRef.current.getBoundingClientRect();
     return stickyRect.top <= 5 && sectionRect.bottom > window.innerHeight;
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,6 +71,8 @@ const ProjectsScroll = () => {
 
   // Desktop wheel event
   useEffect(() => {
+    if (isMobile) return;
+    
     const handleWheel = (e) => {
       if (!isStuck()) return;
       
@@ -83,31 +95,7 @@ const ProjectsScroll = () => {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [currentIndex, isStuck, navigateToItem]);
-
-  // Mobile touch handlers - attached to the sticky container
-  const handleTouchStart = (e) => {
-    touchStartY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!isStuck() || isTransitioning.current) return;
-    
-    const touchEndY = e.changedTouches[0].clientY;
-    const deltaY = touchStartY.current - touchEndY;
-    const minSwipeDistance = 30;
-    
-    const canGoNext = currentIndex < projects.length - 1;
-    const canGoPrev = currentIndex > 0;
-    
-    if (Math.abs(deltaY) > minSwipeDistance) {
-      if (deltaY > 0 && canGoNext) {
-        navigateToItem('next');
-      } else if (deltaY < 0 && canGoPrev) {
-        navigateToItem('prev');
-      }
-    }
-  };
+  }, [currentIndex, isStuck, navigateToItem, isMobile]);
 
   const handleDotClick = (index) => {
     if (index !== currentIndex && !isTransitioning.current) {
@@ -118,37 +106,61 @@ const ProjectsScroll = () => {
     }
   };
 
+  // Mobile touch handlers
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (isTransitioning.current) return;
+    
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaY = touchStartY.current - touchEndY;
+    const minSwipeDistance = 50;
+    
+    if (Math.abs(deltaY) > minSwipeDistance) {
+      if (deltaY > 0) {
+        navigateToItem('next');
+      } else {
+        navigateToItem('prev');
+      }
+    }
+  };
+
   const currentProject = projects[currentIndex];
-  const spacerHeight = (projects.length - 1) * 100;
+  
+  // Desktop: use sticky with spacer height
+  // Mobile: simple min-height screen
+  const spacerHeight = isMobile ? 0 : (projects.length - 1) * 100;
 
   return (
     <section 
       id="projects" 
       ref={sectionRef} 
       className="bg-[#0f0f0f] relative"
-      style={{ minHeight: `${100 + spacerHeight}vh` }}
+      style={{ minHeight: isMobile ? '100vh' : `${100 + spacerHeight}vh` }}
     >
       <div 
         ref={stickyRef}
-        className="sticky top-0 h-screen flex items-center overflow-hidden touch-pan-y"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        className={`${isMobile ? '' : 'sticky top-0'} h-screen flex items-center overflow-hidden`}
+        onTouchStart={isMobile ? handleTouchStart : undefined}
+        onTouchEnd={isMobile ? handleTouchEnd : undefined}
       >
         <div className="container mx-auto px-6 md:px-12 lg:px-20 w-full">
           {/* Section Title */}
           <div
-            className={`mb-8 transform transition-all duration-1000 ease-out ${
+            className={`mb-4 md:mb-8 transform transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
             }`}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
               <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
                 Portfolio
               </span>
             </h2>
           </div>
 
-          {/* Dot Indicators - Desktop only */}
+          {/* Desktop Dot Indicators */}
           <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
             {projects.map((_, idx) => (
               <button
@@ -163,29 +175,24 @@ const ProjectsScroll = () => {
             ))}
           </div>
 
-          {/* Mobile dot indicators */}
-          <div className="flex md:hidden justify-center gap-3 absolute bottom-20 left-1/2 -translate-x-1/2 z-30">
+          {/* Mobile Dot Indicators - positioned below title */}
+          <div className="flex md:hidden justify-center gap-3 mb-4">
             {projects.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleDotClick(idx)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'bg-white w-8' : 'bg-gray-600 w-3'
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-white w-6' : 'bg-gray-600 w-2'
                 }`}
                 aria-label={`Go to project ${idx + 1}`}
               />
             ))}
           </div>
 
-          {/* Progress indicator */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-sm z-30">
-            {currentIndex + 1} / {projects.length}
-          </div>
-
           {/* Single Project Content */}
           <div className="max-w-6xl mx-auto overflow-hidden">
             <div 
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center transition-all duration-500 ease-out ${
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center transition-all duration-500 ease-out ${
                 currentIndex % 2 === 0 ? '' : 'lg:grid-flow-dense'
               } ${
                 slideDirection === 'up' 
@@ -196,7 +203,7 @@ const ProjectsScroll = () => {
             >
               {/* Image */}
               <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-2'}`}>
-                <div className="relative max-w-md mx-auto">
+                <div className="relative max-w-sm md:max-w-md mx-auto">
                   <img
                     src={currentProject.image}
                     alt={currentProject.title}
@@ -211,24 +218,24 @@ const ProjectsScroll = () => {
               </div>
 
               {/* Text Content */}
-              <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
-                <h3 className="text-3xl md:text-4xl font-bold mb-4">
+              <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-1 lg:row-start-1'} text-center lg:text-left`}>
+                <h3 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
                   <span className="bg-gradient-to-r from-white via-gray-400 to-white bg-clip-text text-transparent">
                     {currentProject.title}
                   </span>
                 </h3>
 
-                <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-6">
+                <p className="text-sm md:text-lg text-gray-400 leading-relaxed mb-4 md:mb-6 px-2 md:px-0">
                   {currentProject.description}
                 </p>
 
-                <div className="mt-6">
-                  <div className="text-sm text-gray-500 uppercase tracking-wider mb-3">TECHNOLOGIES USED</div>
-                  <div className="flex flex-wrap gap-2">
+                <div className="mt-4 md:mt-6">
+                  <div className="text-xs md:text-sm text-gray-500 uppercase tracking-wider mb-2 md:mb-3">TECHNOLOGIES USED</div>
+                  <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
                     {currentProject.technologies.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 text-gray-300 text-sm border border-white/10 rounded-lg"
+                        className="px-2 md:px-3 py-1 text-gray-300 text-xs md:text-sm border border-white/10 rounded-lg"
                       >
                         {tech}
                       </span>
@@ -238,6 +245,18 @@ const ProjectsScroll = () => {
               </div>
             </div>
           </div>
+
+          {/* Progress indicator */}
+          <div className="text-center text-gray-500 text-sm mt-4">
+            {currentIndex + 1} / {projects.length}
+          </div>
+          
+          {/* Mobile swipe hint */}
+          {isMobile && (
+            <div className="text-center text-gray-600 text-xs mt-2">
+              Swipe up/down or tap dots to navigate
+            </div>
+          )}
         </div>
       </div>
     </section>
