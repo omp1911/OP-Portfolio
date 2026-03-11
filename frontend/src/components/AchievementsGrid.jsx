@@ -40,11 +40,11 @@ const AchievementItem = ({ cert, index }) => {
       style={{ transitionDelay: `${index * 120}ms` }}
     >
       <div className="flex items-start gap-4">
-        <Award className="text-gray-400 mt-1 flex-shrink-0" size={24} />
+        <Award className="text-gray-300 mt-1 flex-shrink-0" size={24} />
         <div>
           <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">{cert.name}</h3>
-          <div className="text-base text-gray-500 mb-1">{cert.issuer}</div>
-          <div className="text-sm text-gray-600">{cert.date}</div>
+          <div className="text-base text-gray-400 mb-1">{cert.issuer}</div>
+          <div className="text-sm text-gray-500">{cert.date}</div>
         </div>
       </div>
     </div>
@@ -77,10 +77,10 @@ const AchievementsGrid = () => {
   }, []);
 
   return (
-    <section id="certifications" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-32 relative">
+    <section id="certifications" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-20 relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div
-          className={`mb-20 transform transition-all duration-1000 ease-out ${
+          className={`mb-16 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >

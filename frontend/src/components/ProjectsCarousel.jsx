@@ -39,10 +39,10 @@ const ProjectsCarousel = () => {
   const currentProject = projects[currentIndex];
 
   return (
-    <section id="projects" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-32 relative flex items-center">
+    <section id="projects" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-20 relative flex items-center">
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative">
         <div
-          className={`mb-20 transform transition-all duration-1000 ease-out ${
+          className={`mb-16 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >
@@ -53,9 +53,9 @@ const ProjectsCarousel = () => {
           </h2>
         </div>
 
-        {/* Project with side arrows */}
-        <div className="relative">
-          {/* Left Arrow */}
+        {/* Project with side arrows - fixed position */}
+        <div className="relative min-h-[600px] flex items-center">
+          {/* Left Arrow - Fixed */}
           <button
             onClick={goToPrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-600 hover:text-white transition-all duration-300 z-10"
@@ -65,7 +65,7 @@ const ProjectsCarousel = () => {
           </button>
 
           {/* Project Content */}
-          <div className="max-w-5xl mx-auto px-16">
+          <div className="max-w-5xl mx-auto px-16 w-full">
             <div
               className={`text-center transform transition-all duration-700 ease-out ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
@@ -89,13 +89,13 @@ const ProjectsCarousel = () => {
               </h3>
 
               {/* Description */}
-              <p className="text-lg md:text-xl text-gray-500 leading-relaxed mb-6">
+              <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-6">
                 {currentProject.description}
               </p>
 
               {/* Technologies Section */}
               <div className="mt-8">
-                <div className="text-sm text-gray-600 uppercase tracking-wider mb-4">TECHNOLOGIES USED</div>
+                <div className="text-sm text-gray-500 uppercase tracking-wider mb-4">TECHNOLOGIES USED</div>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {currentProject.technologies.map((tech, idx) => (
                     <span
@@ -108,9 +108,23 @@ const ProjectsCarousel = () => {
                 </div>
               </div>
             </div>
+
+            {/* Dot Indicators */}
+            <div className="flex justify-center gap-2 mt-8">
+              {projects.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    idx === currentIndex ? 'bg-white w-8' : 'bg-gray-600'
+                  }`}
+                  aria-label={`Go to project ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Right Arrow */}
+          {/* Right Arrow - Fixed */}
           <button
             onClick={goToNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-600 hover:text-white transition-all duration-300 z-10"

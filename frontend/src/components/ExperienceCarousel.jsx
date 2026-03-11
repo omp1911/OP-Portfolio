@@ -39,11 +39,11 @@ const ExperienceCarousel = () => {
   const currentExperience = experiences[currentIndex];
 
   return (
-    <section id="experience" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-32 relative flex items-center">
+    <section id="experience" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-20 relative flex items-center">
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative">
         {/* Section Title */}
         <div
-          className={`mb-20 transform transition-all duration-1000 ease-out ${
+          className={`mb-16 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >
@@ -54,9 +54,9 @@ const ExperienceCarousel = () => {
           </h2>
         </div>
 
-        {/* Experience with side arrows */}
-        <div className="relative">
-          {/* Left Arrow */}
+        {/* Experience with side arrows - fixed position */}
+        <div className="relative min-h-[500px] flex items-center">
+          {/* Left Arrow - Fixed */}
           <button
             onClick={goToPrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-600 hover:text-white transition-all duration-300 z-10"
@@ -66,9 +66,9 @@ const ExperienceCarousel = () => {
           </button>
 
           {/* Experience Content */}
-          <div className="max-w-4xl mx-auto px-16">
+          <div className="max-w-4xl mx-auto px-16 w-full">
             <div
-              className={`text-center py-12 transform transition-all duration-700 ease-out ${
+              className={`text-center py-8 transform transition-all duration-700 ease-out ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
               }`}
               key={currentIndex}
@@ -78,32 +78,46 @@ const ExperienceCarousel = () => {
                   {currentExperience.role}
                 </span>
               </h3>
-              <div className="text-2xl md:text-3xl text-gray-400 mb-3">{currentExperience.company}</div>
-              <div className="text-lg text-gray-600 mb-8">{currentExperience.duration}</div>
+              <div className="text-2xl md:text-3xl text-gray-300 mb-3">{currentExperience.company}</div>
+              <div className="text-lg text-gray-400 mb-8">{currentExperience.duration}</div>
               
-              <p className="text-xl md:text-2xl text-gray-500 leading-relaxed mb-8">
+              <p className="text-xl md:text-2xl text-gray-400 leading-relaxed mb-8">
                 {currentExperience.description}
               </p>
               
               <div className="flex flex-wrap gap-3 justify-center mb-8">
                 {currentExperience.technologies.map((tech, idx) => (
-                  <span key={idx} className="text-gray-400 text-lg">
-                    {tech}{idx < currentExperience.technologies.length - 1 ? ' •' : ''}
+                  <span key={idx} className="text-gray-300 text-lg">
+                    {tech}{idx < currentExperience.technologies.length - 1 ? ' • ' : ''}
                   </span>
                 ))}
               </div>
 
               {currentIndex === 0 && currentExperience.project && (
                 <div className="mt-12">
-                  <div className="text-sm text-gray-600 uppercase tracking-wider mb-3">ENTERPRISE PROJECT</div>
+                  <div className="text-sm text-gray-500 uppercase tracking-wider mb-3">ENTERPRISE PROJECT</div>
                   <h4 className="text-2xl md:text-3xl font-semibold text-white mb-4">{currentExperience.project.name}</h4>
-                  <p className="text-lg text-gray-500 leading-relaxed">{currentExperience.project.description}</p>
+                  <p className="text-lg text-gray-400 leading-relaxed">{currentExperience.project.description}</p>
                 </div>
               )}
             </div>
+
+            {/* Dot Indicators */}
+            <div className="flex justify-center gap-2 mt-8">
+              {experiences.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    idx === currentIndex ? 'bg-white w-8' : 'bg-gray-600'
+                  }`}
+                  aria-label={`Go to experience ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Right Arrow */}
+          {/* Right Arrow - Fixed */}
           <button
             onClick={goToNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-600 hover:text-white transition-all duration-300 z-10"
