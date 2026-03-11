@@ -5,19 +5,29 @@ const ExperienceScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [slideDirection, setSlideDirection] = useState('up');
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   const stickyRef = useRef(null);
   const isTransitioning = useRef(false);
   const scrollAccumulator = useRef(0);
   const touchStartY = useRef(0);
 
-  // Check if sticky element is at top of viewport
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Check if sticky element is at top of viewport (desktop only)
   const isStuck = useCallback(() => {
+    if (isMobile) return false;
     if (!stickyRef.current || !sectionRef.current) return false;
     const stickyRect = stickyRef.current.getBoundingClientRect();
     const sectionRect = sectionRef.current.getBoundingClientRect();
     return stickyRect.top <= 5 && sectionRect.bottom > window.innerHeight;
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,6 +71,8 @@ const ExperienceScroll = () => {
 
   // Desktop wheel event
   useEffect(() => {
+    if (isMobile) return;
+    
     const handleWheel = (e) => {
       if (!isStuck()) return;
       
@@ -83,31 +95,7 @@ const ExperienceScroll = () => {
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [currentIndex, isStuck, navigateToItem]);
-
-  // Mobile touch handlers - attached to the sticky container
-  const handleTouchStart = (e) => {
-    touchStartY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!isStuck() || isTransitioning.current) return;
-    
-    const touchEndY = e.changedTouches[0].clientY;
-    const deltaY = touchStartY.current - touchEndY;
-    const minSwipeDistance = 30;
-    
-    const canGoNext = currentIndex < experiences.length - 1;
-    const canGoPrev = currentIndex > 0;
-    
-    if (Math.abs(deltaY) > minSwipeDistance) {
-      if (deltaY > 0 && canGoNext) {
-        navigateToItem('next');
-      } else if (deltaY < 0 && canGoPrev) {
-        navigateToItem('prev');
-      }
-    }
-  };
+  }, [currentIndex, isStuck, navigateToItem, isMobile]);
 
   const handleDotClick = (index) => {
     if (index !== currentIndex && !isTransitioning.current) {
@@ -118,37 +106,61 @@ const ExperienceScroll = () => {
     }
   };
 
+  // Mobile touch handlers
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (isTransitioning.current) return;
+    
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaY = touchStartY.current - touchEndY;
+    const minSwipeDistance = 50;
+    
+    if (Math.abs(deltaY) > minSwipeDistance) {
+      if (deltaY > 0) {
+        navigateToItem('next');
+      } else {
+        navigateToItem('prev');
+      }
+    }
+  };
+
   const currentExperience = experiences[currentIndex];
-  const spacerHeight = (experiences.length - 1) * 100;
+  
+  // Desktop: use sticky with spacer height
+  // Mobile: simple min-height screen
+  const spacerHeight = isMobile ? 0 : (experiences.length - 1) * 100;
 
   return (
     <section 
       id="experience" 
       ref={sectionRef} 
       className="bg-[#0f0f0f] relative"
-      style={{ minHeight: `${100 + spacerHeight}vh` }}
+      style={{ minHeight: isMobile ? '100vh' : `${100 + spacerHeight}vh` }}
     >
       <div 
         ref={stickyRef}
-        className="sticky top-0 h-screen flex items-center overflow-hidden touch-pan-y"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+        className={`${isMobile ? '' : 'sticky top-0'} h-screen flex items-center overflow-hidden`}
+        onTouchStart={isMobile ? handleTouchStart : undefined}
+        onTouchEnd={isMobile ? handleTouchEnd : undefined}
       >
         <div className="container mx-auto px-6 md:px-12 lg:px-20 w-full">
           {/* Section Title */}
           <div
-            className={`mb-8 transform transition-all duration-1000 ease-out ${
+            className={`mb-6 md:mb-8 transform transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
             }`}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
               <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
                 Work Experience
               </span>
             </h2>
           </div>
 
-          {/* Dot Indicators - Desktop only */}
+          {/* Desktop Dot Indicators */}
           <div className="absolute left-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
             {experiences.map((_, idx) => (
               <button
@@ -163,64 +175,71 @@ const ExperienceScroll = () => {
             ))}
           </div>
 
-          {/* Mobile dot indicators */}
-          <div className="flex md:hidden justify-center gap-3 absolute bottom-20 left-1/2 -translate-x-1/2 z-30">
+          {/* Mobile Dot Indicators - positioned below title */}
+          <div className="flex md:hidden justify-center gap-3 mb-6">
             {experiences.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleDotClick(idx)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'bg-white w-8' : 'bg-gray-600 w-3'
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? 'bg-white w-6' : 'bg-gray-600 w-2'
                 }`}
                 aria-label={`Go to experience ${idx + 1}`}
               />
             ))}
           </div>
 
-          {/* Progress indicator */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-sm z-30">
-            {currentIndex + 1} / {experiences.length}
-          </div>
-
           {/* Single Experience Content */}
           <div className="max-w-4xl mx-auto overflow-hidden">
             <div
-              className={`text-center py-8 transition-all duration-500 ease-out ${
+              className={`text-center py-4 md:py-8 transition-all duration-500 ease-out ${
                 slideDirection === 'up' 
                   ? 'animate-slide-from-bottom' 
                   : 'animate-slide-from-top'
               }`}
               key={currentIndex}
             >
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
+              <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-3">
                 <span className="bg-gradient-to-r from-white via-gray-400 to-white bg-clip-text text-transparent">
                   {currentExperience.role}
                 </span>
               </h3>
-              <div className="text-xl md:text-2xl text-gray-300 mb-2">{currentExperience.company}</div>
-              <div className="text-base text-gray-400 mb-6">{currentExperience.duration}</div>
+              <div className="text-lg md:text-2xl text-gray-300 mb-1 md:mb-2">{currentExperience.company}</div>
+              <div className="text-sm md:text-base text-gray-400 mb-4 md:mb-6">{currentExperience.duration}</div>
               
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed mb-6">
+              <p className="text-base md:text-xl text-gray-400 leading-relaxed mb-4 md:mb-6 px-4 md:px-0">
                 {currentExperience.description}
               </p>
               
-              <div className="flex flex-wrap gap-3 justify-center mb-6">
+              <div className="flex flex-wrap gap-2 md:gap-3 justify-center mb-4 md:mb-6">
                 {currentExperience.technologies.map((tech, idx) => (
-                  <span key={idx} className="text-gray-300 text-base">
+                  <span key={idx} className="text-gray-300 text-sm md:text-base">
                     {tech}{idx < currentExperience.technologies.length - 1 ? ' • ' : ''}
                   </span>
                 ))}
               </div>
 
               {currentIndex === 0 && currentExperience.project && (
-                <div className="mt-8">
-                  <div className="text-sm text-gray-500 uppercase tracking-wider mb-2">ENTERPRISE PROJECT</div>
-                  <h4 className="text-xl md:text-2xl font-semibold text-white mb-3">{currentExperience.project.name}</h4>
-                  <p className="text-base text-gray-400 leading-relaxed">{currentExperience.project.description}</p>
+                <div className="mt-6 md:mt-8">
+                  <div className="text-xs md:text-sm text-gray-500 uppercase tracking-wider mb-2">ENTERPRISE PROJECT</div>
+                  <h4 className="text-lg md:text-2xl font-semibold text-white mb-2 md:mb-3">{currentExperience.project.name}</h4>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed px-4 md:px-0">{currentExperience.project.description}</p>
                 </div>
               )}
             </div>
           </div>
+
+          {/* Progress indicator */}
+          <div className="text-center text-gray-500 text-sm mt-4">
+            {currentIndex + 1} / {experiences.length}
+          </div>
+          
+          {/* Mobile swipe hint */}
+          {isMobile && (
+            <div className="text-center text-gray-600 text-xs mt-2">
+              Swipe up/down or tap dots to navigate
+            </div>
+          )}
         </div>
       </div>
     </section>
