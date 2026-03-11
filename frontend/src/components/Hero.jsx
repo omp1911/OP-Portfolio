@@ -21,10 +21,10 @@ const Hero = () => {
       <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen py-24">
           
-          {/* Left Side - Text Content */}
+          {/* Left Side - Text Content with bottom animation */}
           <div
             className={`space-y-8 transform transition-all duration-1000 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
             }`}
           >
             {/* Greeting */}
@@ -52,10 +52,10 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Right Side - Simple Image */}
+          {/* Right Side - Simple Image with right animation */}
           <div
             className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
             }`}
           >
             <div className="relative w-full max-w-lg lg:max-w-xl">

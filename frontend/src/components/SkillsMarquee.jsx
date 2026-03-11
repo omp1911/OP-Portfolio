@@ -26,15 +26,14 @@ const SkillsMarquee = () => {
     };
   }, []);
 
-  // Duplicate skills for seamless loop
   const duplicatedSkills = [...techStack, ...techStack, ...techStack];
 
   return (
     <section id="tech-stack" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-32 relative flex items-center">
       <div className="w-full">
         <div
-          className={`mb-20 text-center transform transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          className={`mb-20 container mx-auto px-6 md:px-12 lg:px-20 transform transition-all duration-1000 ease-out ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
@@ -44,14 +43,14 @@ const SkillsMarquee = () => {
           </h2>
         </div>
 
-        {/* Scrolling Lines */}
-        <div className="space-y-12 overflow-hidden">
+        {/* Scrolling Lines with smaller font */}
+        <div className="space-y-8 overflow-hidden">
           {/* Line 1 - Left to Right */}
           <div className="relative">
             <div className="flex animate-marquee-right">
               {duplicatedSkills.map((tech, idx) => (
-                <div key={idx} className="flex-shrink-0 px-8">
-                  <span className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white whitespace-nowrap">
+                <div key={idx} className="flex-shrink-0 px-6">
+                  <span className="text-xl md:text-2xl font-semibold text-white whitespace-nowrap">
                     {tech.name}
                   </span>
                 </div>
@@ -63,8 +62,8 @@ const SkillsMarquee = () => {
           <div className="relative">
             <div className="flex animate-marquee-left">
               {duplicatedSkills.map((tech, idx) => (
-                <div key={idx} className="flex-shrink-0 px-8">
-                  <span className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-500 whitespace-nowrap">
+                <div key={idx} className="flex-shrink-0 px-6">
+                  <span className="text-xl md:text-2xl font-semibold text-gray-500 whitespace-nowrap">
                     {tech.name}
                   </span>
                 </div>
@@ -76,8 +75,8 @@ const SkillsMarquee = () => {
           <div className="relative">
             <div className="flex animate-marquee-right">
               {duplicatedSkills.map((tech, idx) => (
-                <div key={idx} className="flex-shrink-0 px-8">
-                  <span className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white whitespace-nowrap">
+                <div key={idx} className="flex-shrink-0 px-6">
+                  <span className="text-xl md:text-2xl font-semibold text-white whitespace-nowrap">
                     {tech.name}
                   </span>
                 </div>

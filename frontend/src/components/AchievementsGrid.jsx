@@ -27,11 +27,15 @@ const AchievementItem = ({ cert, index }) => {
     };
   }, []);
 
+  const isEven = index % 2 === 0;
+
   return (
     <div
       ref={itemRef}
       className={`transform transition-all duration-1000 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+        isVisible 
+          ? 'opacity-100 translate-x-0' 
+          : `opacity-0 ${isEven ? '-translate-x-20' : 'translate-x-20'}`
       }`}
       style={{ transitionDelay: `${index * 120}ms` }}
     >
@@ -77,7 +81,7 @@ const AchievementsGrid = () => {
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div
           className={`mb-20 transform transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
           }`}
         >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
