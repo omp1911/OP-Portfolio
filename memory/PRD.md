@@ -65,3 +65,16 @@ Build a modern, sleek, personal portfolio website inspired by Apple's product pa
 
 ## Deployment
 Ready for Emergent native deployment. No backend required.
+
+### GitHub Pages Deployment (Added March 11, 2026)
+**Files modified:**
+- `package.json` - Added `homepage`, `predeploy`, and `deploy` scripts
+- `.github/workflows/deploy.yml` - GitHub Actions for auto-deploy on push
+
+**Setup Steps:**
+1. Push code to GitHub repository
+2. Update `homepage` in `package.json` with your actual URL: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME`
+3. Go to repo Settings → Pages → Select branch: `gh-pages`, folder: `/` (root)
+4. Every push to `main` will auto-deploy via GitHub Actions
+
+**Manual deploy:** `yarn deploy` (runs build then deploys to gh-pages branch)
