@@ -56,7 +56,7 @@ const Contact = () => {
               Get in Touch
             </span>
           </h2>
-          <p className="text-gray-400 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-300 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
             {personalInfo.bio}
           </p>
 
