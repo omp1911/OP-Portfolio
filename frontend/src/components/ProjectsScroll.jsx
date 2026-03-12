@@ -167,7 +167,7 @@ const ProjectsScroll = () => {
                 key={idx}
                 onClick={() => handleDotClick(idx)}
                 className={`w-2 h-2 rounded-full transition-all duration-500 cursor-pointer hover:bg-gray-400 ${
-                  idx === currentIndex ? 'bg-white h-8' : 'bg-gray-600'
+                  idx === currentIndex ? 'bg-blue-500 h-8' : 'bg-gray-600'
                 }`}
                 aria-label={`Go to project ${idx + 1}`}
                 data-testid={`project-dot-${idx}`}
@@ -182,7 +182,7 @@ const ProjectsScroll = () => {
                 key={idx}
                 onClick={() => handleDotClick(idx)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? 'bg-white w-6' : 'bg-gray-600 w-2'
+                  idx === currentIndex ? 'bg-blue-500 w-6' : 'bg-gray-600 w-2'
                 }`}
                 aria-label={`Go to project ${idx + 1}`}
               />
