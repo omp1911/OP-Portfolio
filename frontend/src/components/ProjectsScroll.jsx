@@ -216,13 +216,13 @@ const ProjectsScroll = () => {
                       />
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-3">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-3">
                       <span className="bg-gradient-to-r from-white via-gray-400 to-white bg-clip-text text-transparent">
                         {proj.title}
                       </span>
                     </h3>
 
-                    <p className="text-sm text-gray-400 leading-relaxed mb-4">
+                    <p className="text-base text-gray-300 leading-relaxed mb-4">
                       {proj.description}
                     </p>
 
@@ -277,13 +277,13 @@ const ProjectsScroll = () => {
 
                   {/* Text Content */}
                   <div className={`${currentIndex % 2 === 0 ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
-                    <h3 className="text-4xl font-bold mb-4">
+                    <h3 className="text-3xl lg:text-4xl font-bold mb-4">
                       <span className="bg-gradient-to-r from-white via-gray-400 to-white bg-clip-text text-transparent">
                         {currentProject.title}
                       </span>
                     </h3>
 
-                    <p className="text-lg text-gray-400 leading-relaxed mb-6">
+                    <p className="text-lg text-gray-300 leading-relaxed mb-6">
                       {currentProject.description}
                     </p>
 
