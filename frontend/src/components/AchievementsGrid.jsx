@@ -40,7 +40,7 @@ const AchievementItem = ({ cert, index }) => {
       style={{ transitionDelay: `${index * 120}ms` }}
     >
       <div className="flex items-start gap-4">
-        <Award className="text-gray-300 mt-1 flex-shrink-0" size={24} />
+        <Award className="text-blue-500 mt-1 flex-shrink-0" size={24} />
         <div>
           <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">{cert.name}</h3>
           <div className="text-base text-gray-300 mb-1">{cert.issuer}</div>
