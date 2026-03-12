@@ -73,7 +73,7 @@ const Hero = () => {
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
         <button
           onClick={scrollToNext}
-          className={`text-gray-600 hover:text-white transition-all duration-500 ease-out transform ${
+          className={`text-blue-500 hover:text-blue-400 transition-all duration-500 ease-out transform ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           } delay-1000`}
         >
