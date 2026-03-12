@@ -67,13 +67,13 @@ const Contact = () => {
             }`}
           >
             <div className="flex items-center gap-2 text-gray-300 transition-all duration-300 hover:text-white">
-              <Mail className="text-white" size={20} />
+              <Mail className="text-blue-500" size={20} />
               <a href={`mailto:${personalInfo.email}`} className="hover:text-white transition-colors duration-300">
                 {personalInfo.email}
               </a>
             </div>
             <div className="flex items-center gap-2 text-gray-300">
-              <MapPin className="text-white" size={20} />
+              <MapPin className="text-blue-500" size={20} />
               <span>{personalInfo.location}</span>
             </div>
           </div>
