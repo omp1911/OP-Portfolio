@@ -43,8 +43,8 @@ const AchievementItem = ({ cert, index }) => {
         <Award className="text-gray-300 mt-1 flex-shrink-0" size={24} />
         <div>
           <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">{cert.name}</h3>
-          <div className="text-base text-gray-400 mb-1">{cert.issuer}</div>
-          <div className="text-sm text-gray-500">{cert.date}</div>
+          <div className="text-base text-gray-300 mb-1">{cert.issuer}</div>
+          <div className="text-sm text-gray-400">{cert.date}</div>
         </div>
       </div>
     </div>
