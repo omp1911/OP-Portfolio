@@ -38,7 +38,7 @@ export const experiences = [
     duration: "2021 - 2022",
     description: "Delivered enterprise-grade batch and streaming data pipelines using Spark, Kafka, Hive, and HDFS with custom UDFs and HiveQL transformations for JSON/XML processing and data masking, while automating orchestration via Oozie and Apache NiFi to improve reliability and reduce manual effort.",
     technologies: ["Apache Nifi", "Python", "Spark", "Hive", "HDFS", "Shell Scripting"]
-  },
+  }
   // {
   //   id: 3,
   //   company: "StartUp Labs",
@@ -81,19 +81,19 @@ export const techStack = [
   { name: "MongoDB", category: "Database" },
   { name: "PostgreSQL", category: "Database" },
   { name: "SQL Server", category: "Database" },
-  { name: "Oracle DB2", category: "Database" },
+  { name: "Oracle DB2", category: "Database" }
 ];
 
 export const projects = [
-  // {
-  //   id: 1,
-  //   title: "E-Commerce Platform",
-  //   description: "Full-featured online shopping platform with payment integration, inventory management, and admin dashboard.",
-  //   image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
-  //   technologies: ["React", "Node.js", "Stripe", "MongoDB"],
-  //   link: "#",
-  //   github: "#"
-  // },
+  {
+    id: 1,
+    title: "Shabdlab.ai",
+    description: "Full-featured online shopping platform with payment integration, inventory management, and admin dashboard.",
+    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
+    technologies: ["React", "Node.js", "Stripe", "MongoDB"],
+    link: "#",
+    github: "#"
+  }
   // {
   //   id: 2,
   //   title: "Task Management App",
