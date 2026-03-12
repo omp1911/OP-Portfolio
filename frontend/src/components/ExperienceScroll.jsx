@@ -202,15 +202,15 @@ const ExperienceScroll = () => {
                   className="flex-shrink-0 w-full snap-center px-6"
                 >
                   <div className="text-center py-4">
-                    <h3 className="text-2xl font-bold mb-2">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2">
                       <span className="bg-gradient-to-r from-white via-gray-400 to-white bg-clip-text text-transparent">
                         {exp.role}
                       </span>
                     </h3>
-                    <div className="text-lg text-gray-300 mb-1">{exp.company}</div>
+                    <div className="text-lg text-gray-200 mb-1">{exp.company}</div>
                     <div className="text-sm text-gray-400 mb-4">{exp.duration}</div>
                     
-                    <p className="text-base text-gray-400 leading-relaxed mb-4">
+                    <p className="text-base text-gray-300 leading-relaxed mb-4">
                       {exp.description}
                     </p>
                     
@@ -226,7 +226,7 @@ const ExperienceScroll = () => {
                       <div className="mt-6">
                         <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">ENTERPRISE PROJECT</div>
                         <h4 className="text-lg font-semibold text-white mb-2">{exp.project.name}</h4>
-                        <p className="text-sm text-gray-400 leading-relaxed">{exp.project.description}</p>
+                        <p className="text-sm text-gray-300 leading-relaxed">{exp.project.description}</p>
                       </div>
                     )}
                   </div>
@@ -247,21 +247,21 @@ const ExperienceScroll = () => {
                   }`}
                   key={currentIndex}
                 >
-                  <h3 className="text-4xl lg:text-5xl font-bold mb-3">
+                  <h3 className="text-3xl lg:text-4xl font-bold mb-3">
                     <span className="bg-gradient-to-r from-white via-gray-400 to-white bg-clip-text text-transparent">
                       {currentExperience.role}
                     </span>
                   </h3>
-                  <div className="text-2xl text-gray-300 mb-2">{currentExperience.company}</div>
+                  <div className="text-xl text-gray-200 mb-2">{currentExperience.company}</div>
                   <div className="text-base text-gray-400 mb-6">{currentExperience.duration}</div>
                   
-                  <p className="text-xl text-gray-400 leading-relaxed mb-6">
+                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
                     {currentExperience.description}
                   </p>
                   
                   <div className="flex flex-wrap gap-3 justify-center mb-6">
                     {currentExperience.technologies.map((tech, idx) => (
-                      <span key={idx} className="text-gray-300 text-base">
+                      <span key={idx} className="text-gray-300 text-sm">
                         {tech}{idx < currentExperience.technologies.length - 1 ? ' • ' : ''}
                       </span>
                     ))}
@@ -270,8 +270,8 @@ const ExperienceScroll = () => {
                   {currentIndex === 0 && currentExperience.project && (
                     <div className="mt-8">
                       <div className="text-sm text-gray-500 uppercase tracking-wider mb-2">ENTERPRISE PROJECT</div>
-                      <h4 className="text-2xl font-semibold text-white mb-3">{currentExperience.project.name}</h4>
-                      <p className="text-base text-gray-400 leading-relaxed">{currentExperience.project.description}</p>
+                      <h4 className="text-xl font-semibold text-white mb-3">{currentExperience.project.name}</h4>
+                      <p className="text-base text-gray-300 leading-relaxed">{currentExperience.project.description}</p>
                     </div>
                   )}
                 </div>
