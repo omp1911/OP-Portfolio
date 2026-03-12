@@ -40,6 +40,7 @@ const SkillsMarquee = () => {
             <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
               Skills
             </span>
+            <div className="h-1 w-16 bg-blue-500 mt-4 rounded-full"></div>
           </h2>
         </div>
 

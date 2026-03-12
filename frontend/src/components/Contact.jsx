@@ -55,6 +55,7 @@ const Contact = () => {
             <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
               Get in Touch
             </span>
+            <div className="h-1 w-16 bg-blue-500 mt-4 mx-auto rounded-full"></div>
           </h2>
           <p className="text-gray-300 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
             {personalInfo.bio}
