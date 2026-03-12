@@ -152,11 +152,11 @@ const ExperienceScroll = () => {
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
             }`}
           >
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
-                Work Experience
-              </span>
-            </h2>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
+              Work Experience
+            </span>
+          </h2>
           </div>
 
           {/* Desktop Dot Indicators */}

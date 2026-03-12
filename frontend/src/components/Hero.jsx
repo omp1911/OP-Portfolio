@@ -47,7 +47,7 @@ const Hero = () => {
             </div>
 
             {/* Description */}
-            <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-xl">
+            <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-xl">
               {personalInfo.bio}
             </p>
           </div>
