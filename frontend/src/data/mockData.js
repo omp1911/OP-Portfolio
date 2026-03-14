@@ -4,7 +4,7 @@ export const personalInfo = {
   name: "Om Patel",
   title: "Data Engineer",
   tagline: "Crafting digital experiences with clean code and creative solutions",
-  bio: "Passionate developer with 5+ years of experience building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive solutions.",
+  bio: "Passionate Data Engineer and DevOps practitioner with 5+ years of experience building scalable Data solutions. I love turning complex data challenges into Analytics ready solutions.",
   email: "patelomr07@gmail.com",
   location: "Ontario, CA",
   animoji: "👨‍💻"

@@ -19,7 +19,6 @@ const SkillsMarquee = () => {
     };
   }, []);
 
-  // Group skills by category, deduplicate by name
   const grouped = techStack.reduce((acc, tech) => {
     if (!acc[tech.category]) acc[tech.category] = [];
     if (!acc[tech.category].find(t => t.name === tech.name)) {
@@ -28,12 +27,15 @@ const SkillsMarquee = () => {
     return acc;
   }, {});
 
-  const categories = Object.keys(grouped);
+  const categories = Object.values(grouped);
+
+  const durations = ['32s', '26s', '38s', '30s', '34s'];
 
   return (
     <section id="tech-stack" ref={sectionRef} className="bg-[#0f0f0f] py-16 relative">
       <div className="w-full">
-        {/* Section Title */}
+
+        {/* ── Skills Header — untouched from original ── */}
         <div
           className={`mb-16 container mx-auto px-6 md:px-12 lg:px-20 transform transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
             }`}
@@ -46,30 +48,42 @@ const SkillsMarquee = () => {
           </h2>
         </div>
 
-        {/* One marquee row per category */}
-        <div className="space-y-10">
-          {categories.map((category, catIdx) => {
-            const skills = grouped[category];
-            const repeated = [...skills, ...skills, ...skills, ...skills];
-            const direction = catIdx % 2 === 0 ? 'animate-marquee-right' : 'animate-marquee-left';
-            // Odd rows bright, even rows dimmer for layered gradient effect
-            const textColor = catIdx % 2 === 0 ? 'text-white' : 'text-gray-500';
-            const dotColor = catIdx % 2 === 0 ? 'text-gray-500' : 'text-gray-700';
+        {/* ── Marquee rows ── */}
+        <div className="flex flex-col">
+          {categories.map((skills, catIdx) => {
+            const toLeft = catIdx % 2 === 0;
+            const bright = catIdx % 2 === 0;
+            const duration = durations[catIdx % durations.length];
+            const repeated = [...skills, ...skills, ...skills, ...skills, ...skills, ...skills];
 
             return (
-              <div key={category} className="overflow-hidden">
-                <div className={`flex ${direction}`}>
+              <div key={catIdx} className="relative overflow-hidden py-3.5 group">
+
+                {/* Edge fades */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-[#0f0f0f] to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-[#0f0f0f] to-transparent" />
+
+                <div
+                  className="flex w-max items-center group-hover:[animation-play-state:paused]"
+                  style={{
+                    animation: `${toLeft ? 'scrollLeft' : 'scrollRight'} ${duration} linear infinite`,
+                  }}
+                >
                   {repeated.map((tech, idx) => (
-                    <div
-                      key={`${tech.name}-${idx}`}
-                      className="flex-shrink-0 flex items-center"
-                    >
-                      {/* Equal px-6 padding on both sides of text, dot sits between */}
-                      <span className={`text-xl md:text-2xl font-semibold ${textColor} whitespace-nowrap px-6`}>
+                    <span key={idx} className="inline-flex items-center">
+                      <span
+                        className={`px-7 text-[15px] font-medium cursor-default transition-colors duration-200 ${bright
+                          ? 'text-gray-300 hover:text-blue-500'
+                          : 'text-gray-600 hover:text-gray-300'
+                          }`}
+                      >
                         {tech.name}
                       </span>
-                      <span className={`${dotColor} text-xl select-none`}>•</span>
-                    </div>
+                      <span
+                        className={`w-[3px] h-[3px] rounded-full flex-shrink-0 ${bright ? 'bg-gray-700' : 'bg-gray-800'
+                          }`}
+                      />
+                    </span>
                   ))}
                 </div>
               </div>
@@ -77,6 +91,17 @@ const SkillsMarquee = () => {
           })}
         </div>
       </div>
+
+      <style>{`
+        @keyframes scrollLeft {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes scrollRight {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
+        }
+      `}</style>
     </section>
   );
 };
