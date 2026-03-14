@@ -72,7 +72,7 @@ const SkillsMarquee = () => {
                   {repeated.map((tech, idx) => (
                     <span key={idx} className="inline-flex items-center">
                       <span
-                        className={`px-7 text-sm font-medium cursor-default transition-colors duration-200 ${bright
+                        className={`px-7 text-lg font-medium cursor-default transition-colors duration-200 ${bright
                           ? 'text-gray-300 hover:text-blue-500'
                           : 'text-gray-600 hover:text-gray-300'
                           }`}
