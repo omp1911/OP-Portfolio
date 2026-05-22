@@ -84,3 +84,11 @@ Ready for Emergent native deployment. No backend required.
 4. Every push to `main` will auto-deploy via GitHub Actions
 
 **Manual deploy:** `yarn deploy` (runs build then deploys to gh-pages branch)
+
+
+## Changelog
+- **2026-05-22 — Hero image robustness + branding cleanup**
+  - Bundled hero portrait as a local webpack asset (`src/assets/hero.png`, imported in `Hero.jsx`) so it ships inside `build/static/media/` and is served from the same origin as the rest of the GitHub Pages build. Eliminates breakage from third-party host policies, blockers, or expired CDN URLs.
+  - Removed the "Made with Emergent" badge HTML and the `emergent-main.js` script from `public/index.html`.
+  - Updated `<title>` to "Om Patel | Data Engineer" and meta description to portfolio copy.
+  - Verified: `grep` on production `build/index.html` returns 0 occurrences of badge/script; image asset present at `build/static/media/hero.HASH.png`.

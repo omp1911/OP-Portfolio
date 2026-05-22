@@ -69,7 +69,7 @@ const SkillsApple = () => {
     <section id="tech-stack" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-32 relative">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         <div
-          className={`mb-32 transform transition-all duration-1000 ease-out ${
+          className={`mb-20 transform transition-all duration-1000 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >

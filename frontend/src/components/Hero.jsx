@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
+import heroImage from '../assets/hero.png';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -60,9 +61,10 @@ const Hero = () => {
           >
             <div className="relative w-full max-w-lg lg:max-w-xl">
               <img
-                src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
+                src={heroImage}
                 alt="Professional portrait"
                 className="w-full h-auto"
+                loading="eager"
               />
             </div>
           </div>
