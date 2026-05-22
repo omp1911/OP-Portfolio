@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { personalInfo } from '../data/mockData';
+import React, { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { personalInfo } from "../data/mockData";
+import heroImage from "../assets/hero.png";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,21 +11,25 @@ const Hero = () => {
   }, []);
 
   const scrollToNext = () => {
-    const element = document.getElementById('experience');
+    const element = document.getElementById("experience");
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <section id="hero" className="min-h-screen bg-[#0f0f0f] flex items-center relative overflow-hidden">
+    <section
+      id="hero"
+      className="min-h-screen bg-[#0f0f0f] flex items-center relative overflow-hidden"
+    >
       <div className="container mx-auto px-8 md:px-16 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen py-24">
-          
           {/* Left Side - Text Content with bottom animation */}
           <div
             className={`space-y-8 transform transition-all duration-1000 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-20"
             }`}
           >
             {/* Greeting */}
@@ -55,12 +60,15 @@ const Hero = () => {
           {/* Right Side - Simple Image with right animation */}
           <div
             className={`flex justify-center lg:justify-end transform transition-all duration-1200 delay-300 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-20"
             }`}
           >
             <div className="relative w-full max-w-lg lg:max-w-xl">
               <img
-                src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
+                // src="https://customer-assets.emergentagent.com/job_animoji-folio/artifacts/i4rd77tj_Adobe%20Express%20-%20file.png"
+                src={heroImage  }
                 alt="Professional portrait"
                 className="w-full h-auto"
               />
@@ -74,7 +82,7 @@ const Hero = () => {
         <button
           onClick={scrollToNext}
           className={`text-blue-500 hover:text-blue-400 transition-all duration-500 ease-out transform ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           } delay-1000`}
         >
           <ChevronDown size={32} className="animate-bounce" />
