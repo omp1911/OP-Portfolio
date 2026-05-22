@@ -92,3 +92,14 @@ Ready for Emergent native deployment. No backend required.
   - Removed the "Made with Emergent" badge HTML and the `emergent-main.js` script from `public/index.html`.
   - Updated `<title>` to "Om Patel | Data Engineer" and meta description to portfolio copy.
   - Verified: `grep` on production `build/index.html` returns 0 occurrences of badge/script; image asset present at `build/static/media/hero.HASH.png`.
+
+- **2026-05-22 — Animated intro hero with TTS voiceover**
+  - New `IntroHero.jsx` sits as the first full-screen section before the existing `Hero`. State machine: `idle` → `speaking` → `done`.
+  - Pre-recorded TTS audio generated with OpenAI `tts-1-hd` voice `onyx` via Emergent LLM key (script: `/app/backend/scripts/gen_intro_audio.py`). Output bundled as static asset: `/app/frontend/public/audio/intro.mp3` (~164 KB).
+  - Exact spoken line: "Hi, I am Om. I build clean, production data systems using the modern data stack. Nice to e-meet you. Scroll down to know more about me."
+  - Click-to-start splash ("Tap to meet Om") is required due to browser autoplay policies. On click: portrait breathes, blue ping ring pulses, hand emoji waves (`intro-wave` keyframe), and an equalizer of blue bars animates. No on-screen captions (per user's "not written on screen" preference).
+  - After audio `onEnded`, "Scroll down to know more about me" + bouncing chevron appears.
+  - `Header.jsx` updated: hidden (`opacity-0`, `-translate-y-full`, `pointer-events-none`) until `scrollY > 55% of viewport`, so it doesn't intrude during the intro.
+  - Plays every visit (no localStorage gating, as requested).
+  - Animations added in `App.css`: `intro-wave`, `intro-ping`, `intro-breathe`, `intro-bar`, `intro-fade-in`.
+  - `EMERGENT_LLM_KEY` added to `backend/.env` for the one-off TTS script (no runtime backend calls — MP3 is static).
