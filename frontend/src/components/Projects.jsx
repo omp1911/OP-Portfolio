@@ -1,89 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
+import React from 'react';
 import { projects } from '../data/mockData';
-import { Button } from './ui/button';
+import useScrollReveal from '../hooks/useScrollReveal';
 
-const ProjectCard = ({ project, index }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef(null);
+const PolaroidScene = ({ tech }) => {
+  const nodes = ['Source', 'Pipeline', 'Warehouse'];
+  return (
+    <div className="polaroid-scene">
+      <span className="node">
+        <span className="dot" /> {tech[0] || nodes[0]}
+      </span>
+      <div className="flex items-center">
+        <span className="line" />
+        <span className="node center">{tech[1] || nodes[1]}</span>
+        <span className="line" />
+      </div>
+      <span className="node right">
+        <span className="dot" /> {tech[tech.length - 1] || nodes[2]}
+      </span>
+    </div>
+  );
+};
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, []);
-
+const Polaroid = ({ project, index }) => {
+  const { ref, visible } = useScrollReveal();
   return (
     <div
-      ref={cardRef}
-      className={`group transform transition-all duration-1000 ease-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-      }`}
-      style={{ transitionDelay: `${index * 150}ms` }}
+      ref={ref}
+      className={`reveal reveal-delay-${(index % 4) + 1} ${visible ? 'is-visible' : ''}`}
+      data-testid={`project-${index}`}
     >
-      <div className="bg-gradient-to-br from-white/[0.03] to-transparent backdrop-blur-sm rounded-2xl overflow-hidden border border-white/[0.05] hover:border-cyan-500/20 transition-all duration-500">
-        {/* Project Image */}
-        <div className="relative overflow-hidden h-56 bg-black/50">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover transition-all duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+      <div
+        className="polaroid"
+        style={{ transform: `rotate(${project.tilt}deg)` }}
+      >
+        <div className="polaroid-photo">
+          <PolaroidScene tech={project.tech} />
         </div>
-
-        {/* Project Content */}
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-          <p className="text-gray-400 mb-4 leading-relaxed text-sm">{project.description}</p>
-
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.technologies.map((tech, idx) => (
-              <span
-                key={idx}
-                className="px-3 py-1 bg-white/[0.03] text-gray-400 rounded-lg text-xs border border-white/[0.05]"
-              >
-                {tech}
+        <div className="polaroid-caption">
+          <div className="title">{project.title}</div>
+          <div className="metric">{project.metric}</div>
+          <p className="mt-3 text-[13px] leading-[1.6] text-[var(--ink-2)]">{project.caption}</p>
+          <div className="flex flex-wrap gap-1.5 mt-4">
+            {project.tech.map((t) => (
+              <span key={t} className="font-mono text-[10.5px] tracking-[0.08em] text-[var(--muted)]">
+                {t}
               </span>
-            ))}
-          </div>
-
-          {/* Links */}
-          <div className="flex gap-3">
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300"
-              onClick={() => window.open(project.link, '_blank')}
-            >
-              <ExternalLink size={14} className="mr-2" />
-              Live Demo
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-white/10 text-gray-400 hover:bg-white/5 transition-all duration-300"
-              onClick={() => window.open(project.github, '_blank')}
-            >
-              <Github size={14} className="mr-2" />
-              Code
-            </Button>
+            )).reduce((prev, curr, i) => i === 0 ? [curr] : [...prev, <span key={`sep-${i}`} className="text-[var(--muted)]">·</span>, curr], [])}
           </div>
         </div>
       </div>
@@ -92,47 +54,25 @@ const ProjectCard = ({ project, index }) => {
 };
 
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
+  const { ref, visible } = useScrollReveal();
   return (
-    <section id="projects" ref={sectionRef} className="min-h-screen bg-[#0f0f0f] py-32 relative">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <div
-          className={`mb-20 transform transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">Portfolio</h2>
-          <p className="text-gray-500 text-lg">
-            A selection of my recent work and side projects
+    <section id="projects" className="section" data-testid="projects-section">
+      <div className="rail">Projects · 03</div>
+      <div className="container-wide">
+        <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''} max-w-3xl mb-16`}>
+          <p className="section-label mb-6">Featured Projects</p>
+          <h2 className="display text-[42px] md:text-[64px]">
+            Things I&apos;ve built in production.
+          </h2>
+          <p className="mt-6 text-[16px] text-[var(--ink-2)] max-w-[620px]">
+            A few pipelines, migrations and platform pieces I&apos;ve shipped — each one boring on
+            purpose, because reliable is more useful than clever.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-14">
+          {projects.map((p, i) => (
+            <Polaroid project={p} index={i} key={p.id} />
           ))}
         </div>
       </div>

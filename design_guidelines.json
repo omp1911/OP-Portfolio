@@ -1,0 +1,95 @@
+{
+  "theme": "light",
+  "archetype": "4 (Swiss & High-Contrast)",
+  "vibe": "pure minimalism, data-driven, clean engineering, no-nonsense",
+  "colors": {
+    "background": "#FFFFFF",
+    "surface": "#FAFAFA",
+    "text_primary": "#09090B",
+    "text_secondary": "#71717A",
+    "border": "#E4E4E7",
+    "accent": "#000000",
+    "accent_hover": "#27272A",
+    "accent_text": "#FFFFFF"
+  },
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "IBM Plex Sans",
+    "heading_weight": "font-bold",
+    "heading_tracking": "tracking-tight",
+    "h1_size": "text-4xl sm:text-5xl lg:text-6xl",
+    "h2_size": "text-2xl sm:text-3xl lg:text-4xl",
+    "h3_size": "text-xl sm:text-2xl",
+    "body_size": "text-base leading-relaxed"
+  },
+  "layout": {
+    "grid": "grid-cols-1 md:grid-cols-12 gap-8 md:gap-12",
+    "spacing": "p-8 md:p-12 lg:p-24",
+    "container_max_width": "max-w-5xl mx-auto",
+    "style": "narrow single-column focus, stark borders, generous whitespace, pure minimal (no skeuomorphism)"
+  },
+  "ui_elements": {
+    "cards": "border border-zinc-200 bg-white p-6 md:p-8 rounded-none",
+    "buttons": "bg-black text-white hover:bg-zinc-800 transition-colors px-6 py-3 text-sm font-medium uppercase tracking-widest",
+    "badges": "border border-zinc-200 text-zinc-600 bg-zinc-50 px-2 py-1 text-xs font-mono uppercase tracking-wider"
+  },
+  "sections": [
+    {
+      "name": "Header",
+      "design": "Sticky top, bg-white/90 backdrop-blur-md, border-b border-zinc-200. Minimal nav links (About, Experience, Projects) + Contact CTA."
+    },
+    {
+      "name": "Hero",
+      "design": "Massive typography for Name 'Om Patel', smaller monospace subhead 'Data Engineer'. Focus on whitespace. Align left. 1px solid border separators."
+    },
+    {
+      "name": "About",
+      "design": "Concise text. No fluff. 2 columns on desktop (Heading on left span-4, Text on right span-8)."
+    },
+    {
+      "name": "Experience",
+      "design": "Chronological list. High contrast Role title, muted Company (EllisDon) and dates. 1px border bottom per item."
+    },
+    {
+      "name": "Projects",
+      "design": "Bento or linear list. Data Pipelines, Kafka, GCP focus. Display tech stack as minimal badges."
+    },
+    {
+      "name": "Skills",
+      "design": "Grid of textual skills categorized (Languages, Cloud, Tools). No progress bars. Pure text."
+    },
+    {
+      "name": "Contact",
+      "design": "Massive CTA block with 'Request Resume' button. Uses mailto link with pre-drafted subject and body."
+    }
+  ],
+  "functionality": {
+    "mailto_link": "mailto:patelomr07@gmail.com?subject=Requesting%20Resume%20-%20Data%20Engineer%20Role&body=Hi%20Om,%0A%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20latest%20resume.%0A%0ABest,"
+  },
+  "testing": {
+    "attributes": "All interactive elements (nav links, buttons) MUST have data-testid attributes (e.g. data-testid='nav-about', data-testid='resume-request-btn')."
+  },
+  "media": {
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1707054437518-dfd402977b03?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwYWJzdHJhY3QlMjBkYXRhJTIwbmV0d29yayUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODMyODc4OTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract minimalist wave texture - can be used as subtle hero background or project placeholder",
+        "category": "background"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBtaW5pbWFsJTIwb2ZmaWNlJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4MzI4Nzg5Mnww&ixlib=rb-4.1.0&q=85",
+        "description": "Minimal office architecture - can be used as contact section accent image or omitted if purely text-driven",
+        "category": "accent"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Use pure HTML and Tailwind CSS for layouts. Avoid overusing Shadcn card components; instead use raw divs with stark 1px solid borders for a minimalist look.",
+    "Implement the mailto link exactly as provided in functionality.mailto_link on the 'Request Resume' button.",
+    "Load 'Outfit' and 'IBM Plex Sans' from Google Fonts and apply them in tailwind.config.js.",
+    "Do NOT use any skeuomorphic elements (no drop shadows, no bevels, no 3D effects). Pure 2D flat minimal styling.",
+    "Ensure all components are in .js/.jsx formats, not .tsx.",
+    "Make heavy use of whitespace and ensure strict mobile responsiveness.",
+    "Add 'data-testid' to all buttons, links, and forms."
+  ]
+}

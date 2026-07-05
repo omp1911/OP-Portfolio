@@ -1,110 +1,88 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Mail, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
-import { personalInfo, socialLinks } from '../data/mockData';
-import { Button } from './ui/button';
-
-const getSocialIcon = (iconName) => {
-  switch (iconName) {
-    case 'github':
-      return <Github size={20} />;
-    case 'linkedin':
-      return <Linkedin size={20} />;
-    case 'twitter':
-      return <Twitter size={20} />;
-    case 'mail':
-      return <Mail size={20} />;
-    default:
-      return null;
-  }
-};
+import React from 'react';
+import { Mail, Phone, Linkedin, ArrowUpRight } from 'lucide-react';
+import { personalInfo } from '../data/mockData';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 const Contact = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
+  const { ref, visible } = useScrollReveal();
   return (
-    <section id="contact" ref={sectionRef} className="bg-[#0f0f0f] py-16 flex items-center relative">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-        <div
-          className={`max-w-4xl mx-auto text-center transform transition-all duration-1000 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8">
-            <span className="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
-              Get in Touch
-            </span>
-            <div className="h-1 w-16 bg-blue-500 mt-4 mx-auto rounded-full"></div>
-          </h2>
-          <p className="text-gray-300 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-            {personalInfo.bio}
-          </p>
+    <section id="contact" className="section" data-testid="contact-section">
+      <div className="rail">Contact · 07</div>
+      <div className="container-wide">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16 items-center">
+          <div ref={ref} className={`md:col-span-6 reveal ${visible ? 'is-visible' : ''}`}>
+            <p className="section-label mb-6">Contact</p>
+            <h2 className="display text-[42px] md:text-[64px]">
+              Got a pipeline worth building? <span style={{ color: 'var(--accent)' }}>Let&apos;s talk.</span>
+            </h2>
+            <p className="mt-6 text-[16.5px] max-w-[500px] text-[var(--ink-2)]">
+              Open to full-time roles, freelance data-platform work, and interesting engineering
+              problems. Fastest reply is email.
+            </p>
 
-          <div
-            className={`flex flex-wrap justify-center gap-8 mb-12 transform transition-all duration-1000 ease-out delay-200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <div className="flex items-center gap-2 text-gray-300 transition-all duration-300 hover:text-white">
-              <Mail className="text-blue-500" size={20} />
-              <a href={`mailto:${personalInfo.email}`} className="hover:text-white transition-colors duration-300">
-                {personalInfo.email}
+            <div className="mt-10 flex flex-col gap-4">
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="flex items-center gap-3 underline-fx font-serif text-[19px]"
+                data-testid="contact-email"
+              >
+                <Mail size={18} /> {personalInfo.email}
+              </a>
+              <a
+                href={`tel:${personalInfo.phone.replace(/[^+\d]/g, '')}`}
+                className="flex items-center gap-3 underline-fx font-serif text-[19px]"
+                data-testid="contact-phone"
+              >
+                <Phone size={18} /> {personalInfo.phone}
+              </a>
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 underline-fx font-serif text-[19px]"
+                data-testid="contact-linkedin"
+              >
+                <Linkedin size={18} /> LinkedIn <ArrowUpRight size={14} />
               </a>
             </div>
-            <div className="flex items-center gap-2 text-gray-300">
-              <MapPin className="text-blue-500" size={20} />
-              <span>{personalInfo.location}</span>
+          </div>
+
+          {/* Skeuo accent #3 — business card */}
+          <div className={`md:col-span-6 reveal reveal-delay-2 ${visible ? 'is-visible' : ''}`} data-testid="business-card">
+            <div className="business-card">
+              <div className="emboss">Data Engineer</div>
+              <div className="relative z-10">
+                <p className="font-mono text-[10px] tracking-[0.32em] text-[var(--muted)] uppercase mb-4">
+                  ・ ID · 2020
+                </p>
+                <div className="name">Om Patel</div>
+                <div className="title-line">Pipelines · Streaming · Warehouses</div>
+
+                <div className="mt-10 grid grid-cols-2 gap-4 text-[13px]">
+                  <div>
+                    <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--muted)] mb-1">Email</p>
+                    <p className="font-serif">{personalInfo.email}</p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--muted)] mb-1">Phone</p>
+                    <p className="font-serif">{personalInfo.phone}</p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--muted)] mb-1">Location</p>
+                    <p className="font-serif">{personalInfo.location}</p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-[var(--muted)] mb-1">Cloud</p>
+                    <p className="font-serif">GCP · Azure · AWS</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-4 border-t border-dashed border-[var(--hairline-strong)] flex items-center justify-between">
+                  <span className="font-hand text-[24px]" style={{ color: 'var(--sig-blue)' }}>Om Patel</span>
+                  <span className="font-mono text-[10px] tracking-[0.16em] text-[var(--muted)]">Since 2020</span>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div
-            className={`flex justify-center gap-4 mb-16 transform transition-all duration-1000 ease-out delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            {socialLinks.map((social, index) => (
-              <Button
-                key={social.name}
-                variant="outline"
-                size="icon"
-                className="border-white/20 hover:border-white hover:text-white text-gray-300 transition-all duration-300 bg-white/[0.02] hover:bg-white/10"
-                onClick={() => window.open(social.url, '_blank')}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                {getSocialIcon(social.icon)}
-              </Button>
-            ))}
-          </div>
-
-          <div
-            className={`border-t border-white/5 pt-8 transform transition-all duration-1000 ease-out delay-500 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <p className="text-gray-600 text-sm">
-              © {new Date().getFullYear()} {personalInfo.name}. Built with React & FastAPI.
-            </p>
           </div>
         </div>
       </div>
