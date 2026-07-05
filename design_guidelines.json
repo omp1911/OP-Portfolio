@@ -1,95 +1,130 @@
 {
-  "theme": "light",
-  "archetype": "4 (Swiss & High-Contrast)",
-  "vibe": "pure minimalism, data-driven, clean engineering, no-nonsense",
+  "project_name": "Om Patel - Data & DevOps Portfolio",
+  "theme_archetype": "Archetype 5/7 Hybrid (Luxury Moody + Electric Neon)",
+  "vibe": "High-Tech Synthesis. Replacing flat, muddy neomorphism with sharp, kinetic 'Tactile Neomorphism'. Precise, data-driven, engineered.",
   "colors": {
-    "background": "#FFFFFF",
-    "surface": "#FAFAFA",
-    "text_primary": "#09090B",
-    "text_secondary": "#71717A",
-    "border": "#E4E4E7",
-    "accent": "#000000",
-    "accent_hover": "#27272A",
-    "accent_text": "#FFFFFF"
+    "background": {
+      "base": "#1a1a2e",
+      "card": "#1a1a2e",
+      "surface": "#1e1e36"
+    },
+    "text": {
+      "primary": "#f8f9fa",
+      "secondary": "#a0a0b8",
+      "muted": "#6a6a8c"
+    },
+    "accent": {
+      "cyan": "#00f2fe",
+      "purple": "#9d4cdd",
+      "cyan_glow": "rgba(0, 242, 254, 0.2)",
+      "purple_glow": "rgba(157, 76, 221, 0.15)"
+    },
+    "gradients": {
+      "text_highlight": "bg-gradient-to-r from-[#00f2fe] to-[#9d4cdd] bg-clip-text text-transparent",
+      "subtle_border": "bg-gradient-to-br from-white/10 to-transparent"
+    }
   },
   "typography": {
-    "heading_font": "Outfit",
-    "body_font": "IBM Plex Sans",
-    "heading_weight": "font-bold",
-    "heading_tracking": "tracking-tight",
-    "h1_size": "text-4xl sm:text-5xl lg:text-6xl",
-    "h2_size": "text-2xl sm:text-3xl lg:text-4xl",
-    "h3_size": "text-xl sm:text-2xl",
-    "body_size": "text-base leading-relaxed"
-  },
-  "layout": {
-    "grid": "grid-cols-1 md:grid-cols-12 gap-8 md:gap-12",
-    "spacing": "p-8 md:p-12 lg:p-24",
-    "container_max_width": "max-w-5xl mx-auto",
-    "style": "narrow single-column focus, stark borders, generous whitespace, pure minimal (no skeuomorphism)"
-  },
-  "ui_elements": {
-    "cards": "border border-zinc-200 bg-white p-6 md:p-8 rounded-none",
-    "buttons": "bg-black text-white hover:bg-zinc-800 transition-colors px-6 py-3 text-sm font-medium uppercase tracking-widest",
-    "badges": "border border-zinc-200 text-zinc-600 bg-zinc-50 px-2 py-1 text-xs font-mono uppercase tracking-wider"
-  },
-  "sections": [
-    {
-      "name": "Header",
-      "design": "Sticky top, bg-white/90 backdrop-blur-md, border-b border-zinc-200. Minimal nav links (About, Experience, Projects) + Contact CTA."
+    "fonts": {
+      "heading": "Outfit, sans-serif",
+      "body": "IBM Plex Sans, sans-serif",
+      "mono": "JetBrains Mono, monospace"
     },
-    {
-      "name": "Hero",
-      "design": "Massive typography for Name 'Om Patel', smaller monospace subhead 'Data Engineer'. Focus on whitespace. Align left. 1px solid border separators."
-    },
-    {
-      "name": "About",
-      "design": "Concise text. No fluff. 2 columns on desktop (Heading on left span-4, Text on right span-8)."
-    },
-    {
-      "name": "Experience",
-      "design": "Chronological list. High contrast Role title, muted Company (EllisDon) and dates. 1px border bottom per item."
-    },
-    {
-      "name": "Projects",
-      "design": "Bento or linear list. Data Pipelines, Kafka, GCP focus. Display tech stack as minimal badges."
-    },
-    {
-      "name": "Skills",
-      "design": "Grid of textual skills categorized (Languages, Cloud, Tools). No progress bars. Pure text."
-    },
-    {
-      "name": "Contact",
-      "design": "Massive CTA block with 'Request Resume' button. Uses mailto link with pre-drafted subject and body."
+    "rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-light tracking-tighter text-white",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white",
+      "h3": "text-xl sm:text-2xl font-normal text-white",
+      "body": "text-base leading-relaxed text-[#a0a0b8]",
+      "labels": "text-xs font-mono uppercase tracking-[0.2em] text-[#00f2fe]"
     }
-  ],
-  "functionality": {
-    "mailto_link": "mailto:patelomr07@gmail.com?subject=Requesting%20Resume%20-%20Data%20Engineer%20Role&body=Hi%20Om,%0A%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20latest%20resume.%0A%0ABest,"
   },
-  "testing": {
-    "attributes": "All interactive elements (nav links, buttons) MUST have data-testid attributes (e.g. data-testid='nav-about', data-testid='resume-request-btn')."
+  "spacing_and_layout": {
+    "philosophy": "Generous Spacing & High Density Bento Grids.",
+    "containers": "max-w-7xl mx-auto px-6 md:px-12",
+    "section_spacing": "py-24 md:py-32",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8"
   },
-  "media": {
-    "image_urls": [
-      {
-        "url": "https://images.unsplash.com/photo-1707054437518-dfd402977b03?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwYWJzdHJhY3QlMjBkYXRhJTIwbmV0d29yayUyMHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODMyODc4OTJ8MA&ixlib=rb-4.1.0&q=85",
-        "description": "Abstract minimalist wave texture - can be used as subtle hero background or project placeholder",
-        "category": "background"
-      },
-      {
-        "url": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBtaW5pbWFsJTIwb2ZmaWNlJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4MzI4Nzg5Mnww&ixlib=rb-4.1.0&q=85",
-        "description": "Minimal office architecture - can be used as contact section accent image or omitted if purely text-driven",
-        "category": "accent"
-      }
-    ]
+  "components": {
+    "tactile_neomorphism_card": {
+      "description": "A modern take on dark neomorphism incorporating soft cyan/purple glows.",
+      "classes": "bg-[#1a1a2e] rounded-2xl border border-white/5 shadow-[6px_6px_16px_rgba(0,0,0,0.6),-4px_-4px_12px_rgba(157,76,221,0.06)] hover:shadow-[0_0_20px_rgba(0,242,254,0.15)] transition-all duration-300 p-8"
+    },
+    "glass_header": {
+      "classes": "fixed top-0 w-full z-50 bg-[#1a1a2e]/70 backdrop-blur-xl border-b border-white/5"
+    },
+    "buttons": {
+      "primary": "relative inline-flex items-center justify-center px-8 py-3 text-sm font-mono tracking-wider text-white transition-all bg-[#1a1a2e] rounded-lg border border-[#00f2fe]/30 shadow-[inset_0_0_10px_rgba(0,242,254,0.1),0_0_15px_rgba(0,242,254,0.1)] hover:shadow-[inset_0_0_15px_rgba(0,242,254,0.3),0_0_25px_rgba(0,242,254,0.2)] hover:border-[#00f2fe] hover:-translate-y-0.5",
+      "secondary": "px-6 py-2 text-sm font-medium text-[#a0a0b8] hover:text-white transition-colors"
+    },
+    "data_pipeline_diagram": {
+      "description": "An animated SVG illustrating Source -> Ingest -> Transform -> DW. Use framer-motion to animate a glowing 'data packet' (circle) along the SVG path.",
+      "nodes": "Neomorphic circles representing servers/databases.",
+      "paths": "Dashed SVG lines (stroke-white/20) connecting the nodes.",
+      "animation": "A glowing cyan dot moving along the paths with easeInOut repeating."
+    }
+  },
+  "sections": {
+    "header": {
+      "logo": "OM_P.",
+      "links": ["About", "Experience", "Skills", "Projects", "Contact"]
+    },
+    "hero": {
+      "layout": "Asymmetrical 2-column. Left: Typography + CTA. Right: Portrait image integrated with abstract glowing data nodes.",
+      "tagline": "Data Engineer · Analytics · DevOps",
+      "heading_structure": "Hi, I'm Om Patel. Architecting Data Flows.",
+      "cta": "View Pipeline (Scroll Down)"
+    },
+    "about": {
+      "layout": "Bento Grid (md:grid-cols-12). Left side (col-span-12 lg:col-span-4): Neomorphic card with bio. Right side (col-span-12 lg:col-span-8): Neomorphic card housing the full animated Data Pipeline diagram.",
+      "pipeline_flow": "Source Systems -> Ingestion -> Transform/Clean -> Data Warehouse."
+    },
+    "experience": {
+      "layout": "Vertical timeline. A single glowing cyan vertical line on the left. Neomorphic cards for each role spaced out along the timeline."
+    },
+    "skills": {
+      "layout": "Grid of small neomorphic pills/tiles. Grouped by: Data Engineering, Analytics, DevOps.",
+      "tile_classes": "bg-[#1e1e36] px-4 py-2 rounded-lg text-sm font-mono text-[#a0a0b8] border border-white/5 hover:text-[#00f2fe] hover:border-[#00f2fe]/50 transition-all cursor-default"
+    },
+    "projects": {
+      "layout": "Grid (grid-cols-1 md:grid-cols-2 gap-8). Each project is a large neomorphic card with abstract data visualization image, title, mono tags for tech stack, and a 'View Source' link."
+    },
+    "education": {
+      "layout": "Simple list of neomorphic strips. Degree/Cert on left, Year on right."
+    },
+    "contact": {
+      "layout": "Centered massive layout. Generous padding (py-32).",
+      "phrase": "Data stuck in silos? Let's build pipelines that turn chaos into insights.",
+      "cta": "Mailto button styled as the Primary button."
+    }
+  },
+  "motion_and_interactions": {
+    "page_load": "Staggered fade up (y: 20, opacity: 0 to 1) for hero elements.",
+    "scroll": "Use framer-motion 'whileInView' to fade in sections as they appear.",
+    "hover": "Interactive elements must lift (-translate-y-1) and intensify their cyan/purple box-shadow glow.",
+    "testing": "All interactive elements MUST have data-testid attributes (e.g., data-testid='contact-mailto-btn')."
+  },
+  "media_urls": {
+    "hero_portrait": {
+      "url": "https://images.unsplash.com/photo-1764546899196-b53061b1b609?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBtYWxlJTIwcHJvZmVzc2lvbmFsJTIwcG9ydHJhaXQlMjBkYXJrJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODMyOTA0NzZ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Professional portrait for the hero section."
+    },
+    "abstract_data_1": {
+      "url": "https://images.unsplash.com/photo-1758073519996-6d3c63b4922c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRhcmslMjBuZW9uJTIwY3lhbiUyMGRhdGElMjB2aXN1YWxpemF0aW9ufGVufDB8fHx8MTc4MzI5MDQ3N3ww&ixlib=rb-4.1.0&q=85",
+      "description": "Abstract blue glowing dots forming wave patterns, use as a subtle background or project thumbnail."
+    },
+    "abstract_data_2": {
+      "url": "https://images.unsplash.com/photo-1709990740078-05aa8ee5b9b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhcmslMjBuZW9uJTIwY3lhbiUyMGRhdGElMjB2aXN1YWxpemF0aW9ufGVufDB8fHx8MTc4MzI5MDQ3N3ww&ixlib=rb-4.1.0&q=85",
+      "description": "Black and green abstract curves, use for a project card thumbnail."
+    }
   },
   "instructions_to_main_agent": [
-    "Use pure HTML and Tailwind CSS for layouts. Avoid overusing Shadcn card components; instead use raw divs with stark 1px solid borders for a minimalist look.",
-    "Implement the mailto link exactly as provided in functionality.mailto_link on the 'Request Resume' button.",
-    "Load 'Outfit' and 'IBM Plex Sans' from Google Fonts and apply them in tailwind.config.js.",
-    "Do NOT use any skeuomorphic elements (no drop shadows, no bevels, no 3D effects). Pure 2D flat minimal styling.",
-    "Ensure all components are in .js/.jsx formats, not .tsx.",
-    "Make heavy use of whitespace and ensure strict mobile responsiveness.",
-    "Add 'data-testid' to all buttons, links, and forms."
+    "You are building a React.js (not TSX) application with Tailwind CSS.",
+    "Do NOT use pure white or pure black. Stick strictly to the #1a1a2e base.",
+    "Apply the `tactile_neomorphism_card` classes strictly as defined. Do not use standard Shadcn cards; build custom divs with these specific box-shadows.",
+    "Install `framer-motion` for animations. Build the Data Pipeline SVG in the About section as described: Use Framer Motion's `<motion.circle>` with a `pathLength` or raw `x,y` coordinates to make a glowing dot travel along an SVG line.",
+    "Install `@phosphor-icons/react` or `lucide-react` for Tech/DevOps icons (e.g., Database, FlowArrow, Server, GitMerge).",
+    "Configure Tailwind config to include the custom font families: Outfit, IBM Plex Sans, JetBrains Mono.",
+    "Add `data-testid` attributes to all buttons, links, and forms.",
+    "Ensure high contrast on the cyan/purple text highlights so they remain readable against the dark background. Use text-shadow if necessary."
   ]
 }
