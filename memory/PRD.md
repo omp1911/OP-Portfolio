@@ -1,7 +1,7 @@
 # Om Patel - Data & DevOps Portfolio
 
 ## Original Problem Statement
-Build a modern, sleek tech-focused personal portfolio website with Dark Neomorphism aesthetic for Om Patel, showcasing his experience as a Data Engineer with Analytics and DevOps expertise.
+Build a modern, premium personal portfolio website for Om Patel with Luxury Dark Neumorphism aesthetic that impresses HR/Managers/Companies.
 
 ## User Personas
 - **Primary**: Hiring managers and recruiters looking for Data Engineers
@@ -9,121 +9,125 @@ Build a modern, sleek tech-focused personal portfolio website with Dark Neomorph
 
 ## Core Requirements
 
-### Theme & Styling ✅
-- Dark Neomorphism theme (#1a1a2e base)
-- Soft cyan (#00f2fe) and purple (#9d4cdd) accent glows
-- Custom fonts: Outfit (headings), IBM Plex Sans (body), JetBrains Mono (mono)
-- Tactile neomorphic cards with box shadows
+### Theme & Styling ✅ (Redesigned Dec 2025)
+- **Luxury Dark Neumorphism** with subtle color palette
+- Dark base: `#0C0C0E` (not pure black)
+- Surface cards: `#131316`
+- Accent orange: `#D96C4A`
+- Accent beige: `#D4C4A8`
+- Custom fonts: Cabinet Grotesk (headings), Manrope (body)
+- Neumorphic shadows: `-4px -4px 10px rgba(255,255,255,0.02), 4px 4px 10px rgba(0,0,0,0.4)`
 
 ### Hero Section ✅
-- User's portrait image with floating animated data nodes
-- "Data Engineer · Analytics · DevOps" tagline
-- "Hi, I'm Om Patel" + "Architecting Data Flows" headlines
-- Request Resume and View Pipeline CTA buttons
+- User's actual portrait (hero-om-converted.jpg) in circular avatar
+- "Data Engineer · Analytics · DevOps" tagline in beige
+- Clean "Om Patel" name (NO gradient effect)
+- Request Resume + Get in Touch buttons
+- NO "View Pipeline" button
+
+### Header/Navigation ✅
+- Shows "Om Patel" text (NOT "OM_P.")
+- Navigation: About, Experience, Skills, Projects, Contact
+- Resume button with orange accent
+- Glass header on scroll
 
 ### About Section ✅
-- Bio card describing 5+ years of experience
-- **Animated SVG Data Pipeline Diagram** showing:
-  - Source Systems → Ingestion → Transform → Data Warehouse
-  - Framer Motion animated data packets flowing along path
-  - Neomorphic node circles with icons
+- Bio text on left
+- Elegant Data Pipeline diagram on right with 4 stages:
+  - Extract → Transform → Load → Analyze
+- Neumorphic card styling
 
 ### Experience Section ✅
-- Vertical timeline with glowing cyan line
-- Neomorphic cards for each role (EllisDon, DIGIBEE)
-- Purple border accent on bullet points
-- Skill tiles at bottom of each card
+- Vertical timeline with orange gradient line
+- Neomorphic cards for EllisDon and DIGIBEE
+- Beige border on bullet points
+- Skill pills at bottom
 
 ### Skills Section ✅
 - Three categorized neomorphic cards:
-  - Data Engineering (Airflow, Kafka, Spark, dbt, etc.)
-  - Analytics (BigQuery, Synapse, Snowflake, etc.)
-  - Cloud & DevOps (GCP, Azure, AWS, Docker, etc.)
+  - Data Engineering
+  - Analytics
+  - Cloud & DevOps
+- Rounded pill styling for skills
 
 ### Projects Section ✅
 - Grid of project cards with result badges
+- Orange accent on badges
 - Tech stack tags at bottom
-- Hover lift animations
 
 ### Education Section ✅ (Separate Container)
-- Sheridan College - Computer System Technician
-- BITS Pilani - Bachelor of Computer Science
+- Sheridan College
+- BITS Pilani
+- Neomorphic card styling
 
 ### Certifications Section ✅ (Separate Container)
 - Azure Data Fundamentals (DP-900)
 - Palantir Certified Foundry Data Engineer
+- Neomorphic card styling
 
 ### Contact Section ✅
-- **Phrase**: "Got data stuck and need to have it transformed with analytics?"
-- Contact info grid (Email, Phone, LinkedIn, Location)
-- **Request Resume button** → mailto:patelomr07@gmail.com
-
-### Header & Navigation ✅
-- Glass-morphism header with backdrop blur
-- Desktop nav with smooth scroll to sections
-- Mobile hamburger menu with slide-in animation
-- "OM_P." branded logo
-
-### Footer ✅
-- Copyright with year
-- Back to top button
+- **Required Phrase**: "Got data stuck and need to have it transformed with analytics?"
+  - "transformed" in orange
+  - "analytics" in beige
+- Contact info grid
+- Request Resume button → mailto:patelomr07@gmail.com
 
 ## Technology Stack
 - **Frontend**: React.js, TailwindCSS
-- **Animations**: Framer Motion
+- **Animations**: Framer Motion (smooth easing: [0.16, 1, 0.3, 1])
 - **Icons**: Lucide React
-- **Data**: Static mockData.js (no backend yet)
+- **Data**: Static mockData.js
+
+## Design Inspirations
+- https://samxie.net/ - Clean minimal portfolio
+- https://neumorph-dashboard.webflow.io/ - Proper neomorphism
+- https://www.tasteskill.dev/ - Modern polished design
+- https://impeccable.style/designing/ - Smooth animations
 
 ## What's Been Implemented (Dec 2025)
 
-### Phase 1 - Dark Neomorphism UI ✅
-- [x] Updated App.css with CSS variables and neomorphic styles
-- [x] Updated mockData.js with Om Patel's info
-- [x] Created design_guidelines.json
-- [x] Installed framer-motion
-- [x] Converted and moved hero image to assets/
+### Phase 1 - Initial Dark Neomorphism ✅
+- Created design guidelines
+- Installed framer-motion
+- Converted user's hero image
 
-### Phase 2 - Component Rewrite ✅
-- [x] Header.jsx - Glass header with Framer Motion animations
-- [x] Hero.jsx - Two-column layout with portrait and floating nodes
-- [x] About.jsx - Bento grid with bio and pipeline diagram
-- [x] DataPipelineDiagram.jsx - Animated SVG with moving data packets
-- [x] Experience.jsx - Timeline with neomorphic cards
-- [x] Skills.jsx - Categorized skill tiles
-- [x] Projects.jsx - Project cards with result badges
-- [x] Education.jsx - Separate education container
-- [x] Certifications.jsx - Separate certifications container
-- [x] Contact.jsx - Contact info with requested phrase
-- [x] Footer.jsx - Styled footer with back-to-top
+### Phase 2 - Premium Redesign ✅
+- Redesigned color scheme (cyan/purple → orange/beige)
+- Removed "OM_P." branding
+- Removed "View Pipeline" button
+- Removed gradient effect on name
+- Implemented proper neumorphic shadows
+- Fixed responsive text overflow
+- Updated all 10 components with new design
+- Integrated user's actual photo
 
 ### Testing ✅
-- [x] All 12 features verified on desktop (1920x1080) and mobile (390x844)
-- [x] 100% frontend success rate
-- [x] No console errors
+- 100% frontend success rate (12/12 features)
+- Desktop (1920x1080) and mobile (390x844) verified
+- No horizontal overflow on mobile
 
 ## Prioritized Backlog
 
 ### P1 - Near-term
-- [ ] SEO & Metadata updates (title, meta tags, favicon)
-- [ ] Add more social links (GitHub, Twitter)
-- [ ] Add project links/demo URLs
+- [ ] SEO & Metadata updates (title, favicon, meta tags for Om Patel)
+- [ ] Add GitHub profile link
+- [ ] Add project demo URLs
 
 ### P2 - Future
-- [ ] Backend integration with FastAPI/MongoDB for dynamic content
-- [ ] Admin panel to update portfolio data
+- [ ] Backend integration with FastAPI/MongoDB
+- [ ] Admin panel for content management
 - [ ] Blog section
-- [ ] Analytics integration (Google Analytics)
+- [ ] Analytics integration
 
 ## File Structure
 ```
 /app/frontend/src/
 ├── assets/
-│   └── hero-om-converted.jpg
+│   └── hero-om-converted.jpg (User's photo)
 ├── components/
 │   ├── Header.jsx
 │   ├── Hero.jsx
 │   ├── About.jsx
-│   ├── DataPipelineDiagram.jsx
 │   ├── Experience.jsx
 │   ├── Skills.jsx
 │   ├── Projects.jsx

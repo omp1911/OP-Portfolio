@@ -80,14 +80,14 @@ const Contact = () => {
                           href={item.href}
                           target={item.label === 'LinkedIn' ? '_blank' : undefined}
                           rel={item.label === 'LinkedIn' ? 'noopener noreferrer' : undefined}
-                          className="text-dark-text hover:text-accent-orange transition-colors text-sm truncate block"
+                          className="text-dark-text hover:text-accent-orange transition-colors text-sm break-all"
                           data-testid={`contact-${item.label.toLowerCase()}`}
                         >
                           {item.value}
                         </a>
                       ) : (
                         <p 
-                          className="text-dark-text text-sm truncate"
+                          className="text-dark-text text-sm"
                           data-testid={`contact-${item.label.toLowerCase()}`}
                         >
                           {item.value}
