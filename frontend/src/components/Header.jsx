@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { navSections, personalInfo } from '../data/mockData';
 
@@ -19,78 +20,104 @@ const Header = () => {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-white/90 backdrop-blur-md border-b border-zinc-200' : 'bg-transparent'
+          scrolled 
+            ? 'bg-neo-base/80 backdrop-blur-xl border-b border-white/5' 
+            : 'bg-transparent'
         }`}
         data-testid="site-header"
       >
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="font-heading font-bold text-lg tracking-tight"
+            className="font-heading font-semibold text-xl tracking-tight text-neo-text hover:text-neo-cyan transition-colors"
             data-testid="brand-link"
           >
-            {personalInfo.name}
+            <span className="gradient-text">OM_P</span><span className="text-neo-muted">.</span>
           </button>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8" data-testid="desktop-nav">
-            {navSections.map((s) => (
-              <button
+            {navSections.map((s, i) => (
+              <motion.button
                 key={s.id}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * i, duration: 0.4 }}
                 onClick={() => scrollTo(s.id)}
-                className="text-sm text-zinc-600 hover:text-black transition-colors"
+                className="text-sm font-mono text-neo-secondary hover:text-neo-cyan transition-colors tracking-wide"
                 data-testid={`nav-${s.id}`}
               >
                 {s.label}
-              </button>
+              </motion.button>
             ))}
-            <a
+            <motion.a
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
               href={personalInfo.resumeMailto}
-              className="btn btn-primary text-xs"
+              className="btn-neo text-xs"
               data-testid="resume-request-btn"
             >
               Request Resume
-            </a>
+            </motion.a>
           </nav>
 
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-neo-text hover:text-neo-cyan transition-colors"
             aria-label="Toggle menu"
             data-testid="mobile-menu-toggle"
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-white pt-20 px-6 md:hidden" data-testid="mobile-menu">
-          <nav className="flex flex-col gap-6">
-            {navSections.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => scrollTo(s.id)}
-                className="text-2xl font-heading font-semibold text-left"
-                data-testid={`mobile-nav-${s.id}`}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 z-40 bg-neo-base pt-24 px-6 md:hidden"
+            data-testid="mobile-menu"
+          >
+            <nav className="flex flex-col gap-6">
+              {navSections.map((s, i) => (
+                <motion.button
+                  key={s.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 * i }}
+                  onClick={() => scrollTo(s.id)}
+                  className="text-2xl font-heading font-medium text-left text-neo-text hover:text-neo-cyan transition-colors"
+                  data-testid={`mobile-nav-${s.id}`}
+                >
+                  {s.label}
+                </motion.button>
+              ))}
+              <motion.a
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                href={personalInfo.resumeMailto}
+                className="btn-neo mt-4 w-fit"
+                data-testid="mobile-resume-btn"
               >
-                {s.label}
-              </button>
-            ))}
-            <a
-              href={personalInfo.resumeMailto}
-              className="btn btn-primary mt-4 w-fit"
-              data-testid="mobile-resume-btn"
-            >
-              Request Resume
-            </a>
-          </nav>
-        </div>
-      )}
+                Request Resume
+              </motion.a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

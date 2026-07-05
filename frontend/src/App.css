@@ -1,5 +1,5 @@
 /* ===========================================
-   Om Patel — Portfolio · Pure Minimal Swiss
+   Om Patel — Portfolio · Dark Neomorphism
    =========================================== */
 
 * {
@@ -9,13 +9,15 @@
 }
 
 :root {
-  --bg: #FFFFFF;
-  --surface: #FAFAFA;
-  --text: #09090B;
-  --text-secondary: #71717A;
-  --border: #E4E4E7;
-  --accent: #000000;
-  --accent-hover: #27272A;
+  --bg-base: #1a1a2e;
+  --bg-surface: #1e1e36;
+  --text-primary: #f8f9fa;
+  --text-secondary: #a0a0b8;
+  --text-muted: #6a6a8c;
+  --accent-cyan: #00f2fe;
+  --accent-purple: #9d4cdd;
+  --cyan-glow: rgba(0, 242, 254, 0.2);
+  --purple-glow: rgba(157, 76, 221, 0.15);
 }
 
 html {
@@ -26,117 +28,163 @@ body {
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--text-primary);
+  background: var(--bg-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: var(--accent);
-  color: white;
+  background: var(--accent-cyan);
+  color: var(--bg-base);
 }
 
 /* Typography */
 h1, h2, h3, h4 {
   font-family: 'Outfit', sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  color: var(--text-primary);
 }
 
-/* Layout */
-.section {
-  padding: 80px 24px;
-  border-bottom: 1px solid var(--border);
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
 }
 
-@media (min-width: 768px) {
-  .section {
-    padding: 120px 48px;
-  }
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
+/* Neomorphic card */
+.neo-card {
+  background: var(--bg-base);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    6px 6px 16px rgba(0, 0, 0, 0.6),
+    -4px -4px 12px rgba(157, 76, 221, 0.06);
+  transition: all 0.3s ease;
 }
 
-/* Reveal animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.neo-card:hover {
+  box-shadow: 
+    0 0 20px rgba(0, 242, 254, 0.15),
+    6px 6px 16px rgba(0, 0, 0, 0.6);
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Button styles */
-.btn {
+/* Buttons */
+.btn-neo {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: 'IBM Plex Sans', sans-serif;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
   font-weight: 500;
-  font-size: 14px;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 14px 28px;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 242, 254, 0.1),
+    0 0 15px rgba(0, 242, 254, 0.1);
+}
+
+.btn-neo:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 0 15px rgba(0, 242, 254, 0.3),
+    0 0 25px rgba(0, 242, 254, 0.2);
+}
+
+.btn-ghost {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: color 0.2s ease;
 }
 
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-.btn-outline:hover {
-  border-color: var(--accent);
-}
-
-/* Badge */
-.badge {
-  display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.02em;
-  padding: 6px 12px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-secondary);
+.btn-ghost:hover {
+  color: var(--text-primary);
 }
 
 /* Section label */
 .section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.1em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
+  color: var(--accent-cyan);
+  margin-bottom: 1rem;
 }
 
-/* Divider */
-.divider {
-  height: 1px;
-  background: var(--border);
-  width: 100%;
+/* Layout */
+.section {
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 8rem 3rem;
+  }
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+/* Skill tile */
+.skill-tile {
+  background: var(--bg-surface);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.skill-tile:hover {
+  color: var(--accent-cyan);
+  border-color: rgba(0, 242, 254, 0.5);
+}
+
+/* Timeline */
+.timeline-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+  opacity: 0.3;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
 }
 
 /* Scrollbar */
@@ -144,12 +192,28 @@ h1, h2, h3, h4 {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--surface);
+  background: var(--bg-base);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--bg-surface);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
+  background: var(--text-muted);
+}
+
+/* Hero image glow */
+.hero-image-wrapper {
+  position: relative;
+}
+
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  border-radius: 1rem;
+  opacity: 0.5;
+  filter: blur(20px);
+  z-index: -1;
 }

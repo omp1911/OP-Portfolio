@@ -1,15 +1,15 @@
-// Portfolio data — Om Patel, Data Engineer
-// Clean, minimal, no redundancy
+// Portfolio data — Om Patel
+// Data Engineer · Analytics · DevOps
 
 export const personalInfo = {
   name: "Om Patel",
-  title: "Data Engineer",
-  location: "Ontario, Canada",
+  tagline: "Data Engineer · Analytics · DevOps",
   email: "patelomr07@gmail.com",
   phone: "+1 (647) 914-2834",
   linkedin: "https://www.linkedin.com/in/om-patel",
-  summary: "5+ years building production data pipelines on GCP and Azure. Real-time streaming, CDC with Kafka & Datastream, Airflow orchestration, dimensional modeling in BigQuery.",
-  resumeMailto: "mailto:patelomr07@gmail.com?subject=Requesting%20Resume%20-%20Data%20Engineer%20Role&body=Hi%20Om,%0A%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20latest%20resume.%0A%0ABest,",
+  location: "Ontario, Canada",
+  resumeMailto: "mailto:patelomr07@gmail.com?subject=Resume%20Request%20-%20Data%20Engineer&body=Hi%20Om,%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20resume.%0A%0ABest%20regards,",
+  bio: "I architect data platforms that transform raw chaos into actionable insights. With 5+ years across GCP, Azure, and AWS, I build pipelines that scale from GBs to TBs — handling real-time streaming, CDC, orchestration, and analytics that drive decisions.",
 };
 
 export const experiences = [
@@ -65,11 +65,9 @@ export const projects = [
 ];
 
 export const skills = {
-  "Languages": ["Python", "SQL", "Scala", "TypeScript", "Shell"],
-  "Data Engineering": ["Airflow", "Kafka", "Spark", "dbt", "CDC", "Dimensional Modeling"],
-  "Cloud": ["GCP", "Azure", "AWS", "BigQuery", "Synapse", "Datastream"],
-  "Databases": ["PostgreSQL", "MySQL", "MongoDB", "Snowflake", "Redis"],
-  "DevOps": ["Docker", "Kubernetes", "Terraform", "Git", "CI/CD"],
+  "Data Engineering": ["Airflow", "Kafka", "Spark", "dbt", "CDC", "Datastream", "ETL/ELT"],
+  "Analytics": ["BigQuery", "Synapse", "Snowflake", "Dimensional Modeling", "SQL", "Python"],
+  "Cloud & DevOps": ["GCP", "Azure", "AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"],
 };
 
 export const education = [
@@ -91,7 +89,7 @@ export const certifications = [
 export const navSections = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
