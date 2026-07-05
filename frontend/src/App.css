@@ -184,3 +184,50 @@ body {
 .animate-intro-fade-in {
   animation: intro-fade-in 0.7s ease-out both;
 }
+
+/* Slow cinematic zoom on the office backdrop */
+@keyframes intro-kenburns {
+  0%   { transform: scale(1.05) translate(0%, 0%); }
+  50%  { transform: scale(1.12) translate(-1.5%, -1%); }
+  100% { transform: scale(1.05) translate(0%, 0%); }
+}
+
+.animate-intro-kenburns {
+  animation: intro-kenburns 28s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+/* Drifting backdrop orbs */
+@keyframes intro-orb-a {
+  0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.9; }
+  50%      { transform: translate(40px, -30px) scale(1.08); opacity: 1; }
+}
+@keyframes intro-orb-b {
+  0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.85; }
+  50%      { transform: translate(-50px, 25px) scale(1.1); opacity: 1; }
+}
+.animate-intro-orb-a { animation: intro-orb-a 14s ease-in-out infinite; }
+.animate-intro-orb-b { animation: intro-orb-b 18s ease-in-out infinite; }
+
+/* Subtle "actively waving" body motion while the audio plays.
+   Small upper-body sway + a faint bob; the raised hand reads as a wave. */
+@keyframes intro-wave-pose {
+  0%   { transform: rotate(0deg)  translateY(0px);    }
+  20%  { transform: rotate(2.4deg) translateY(-2px);  }
+  40%  { transform: rotate(-1.8deg) translateY(-1px); }
+  60%  { transform: rotate(2.2deg) translateY(-2px);  }
+  80%  { transform: rotate(-1.4deg) translateY(0px);  }
+  100% { transform: rotate(0deg)  translateY(0px);    }
+}
+.animate-intro-wave-pose {
+  animation: intro-wave-pose 1.6s ease-in-out infinite;
+}
+
+/* Idle "hover to meet Om" hint — gentle breathing opacity */
+@keyframes intro-hint-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1;    }
+}
+.animate-intro-hint-pulse {
+  animation: intro-hint-pulse 2.2s ease-in-out infinite;
+}

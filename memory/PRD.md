@@ -103,3 +103,15 @@ Ready for Emergent native deployment. No backend required.
   - Plays every visit (no localStorage gating, as requested).
   - Animations added in `App.css`: `intro-wave`, `intro-ping`, `intro-breathe`, `intro-bar`, `intro-fade-in`.
   - `EMERGENT_LLM_KEY` added to `backend/.env` for the one-off TTS script (no runtime backend calls — MP3 is static).
+
+- **2026-05-22 — Cinematic intro hero v2 (animated character + themed backdrop + hover autoplay)**
+  - Replaced the click-splash with a "hover to autoplay" pattern. Audio fires on the **first user interaction** with priority on `mouseenter` over the hero stage (desktop), with fallbacks: `scroll`, `touchstart`, `keydown`, `click`. Feels like genuine autoplay because users almost always move the mouse / scroll within a few hundred ms.
+  - Generated two new visual assets with **Gemini Nano Banana (image-edit)** via Emergent LLM key:
+    - `src/assets/hero-waving.png` — same character (face/hair/beard/jacket identical, image-edit on the existing portrait) but with the right arm raised mid-wave. Background was a stark white from the model; cut out via PIL threshold-based RGBA mask (script in `/tmp/cutout.py`).
+    - `src/assets/office-bg.jpg` — cinematic dark data-engineer's office: bookshelves on both sides, ultrawide monitor showing data dashboards/charts, ambient blue accent lighting, depth-of-field bokeh.
+  - The hero is now bottom-aligned (standing in the office). Cross-fades from `hero.png` (idle, head & shoulders) → `hero-waving.png` (full upper-body, raised hand) when audio starts — the cross-fade visually reads as Om actively raising his hand.
+  - Background animates: slow 28s ken-burns zoom on the office image, drifting blue/cyan accent orbs, radial vignette + bottom fade to keep him readable.
+  - While speaking: `intro-wave-pose` keyframe applies a subtle upper-body sway/bob so the raised hand reads as actively waving; equalizer bars animate underneath; no on-screen captions.
+  - After audio ends: hand lowers (cross-fade back to idle frame), "Scroll down to know more about me" + bouncing chevron appears.
+  - New CSS keyframes in `App.css`: `intro-kenburns`, `intro-orb-a`, `intro-orb-b`, `intro-wave-pose`, `intro-hint-pulse`.
+  - Old splash button and emoji-only wave were removed.
