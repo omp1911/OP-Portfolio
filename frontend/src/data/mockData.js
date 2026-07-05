@@ -9,6 +9,7 @@ export const personalInfo = {
   phone: "+1 (647) 914-2834",
   linkedin: "https://www.linkedin.com/in/om-patel",
   summary: "5+ years building production data pipelines on GCP and Azure. Real-time streaming, CDC with Kafka & Datastream, Airflow orchestration, dimensional modeling in BigQuery.",
+  resumeMailto: "mailto:patelomr07@gmail.com?subject=Requesting%20Resume%20-%20Data%20Engineer%20Role&body=Hi%20Om,%0A%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20latest%20resume.%0A%0ABest,",
 };
 
 export const experiences = [

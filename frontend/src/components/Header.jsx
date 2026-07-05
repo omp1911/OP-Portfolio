@@ -47,7 +47,7 @@ const Header = () => {
               </button>
             ))}
             <a
-              href="mailto:patelomr07@gmail.com?subject=Requesting%20Resume%20-%20Data%20Engineer%20Role&body=Hi%20Om,%0A%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20latest%20resume.%0A%0ABest,"
+              href={personalInfo.resumeMailto}
               className="btn btn-primary text-xs"
               data-testid="resume-request-btn"
             >
@@ -82,7 +82,7 @@ const Header = () => {
               </button>
             ))}
             <a
-              href="mailto:patelomr07@gmail.com?subject=Requesting%20Resume%20-%20Data%20Engineer%20Role&body=Hi%20Om,%0A%0AI%20was%20reviewing%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20latest%20resume.%0A%0ABest,"
+              href={personalInfo.resumeMailto}
               className="btn btn-primary mt-4 w-fit"
               data-testid="mobile-resume-btn"
             >
