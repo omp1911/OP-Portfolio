@@ -3,18 +3,17 @@ import { personalInfo } from '../data/mockData';
 
 const Footer = () => {
   return (
-    <footer className="py-10 px-6 border-t border-[var(--hairline-strong)]" data-testid="site-footer">
-      <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--muted)]">
-          © {new Date().getFullYear()} {personalInfo.name} · Built quietly in {personalInfo.location.split(',')[0]}
+    <footer className="py-8 px-6 border-t border-zinc-200" data-testid="site-footer">
+      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="font-mono text-xs text-zinc-500">
+          © {new Date().getFullYear()} {personalInfo.name}
         </p>
         <button
-          type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--muted)] underline-fx"
+          className="font-mono text-xs text-zinc-500 hover:text-black transition-colors"
           data-testid="footer-back-to-top"
         >
-          Back to top ↑
+          Back to top
         </button>
       </div>
     </footer>
