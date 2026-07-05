@@ -3,35 +3,37 @@ import { motion } from 'framer-motion';
 import { experiences } from '../data/mockData';
 
 const ExperienceItem = ({ exp, index }) => {
+  const easing = [0.16, 1, 0.3, 1];
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: easing }}
       className="relative pl-8 pb-12 last:pb-0"
       data-testid={`experience-${index}`}
     >
       {/* Timeline dot */}
-      <div className="timeline-dot top-1" />
+      <div className="timeline-dot top-1.5" />
       
       {/* Content card */}
-      <div className="neo-card p-6 md:p-8">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-4">
+      <div className="neo-card neo-card-hover p-6 sm:p-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-5">
           <div>
-            <h3 className="font-heading text-xl font-medium text-neo-text">
+            <h3 className="font-heading text-xl font-medium text-dark-text mb-1">
               {exp.role}
             </h3>
-            <p className="text-neo-cyan font-mono text-sm">{exp.company}</p>
+            <p className="text-accent-orange text-sm font-medium">{exp.company}</p>
           </div>
-          <p className="font-mono text-xs text-neo-muted">{exp.duration}</p>
+          <p className="text-xs text-dark-muted font-mono whitespace-nowrap">{exp.duration}</p>
         </div>
 
         <ul className="space-y-3 mb-6">
           {exp.highlights.map((item, i) => (
             <li 
               key={i} 
-              className="text-neo-secondary text-sm leading-relaxed pl-4 border-l-2 border-neo-purple/30"
+              className="text-dark-secondary text-sm leading-relaxed pl-4 border-l border-accent-beige/30"
             >
               {item}
             </li>
@@ -40,7 +42,7 @@ const ExperienceItem = ({ exp, index }) => {
 
         <div className="flex flex-wrap gap-2">
           {exp.stack.map((tech) => (
-            <span key={tech} className="skill-tile text-xs">
+            <span key={tech} className="skill-pill text-xs">
               {tech}
             </span>
           ))}
@@ -51,19 +53,21 @@ const ExperienceItem = ({ exp, index }) => {
 };
 
 const Experience = () => {
+  const easing = [0.16, 1, 0.3, 1];
+
   return (
-    <section id="experience" className="section bg-neo-surface/30" data-testid="experience-section">
-      <div className="container max-w-7xl mx-auto px-6 md:px-12">
+    <section id="experience" className="section bg-dark-surface/30" data-testid="experience-section">
+      <div className="container max-w-[1200px] mx-auto px-6 md:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, ease: easing }}
           className="mb-12"
         >
           <p className="section-label">Experience</p>
-          <h2 className="font-heading text-3xl sm:text-4xl font-medium tracking-tight text-neo-text">
-            Where I&apos;ve <span className="gradient-text">worked</span>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-dark-text">
+            Where I&apos;ve worked
           </h2>
         </motion.div>
 
