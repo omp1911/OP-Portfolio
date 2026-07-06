@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { skills } from '../data/mockData';
 
 const Skills = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <section id="skills" className="section bg-dark-base" data-testid="skills-section">
@@ -11,7 +11,7 @@ const Skills = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, ease: easing }}
           className="mb-12"
         >
@@ -25,9 +25,9 @@ const Skills = () => {
           {Object.entries(skills).map(([category, items], categoryIndex) => (
             <motion.div
               key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1, ease: easing }}
               className="neo-card p-6"
               data-testid={`skill-category-${categoryIndex}`}
@@ -42,7 +42,7 @@ const Skills = () => {
                     key={skill}
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.3 }}
                     transition={{ 
                       duration: 0.3, 
                       delay: categoryIndex * 0.1 + skillIndex * 0.03,

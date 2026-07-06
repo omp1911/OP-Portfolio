@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Cabinet Grotesk', 'sans-serif'],
-        body: ['Manrope', 'sans-serif'],
+        heading: ['Tomorrow', 'sans-serif'],
+        body: ['Tomorrow', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
@@ -56,9 +56,8 @@ module.exports = {
         ring: 'hsl(var(--ring))',
       },
       boxShadow: {
-        'neo': '-4px -4px 10px rgba(255,255,255,0.02), 4px 4px 10px rgba(0,0,0,0.4)',
-        'neo-hover': '-4px -4px 12px rgba(255,255,255,0.03), 6px 6px 14px rgba(0,0,0,0.5)',
-        'neo-inset': 'inset -2px -2px 6px rgba(255,255,255,0.02), inset 2px 2px 6px rgba(0,0,0,0.3)',
+        'neo': 'inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.35)',
+        'neo-inset': 'inset 0 2px 6px rgba(0,0,0,0.6), inset 0 -1px 0 rgba(255,255,255,0.03)',
       },
       keyframes: {
         'accordion-down': {
@@ -69,10 +68,6 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
         },
-        'pulse-glow': {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '1' }
-        },
         'flow': {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(100%)' }
@@ -81,7 +76,6 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'flow': 'flow 3s ease-in-out infinite',
       },
     }

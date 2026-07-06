@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
 import avatarImage from '../assets/avatar-3d.png';
+import ScrambleText from './ScrambleText';
 
 const Hero = () => {
   const easing = [0.16, 1, 0.3, 1];
@@ -33,7 +34,7 @@ const Hero = () => {
               className="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6"
               data-testid="hero-headline"
             >
-              {personalInfo.name}
+              <ScrambleText text={personalInfo.name} trigger="mount" />
             </motion.h1>
             
             <motion.p

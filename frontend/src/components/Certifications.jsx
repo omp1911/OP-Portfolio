@@ -4,7 +4,7 @@ import { Award } from 'lucide-react';
 import { certifications } from '../data/mockData';
 
 const Certifications = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <section id="certifications" className="section bg-dark-surface/30" data-testid="certifications-section">
@@ -12,7 +12,7 @@ const Certifications = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, ease: easing }}
           className="mb-8"
         >
@@ -26,10 +26,10 @@ const Certifications = () => {
           {certifications.map((cert, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1, ease: easing }}
+              initial={{ opacity: 0, y: 15, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.45, delay: index * 0.1, ease: easing }}
               className="neo-card p-5 flex items-center gap-5"
               data-testid={`certification-${index}`}
             >

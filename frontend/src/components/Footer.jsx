@@ -4,7 +4,7 @@ import { ArrowUp } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
 
 const Footer = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <footer 
@@ -15,7 +15,7 @@ const Footer = () => {
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, ease: easing }}
           className="text-xs text-white/50"
         >
@@ -25,7 +25,7 @@ const Footer = () => {
         <motion.button
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           whileHover={{ y: -2 }}
           transition={{ duration: 0.3, ease: easing }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

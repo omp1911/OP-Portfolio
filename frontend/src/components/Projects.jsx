@@ -4,13 +4,13 @@ import { ArrowUpRight } from 'lucide-react';
 import { projects } from '../data/mockData';
 
 const ProjectCard = ({ project, index }) => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: easing }}
       className="neo-card p-6 sm:p-8 group"
       data-testid={`project-${index}`}
@@ -38,7 +38,7 @@ const ProjectCard = ({ project, index }) => {
         {project.tech.map((tech) => (
           <span 
             key={tech} 
-            className="text-xs font-mono px-2.5 py-1 rounded-full bg-dark-surface-hover text-white/50 border border-white/5"
+            className="skill-pill"
           >
             {tech}
           </span>
@@ -49,7 +49,7 @@ const ProjectCard = ({ project, index }) => {
 };
 
 const Projects = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <section id="projects" className="section bg-dark-surface/30" data-testid="projects-section">
@@ -57,7 +57,7 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, ease: easing }}
           className="mb-12"
         >

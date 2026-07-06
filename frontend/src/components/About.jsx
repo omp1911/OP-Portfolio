@@ -178,7 +178,7 @@ const DataPipelineVisualization = () => {
 };
 
 const About = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <section id="about" className="section bg-dark-base" data-testid="about-section">
@@ -186,7 +186,7 @@ const About = () => {
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, ease: easing }}
           className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4"
         >
@@ -196,7 +196,7 @@ const About = () => {
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.1, ease: easing }}
           className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white mb-12"
         >
@@ -208,7 +208,7 @@ const About = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, ease: easing }}
             className="space-y-6"
           >
@@ -229,9 +229,9 @@ const About = () => {
 
           {/* Right: Pipeline Visualization */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2, ease: easing }}
             className="neo-card p-6 sm:p-8"
           >

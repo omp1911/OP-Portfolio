@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 import { experiences } from '../data/mockData';
 
 const ExperienceItem = ({ exp, index }) => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      initial={{ opacity: 0, y: 20, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: easing }}
       className="relative pl-8 pb-12 last:pb-0"
       data-testid={`experience-${index}`}
@@ -53,7 +53,7 @@ const ExperienceItem = ({ exp, index }) => {
 };
 
 const Experience = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
     <section id="experience" className="section bg-dark-surface/30" data-testid="experience-section">
@@ -61,7 +61,7 @@ const Experience = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, ease: easing }}
           className="mb-12"
         >

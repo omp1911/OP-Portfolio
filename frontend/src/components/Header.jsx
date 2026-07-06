@@ -27,8 +27,8 @@ const Header = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: easing }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled 
-            ? 'bg-dark-base/80 backdrop-blur-xl border-b border-white/5' 
+          scrolled
+            ? 'bg-dark-base/95 backdrop-blur-xl border-b border-white/[0.08] shadow-neo'
             : 'bg-transparent'
         }`}
         data-testid="site-header"

@@ -4,7 +4,7 @@ import { Mail, Phone, Linkedin, MapPin, Send } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
 
 const Contact = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   const contactItems = [
     { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
@@ -20,7 +20,7 @@ const Contact = () => {
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5, ease: easing }}
             className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4"
           >
@@ -30,7 +30,7 @@ const Contact = () => {
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.1, ease: easing }}
             className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white mb-6"
           >
@@ -40,7 +40,7 @@ const Contact = () => {
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.2, ease: easing }}
             className="text-lg sm:text-xl text-white/70 leading-relaxed mb-12"
           >
@@ -50,9 +50,9 @@ const Contact = () => {
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.3, ease: easing }}
             className="neo-card p-6 sm:p-8 mb-8"
           >
@@ -64,7 +64,7 @@ const Contact = () => {
                     key={item.label}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.3 }}
                     transition={{ duration: 0.4, delay: 0.4 + index * 0.05, ease: easing }}
                     className="flex items-center gap-4 text-left"
                   >
@@ -114,7 +114,7 @@ const Contact = () => {
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.5, ease: easing }}
             className="text-white/50 text-sm"
           >
