@@ -16,8 +16,8 @@ const Education = () => {
           transition={{ duration: 0.5, ease: easing }}
           className="mb-8"
         >
-          <p className="section-label">Education</p>
-          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-dark-text">
+          <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Education</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-[#FFFFFF]">
             Academic background
           </h2>
         </motion.div>
@@ -30,17 +30,17 @@ const Education = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1, ease: easing }}
-              className="neo-card neo-card-hover p-5 flex items-center gap-5"
+              className="neo-card p-5 flex items-center gap-5"
               data-testid={`education-${index}`}
             >
               <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-dark-surface-hover flex items-center justify-center border border-white/5">
-                <GraduationCap size={20} className="text-accent-beige" />
+                <GraduationCap size={20} className="text-[#D96C4A]" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-heading text-base font-medium text-dark-text truncate">
+                <h3 className="font-heading text-base font-medium text-[#FFFFFF] truncate">
                   {edu.institution}
                 </h3>
-                <p className="text-sm text-dark-secondary truncate">
+                <p className="text-sm text-[#FFFFFF] opacity-60 truncate">
                   {edu.degree}
                 </p>
               </div>

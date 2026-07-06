@@ -17,23 +17,23 @@ const ExperienceItem = ({ exp, index }) => {
       {/* Timeline dot */}
       <div className="timeline-dot top-1.5" />
       
-      {/* Content card */}
-      <div className="neo-card neo-card-hover p-6 sm:p-8">
+      {/* Content card - NO hover effect */}
+      <div className="neo-card p-6 sm:p-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-5">
           <div>
-            <h3 className="font-heading text-xl font-medium text-dark-text mb-1">
+            <h3 className="font-heading text-xl font-medium text-[#FFFFFF] mb-1">
               {exp.role}
             </h3>
-            <p className="text-accent-orange text-sm font-medium">{exp.company}</p>
+            <p className="text-[#D96C4A] text-sm font-medium">{exp.company}</p>
           </div>
-          <p className="text-xs text-dark-muted font-mono whitespace-nowrap">{exp.duration}</p>
+          <p className="text-xs text-[#FFFFFF] opacity-50 font-mono whitespace-nowrap">{exp.duration}</p>
         </div>
 
         <ul className="space-y-3 mb-6">
           {exp.highlights.map((item, i) => (
             <li 
               key={i} 
-              className="text-dark-secondary text-sm leading-relaxed pl-4 border-l border-accent-beige/30"
+              className="text-[#FFFFFF] opacity-80 text-sm leading-relaxed pl-4 border-l border-[#D96C4A]/30"
             >
               {item}
             </li>
@@ -65,8 +65,8 @@ const Experience = () => {
           transition={{ duration: 0.5, ease: easing }}
           className="mb-12"
         >
-          <p className="section-label">Experience</p>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-dark-text">
+          <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Experience</p>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF]">
             Where I&apos;ve worked
           </h2>
         </motion.div>

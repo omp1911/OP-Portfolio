@@ -16,8 +16,8 @@ const Certifications = () => {
           transition={{ duration: 0.5, ease: easing }}
           className="mb-8"
         >
-          <p className="section-label">Certifications</p>
-          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-dark-text">
+          <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Certifications</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-[#FFFFFF]">
             Professional credentials
           </h2>
         </motion.div>
@@ -30,13 +30,13 @@ const Certifications = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1, ease: easing }}
-              className="neo-card neo-card-hover p-5 flex items-center gap-5"
+              className="neo-card p-5 flex items-center gap-5"
               data-testid={`certification-${index}`}
             >
               <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-dark-surface-hover flex items-center justify-center border border-white/5">
-                <Award size={20} className="text-accent-orange" />
+                <Award size={20} className="text-[#D96C4A]" />
               </div>
-              <p className="text-sm font-medium text-dark-text break-words">
+              <p className="text-sm font-medium text-[#FFFFFF] break-words">
                 {cert}
               </p>
             </motion.div>

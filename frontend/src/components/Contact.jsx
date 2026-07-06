@@ -22,7 +22,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: easing }}
-            className="section-label"
+            className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4"
           >
             Contact
           </motion.p>
@@ -32,7 +32,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1, ease: easing }}
-            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-dark-text mb-6"
+            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF] mb-6"
           >
             Let&apos;s connect
           </motion.h2>
@@ -42,11 +42,11 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2, ease: easing }}
-            className="text-lg sm:text-xl text-dark-secondary leading-relaxed mb-12"
+            className="text-lg sm:text-xl text-[#FFFFFF] leading-relaxed mb-12"
           >
             Got data stuck and need to have it{' '}
-            <span className="text-accent-orange">transformed</span> with{' '}
-            <span className="text-accent-beige">analytics</span>?
+            <span className="text-[#D96C4A]">transformed</span> with{' '}
+            <span className="text-[#D96C4A]">analytics</span>?
           </motion.p>
 
           <motion.div
@@ -69,10 +69,10 @@ const Contact = () => {
                     className="flex items-center gap-4 text-left"
                   >
                     <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-dark-surface-hover flex items-center justify-center border border-white/5">
-                      <Icon size={18} className="text-accent-beige" />
+                      <Icon size={18} className="text-[#D96C4A]" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs tracking-wide uppercase text-dark-muted mb-0.5">
+                      <p className="text-xs tracking-wide uppercase text-[#FFFFFF] opacity-50 mb-0.5">
                         {item.label}
                       </p>
                       {item.href ? (
@@ -80,14 +80,14 @@ const Contact = () => {
                           href={item.href}
                           target={item.label === 'LinkedIn' ? '_blank' : undefined}
                           rel={item.label === 'LinkedIn' ? 'noopener noreferrer' : undefined}
-                          className="text-dark-text hover:text-accent-orange transition-colors text-sm break-all"
+                          className="text-[#FFFFFF] hover:text-[#D96C4A] transition-colors text-sm break-all"
                           data-testid={`contact-${item.label.toLowerCase()}`}
                         >
                           {item.value}
                         </a>
                       ) : (
                         <p 
-                          className="text-dark-text text-sm"
+                          className="text-[#FFFFFF] text-sm"
                           data-testid={`contact-${item.label.toLowerCase()}`}
                         >
                           {item.value}
@@ -116,7 +116,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5, ease: easing }}
-            className="text-dark-muted text-sm"
+            className="text-[#FFFFFF] opacity-50 text-sm"
           >
             Open to full-time roles, freelance data platform work, and interesting engineering problems.
           </motion.p>

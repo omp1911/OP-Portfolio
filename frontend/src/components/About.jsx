@@ -1,57 +1,143 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Database, Server, Workflow, BarChart3 } from 'lucide-react';
+import { Database, Workflow, Server, Brain, BarChart3 } from 'lucide-react';
 
 const DataPipelineVisualization = () => {
   const easing = [0.16, 1, 0.3, 1];
-  
-  const stages = [
-    { id: 'extract', label: 'Extract', icon: Database, description: 'Source Systems' },
-    { id: 'transform', label: 'Transform', icon: Workflow, description: 'Clean & Process' },
-    { id: 'load', label: 'Load', icon: Server, description: 'Data Warehouse' },
-    { id: 'analyze', label: 'Analyze', icon: BarChart3, description: 'Insights' },
-  ];
 
   return (
-    <div className="w-full py-8" data-testid="data-pipeline-diagram">
-      {/* Pipeline stages */}
-      <div className="flex items-center justify-between relative">
-        {/* Connection line */}
-        <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-accent-orange/20 via-accent-beige/30 to-accent-orange/20 -translate-y-1/2" />
+    <div className="w-full py-6" data-testid="data-pipeline-diagram">
+      <svg
+        viewBox="0 0 600 200"
+        className="w-full h-auto"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        {/* Connection lines */}
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.3" />
+          </linearGradient>
+        </defs>
+
+        {/* Main horizontal line: Extract -> Transform -> Load */}
+        <path
+          d="M 80 80 L 200 80 L 320 80"
+          stroke="url(#lineGradient)"
+          strokeWidth="2"
+          fill="none"
+          strokeDasharray="6 4"
+        />
         
-        {/* Animated flow */}
-        <motion.div
-          className="absolute top-1/2 left-0 h-px w-1/4 bg-gradient-to-r from-transparent via-accent-orange to-transparent -translate-y-1/2"
-          animate={{ x: ['0%', '300%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+        {/* Fork lines from Load */}
+        <path
+          d="M 320 80 L 400 80 L 480 50"
+          stroke="url(#lineGradient)"
+          strokeWidth="2"
+          fill="none"
+          strokeDasharray="6 4"
+        />
+        <path
+          d="M 320 80 L 400 80 L 480 110"
+          stroke="url(#lineGradient)"
+          strokeWidth="2"
+          fill="none"
+          strokeDasharray="6 4"
         />
 
-        {stages.map((stage, index) => {
-          const Icon = stage.icon;
-          return (
-            <motion.div
-              key={stage.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15, ease: easing }}
-              className="relative z-10 flex flex-col items-center"
-            >
-              {/* Node */}
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-dark-surface border border-white/10 flex items-center justify-center shadow-neo mb-3">
-                <Icon size={24} className="text-accent-beige" />
-              </div>
-              
-              {/* Label */}
-              <span className="text-xs sm:text-sm font-medium text-dark-text mb-1">
-                {stage.label}
-              </span>
-              <span className="text-[10px] sm:text-xs text-dark-muted text-center max-w-[80px]">
-                {stage.description}
-              </span>
-            </motion.div>
-          );
-        })}
+        {/* Animated packets - Main line */}
+        <motion.circle
+          r="4"
+          fill="#D96C4A"
+          initial={{ cx: 80, cy: 80, opacity: 0 }}
+          animate={{
+            cx: [80, 200, 320, 400],
+            cy: [80, 80, 80, 80],
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: 2.5,
+            repeat: Infinity,
+            ease: 'linear',
+            repeatDelay: 1,
+          }}
+        />
+        
+        {/* Animated packet - Fork to AI/ML */}
+        <motion.circle
+          r="3"
+          fill="#FFFFFF"
+          initial={{ cx: 400, cy: 80, opacity: 0 }}
+          animate={{
+            cx: [400, 440, 480],
+            cy: [80, 65, 50],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            ease: 'linear',
+            delay: 2.5,
+            repeatDelay: 2.5,
+          }}
+        />
+        
+        {/* Animated packet - Fork to Analyze */}
+        <motion.circle
+          r="3"
+          fill="#FFFFFF"
+          initial={{ cx: 400, cy: 80, opacity: 0 }}
+          animate={{
+            cx: [400, 440, 480],
+            cy: [80, 95, 110],
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            ease: 'linear',
+            delay: 2.8,
+            repeatDelay: 2.5,
+          }}
+        />
+
+        {/* Node circles */}
+        {/* Extract */}
+        <circle cx="80" cy="80" r="28" fill="#131316" stroke="#D96C4A" strokeWidth="1" opacity="0.8" />
+        {/* Transform */}
+        <circle cx="200" cy="80" r="28" fill="#131316" stroke="#FFFFFF" strokeWidth="1" opacity="0.6" />
+        {/* Load */}
+        <circle cx="320" cy="80" r="28" fill="#131316" stroke="#D96C4A" strokeWidth="1" opacity="0.8" />
+        {/* AI/ML */}
+        <circle cx="480" cy="50" r="24" fill="#131316" stroke="#FFFFFF" strokeWidth="1" opacity="0.6" />
+        {/* Analyze */}
+        <circle cx="480" cy="110" r="24" fill="#131316" stroke="#FFFFFF" strokeWidth="1" opacity="0.6" />
+      </svg>
+
+      {/* Labels positioned with flexbox */}
+      <div className="flex justify-between items-start px-2 -mt-2">
+        <div className="flex flex-col items-center" style={{ width: '80px' }}>
+          <Database size={16} className="text-[#D96C4A] mb-1" />
+          <span className="text-[10px] text-[#FFFFFF] text-center">Extract</span>
+        </div>
+        <div className="flex flex-col items-center" style={{ width: '80px' }}>
+          <Workflow size={16} className="text-[#FFFFFF] mb-1" />
+          <span className="text-[10px] text-[#FFFFFF] text-center">Transform</span>
+        </div>
+        <div className="flex flex-col items-center" style={{ width: '80px' }}>
+          <Server size={16} className="text-[#D96C4A] mb-1" />
+          <span className="text-[10px] text-[#FFFFFF] text-center">Load</span>
+        </div>
+        <div className="flex flex-col items-center gap-6" style={{ width: '80px' }}>
+          <div className="flex flex-col items-center">
+            <Brain size={14} className="text-[#FFFFFF] mb-1" />
+            <span className="text-[10px] text-[#FFFFFF] text-center">AI/ML</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <BarChart3 size={14} className="text-[#FFFFFF] mb-1" />
+            <span className="text-[10px] text-[#FFFFFF] text-center">Analyze</span>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -68,7 +154,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: easing }}
-          className="section-label"
+          className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4"
         >
           About
         </motion.p>
@@ -78,7 +164,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1, ease: easing }}
-          className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-dark-text mb-12"
+          className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF] mb-12"
         >
           Building data infrastructure that scales
         </motion.h2>
@@ -92,16 +178,16 @@ const About = () => {
             transition={{ duration: 0.6, ease: easing }}
             className="space-y-6"
           >
-            <p className="text-dark-secondary leading-relaxed">
+            <p className="text-[#FFFFFF] leading-relaxed opacity-80">
               With 5+ years designing and shipping production data platforms across GCP and Azure, 
               I specialize in building pipelines that transform raw chaos into actionable insights.
             </p>
-            <p className="text-dark-secondary leading-relaxed">
+            <p className="text-[#FFFFFF] leading-relaxed opacity-80">
               Currently at EllisDon, I contribute to multi-cloud ETL/ELT pipelines processing 
               GBs to TBs of data daily. My focus includes zero-downtime migrations, real-time 
               streaming with Kafka and Datastream, and dimensional modeling.
             </p>
-            <p className="text-dark-secondary leading-relaxed">
+            <p className="text-[#FFFFFF] leading-relaxed opacity-80">
               I believe in monitoring that catches issues before they become incidents, 
               and infrastructure that scales without sacrificing reliability.
             </p>
@@ -115,8 +201,8 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2, ease: easing }}
             className="neo-card p-6 sm:p-8"
           >
-            <p className="section-label mb-2">Data Flow</p>
-            <p className="text-sm text-dark-muted mb-6">How I architect data pipelines</p>
+            <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-2">Data Flow</p>
+            <p className="text-sm text-[#FFFFFF] opacity-60 mb-4">How I architect data pipelines</p>
             <DataPipelineVisualization />
           </motion.div>
         </div>

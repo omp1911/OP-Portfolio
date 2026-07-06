@@ -1,5 +1,6 @@
 /* ===========================================
-   Om Patel — Portfolio · Luxury Dark Neumorphism
+   Om Patel — Portfolio · Refined Dark Theme
+   Strict 2-Color Font System: #D96C4A & #FFFFFF
    =========================================== */
 
 * {
@@ -12,31 +13,32 @@
   --bg-base: #0C0C0E;
   --bg-surface: #131316;
   --bg-surface-hover: #1A1A1E;
-  --text-primary: #F2F2F2;
-  --text-secondary: #A1A1AA;
-  --text-muted: #71717A;
-  --accent-orange: #D96C4A;
-  --accent-beige: #D4C4A8;
+  --color-primary: #D96C4A;
+  --color-white: #FFFFFF;
   --border-subtle: rgba(255, 255, 255, 0.05);
 }
 
-/* Typography */
+/* Typography - Only 2 colors: Orange & White */
 h1, h2, h3, h4 {
   font-family: 'Cabinet Grotesk', sans-serif;
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--text-primary);
+  color: var(--color-white);
 }
 
-/* Section label */
+p, span, li, a {
+  color: var(--color-white);
+}
+
+/* Section label - always primary color (orange) */
 .section-label {
   font-family: 'Manrope', sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-beige);
+  color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
@@ -53,7 +55,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--bg-base);
-  background: var(--accent-orange);
+  background: var(--color-primary);
   border: none;
   border-radius: 9999px;
   cursor: pointer;
@@ -62,7 +64,7 @@ h1, h2, h3, h4 {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(217, 108, 74, 0.25);
+  opacity: 0.9;
 }
 
 .btn-secondary {
@@ -70,7 +72,7 @@ h1, h2, h3, h4 {
   font-family: 'Manrope', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--color-white);
   background: transparent;
   border: 1px solid var(--border-subtle);
   border-radius: 9999px;
@@ -79,8 +81,8 @@ h1, h2, h3, h4 {
 }
 
 .btn-secondary:hover {
-  color: var(--text-primary);
-  border-color: var(--text-secondary);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
   transform: translateY(-2px);
 }
 
@@ -106,7 +108,7 @@ h1, h2, h3, h4 {
   margin: 0 auto;
 }
 
-/* Skill pill */
+/* Skill pill - 2 color system */
 .skill-pill {
   display: inline-flex;
   align-items: center;
@@ -114,7 +116,7 @@ h1, h2, h3, h4 {
   font-family: 'Manrope', sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: 9999px;
@@ -122,19 +124,19 @@ h1, h2, h3, h4 {
 }
 
 .skill-pill:hover {
-  color: var(--accent-beige);
-  border-color: var(--accent-beige);
+  color: var(--color-primary);
+  border-color: rgba(217, 108, 74, 0.3);
 }
 
-/* Timeline */
+/* Timeline - simplified */
 .timeline-line {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 1px;
-  background: linear-gradient(180deg, var(--accent-orange) 0%, var(--accent-beige) 100%);
-  opacity: 0.3;
+  background: var(--color-primary);
+  opacity: 0.2;
 }
 
 .timeline-dot {
@@ -143,22 +145,18 @@ h1, h2, h3, h4 {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--accent-orange);
-  box-shadow: 0 0 12px var(--accent-orange);
+  background: var(--color-primary);
 }
 
-/* Avatar glow */
-.avatar-glow {
+/* Neo card - minimal shadow, no hover glow */
+.neo-card {
+  background: var(--bg-surface);
+  border-radius: 1rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Avatar - no glow */
+.avatar-container {
   position: relative;
-}
-
-.avatar-glow::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(135deg, var(--accent-orange), var(--accent-beige));
-  border-radius: 50%;
-  opacity: 0.3;
-  filter: blur(20px);
-  z-index: -1;
 }

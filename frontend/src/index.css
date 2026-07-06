@@ -11,7 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #0C0C0E;
-  color: #F2F2F2;
+  color: #FFFFFF;
 }
 
 code {
@@ -34,7 +34,7 @@ code {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #A1A1AA;
+  background: #FFFFFF;
 }
 
 html {
@@ -44,17 +44,17 @@ html {
 @layer base {
   :root {
     --background: 240 10% 4%;
-    --foreground: 0 0% 95%;
+    --foreground: 0 0% 100%;
     --card: 240 6% 8%;
-    --card-foreground: 0 0% 95%;
+    --card-foreground: 0 0% 100%;
     --popover: 240 6% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover-foreground: 0 0% 100%;
     --primary: 16 62% 57%;
     --primary-foreground: 240 10% 4%;
-    --secondary: 40 26% 74%;
+    --secondary: 0 0% 100%;
     --secondary-foreground: 240 10% 4%;
     --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
+    --muted-foreground: 0 0% 100%;
     --accent: 16 62% 57%;
     --accent-foreground: 240 10% 4%;
     --destructive: 0 84.2% 60.2%;
@@ -71,23 +71,23 @@ html {
     @apply border-border;
   }
   body {
-    @apply bg-dark-base text-dark-text;
+    @apply bg-dark-base;
+    color: #FFFFFF;
   }
 }
 
 @layer utilities {
   .neo-card {
     @apply bg-dark-surface rounded-2xl border border-white/5;
-    box-shadow: -4px -4px 10px rgba(255,255,255,0.02), 4px 4px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
   
-  .neo-card-hover {
-    @apply transition-all duration-300 ease-out;
+  .text-primary-accent {
+    color: #D96C4A;
   }
   
-  .neo-card-hover:hover {
-    box-shadow: -4px -4px 12px rgba(255,255,255,0.03), 6px 6px 14px rgba(0,0,0,0.5);
-    transform: translateY(-2px);
+  .text-white-main {
+    color: #FFFFFF;
   }
 }
 

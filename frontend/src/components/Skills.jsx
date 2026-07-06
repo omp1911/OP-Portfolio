@@ -15,8 +15,8 @@ const Skills = () => {
           transition={{ duration: 0.5, ease: easing }}
           className="mb-12"
         >
-          <p className="section-label">Skills</p>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-dark-text">
+          <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Skills</p>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF]">
             Technical toolkit
           </h2>
         </motion.div>
@@ -29,10 +29,10 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1, ease: easing }}
-              className="neo-card neo-card-hover p-6"
+              className="neo-card p-6"
               data-testid={`skill-category-${categoryIndex}`}
             >
-              <h3 className="text-sm font-medium text-accent-beige tracking-wide uppercase mb-5">
+              <h3 className="text-sm font-medium text-[#D96C4A] tracking-wide uppercase mb-5">
                 {category}
               </h3>
               
