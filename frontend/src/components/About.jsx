@@ -8,15 +8,15 @@ const DataPipelineVisualization = () => {
       {/* SVG for dashed lines and animated packets */}
       <svg 
         className="absolute inset-0 w-full h-full"
-        viewBox="0 0 400 140"
+        viewBox="0 0 400 160"
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           {/* Gradient for the dashed line */}
           <linearGradient id="dashLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.5" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.3)" />
-            <stop offset="100%" stopColor="#D96C4A" stopOpacity="0.5" />
+            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.6)" />
+            <stop offset="100%" stopColor="#D96C4A" stopOpacity="0.9" />
           </linearGradient>
           
           {/* Glow filter for particles */}
@@ -32,8 +32,8 @@ const DataPipelineVisualization = () => {
         {/* Main horizontal dashed line through icon centers: Extract(40) -> Transform(120) -> Load(200) */}
         <path
           d="M 40 55 L 200 55"
-          stroke="url(#dashLineGrad)"
-          strokeWidth="2"
+          stroke="#D96C4A"
+          strokeWidth="2.5"
           fill="none"
           strokeDasharray="8 5"
           strokeLinecap="round"
@@ -42,7 +42,7 @@ const DataPipelineVisualization = () => {
         {/* Fork line to AI/ML (upper branch) from Load center */}
         <path
           d="M 200 55 L 280 55 L 340 30"
-          stroke="url(#dashLineGrad)"
+          stroke="#D96C4A"
           strokeWidth="2"
           fill="none"
           strokeDasharray="8 5"
@@ -52,7 +52,7 @@ const DataPipelineVisualization = () => {
         {/* Fork line to Analyze (lower branch) from Load center */}
         <path
           d="M 200 55 L 280 55 L 340 80"
-          stroke="url(#dashLineGrad)"
+          stroke="#D96C4A"
           strokeWidth="2"
           fill="none"
           strokeDasharray="8 5"
@@ -64,7 +64,8 @@ const DataPipelineVisualization = () => {
           <motion.circle
             key={`main-${i}`}
             r="5"
-            fill="#D96C4A"
+            fill="rgba(255,255,255,0.6)"
+            opacity="70%"
             filter="url(#glowFilter)"
             initial={{ cx: 40, cy: 55, opacity: 0 }}
             animate={{
@@ -87,7 +88,8 @@ const DataPipelineVisualization = () => {
           <motion.circle
             key={`upper-${i}`}
             r="4"
-            fill="#D96C4A"
+            fill="rgba(255,255,255,0.6)"
+            opacity="70%"
             filter="url(#glowFilter)"
             initial={{ cx: 200, cy: 55, opacity: 0 }}
             animate={{
@@ -110,7 +112,8 @@ const DataPipelineVisualization = () => {
           <motion.circle
             key={`lower-${i}`}
             r="4"
-            fill="#D96C4A"
+            fill="rgba(255,255,255,0.6)"
+            opacity="70%"
             filter="url(#glowFilter)"
             initial={{ cx: 200, cy: 55, opacity: 0 }}
             animate={{
