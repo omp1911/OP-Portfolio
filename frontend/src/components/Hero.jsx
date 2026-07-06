@@ -30,7 +30,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: easing }}
-              className="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-[#FFFFFF] mb-6"
+              className="font-heading text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6"
               data-testid="hero-headline"
             >
               {personalInfo.name}
@@ -40,7 +40,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: easing }}
-              className="text-[#FFFFFF] text-lg leading-relaxed max-w-lg mb-10 opacity-80"
+              className="text-white/70 text-lg leading-relaxed max-w-lg mb-10"
               data-testid="hero-summary"
             >
               {personalInfo.bio}
@@ -69,14 +69,14 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Right: 3D Avatar */}
+          {/* Right: 3D Avatar with soft blend */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: easing }}
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
           >
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
+            <div className="avatar-blend relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
               <img
                 src={avatarImage}
                 alt={personalInfo.name}
@@ -94,12 +94,12 @@ const Hero = () => {
           transition={{ delay: 1, duration: 0.6 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-[#FFFFFF] opacity-50 tracking-widest uppercase">Scroll</span>
+          <span className="text-xs text-white/50 tracking-widest uppercase">Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ArrowDown size={20} className="text-[#FFFFFF] opacity-50" />
+            <ArrowDown size={20} className="text-white/50" />
           </motion.div>
         </motion.div>
       </div>

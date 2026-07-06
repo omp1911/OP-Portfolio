@@ -22,15 +22,15 @@ const ProjectCard = ({ project, index }) => {
         </span>
         <ArrowUpRight 
           size={18} 
-          className="text-[#FFFFFF] opacity-40 group-hover:text-[#D96C4A] group-hover:opacity-100 transition-all duration-300" 
+          className="text-white/40 group-hover:text-[#D96C4A] transition-all duration-300" 
         />
       </div>
 
-      <h3 className="font-heading text-lg sm:text-xl font-medium text-[#FFFFFF] mb-3 group-hover:text-[#D96C4A] transition-colors duration-300">
+      <h3 className="font-heading text-lg sm:text-xl font-medium text-white mb-3 group-hover:text-[#D96C4A] transition-colors duration-300">
         {project.title}
       </h3>
 
-      <p className="text-[#FFFFFF] opacity-70 text-sm leading-relaxed mb-6">
+      <p className="text-white/70 text-sm leading-relaxed mb-6">
         {project.description}
       </p>
 
@@ -38,7 +38,7 @@ const ProjectCard = ({ project, index }) => {
         {project.tech.map((tech) => (
           <span 
             key={tech} 
-            className="text-xs font-mono px-2.5 py-1 rounded-full bg-dark-surface-hover text-[#FFFFFF] opacity-60 border border-white/5"
+            className="text-xs font-mono px-2.5 py-1 rounded-full bg-dark-surface-hover text-white/50 border border-white/5"
           >
             {tech}
           </span>
@@ -62,7 +62,7 @@ const Projects = () => {
           className="mb-12"
         >
           <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Projects</p>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF]">
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white">
             Things I&apos;ve built
           </h2>
         </motion.div>

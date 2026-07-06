@@ -17,7 +17,7 @@ const Education = () => {
           className="mb-8"
         >
           <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Education</p>
-          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-[#FFFFFF]">
+          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-white">
             Academic background
           </h2>
         </motion.div>
@@ -37,10 +37,10 @@ const Education = () => {
                 <GraduationCap size={20} className="text-[#D96C4A]" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-heading text-base font-medium text-[#FFFFFF] truncate">
+                <h3 className="font-heading text-base font-medium text-white truncate">
                   {edu.institution}
                 </h3>
-                <p className="text-sm text-[#FFFFFF] opacity-60 truncate">
+                <p className="text-sm text-white/50 truncate">
                   {edu.degree}
                 </p>
               </div>

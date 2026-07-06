@@ -16,7 +16,7 @@ const DataPipelineVisualization = () => {
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.2" />
           </linearGradient>
         </defs>
 
@@ -71,7 +71,7 @@ const DataPipelineVisualization = () => {
           animate={{
             cx: [400, 440, 480],
             cy: [80, 65, 50],
-            opacity: [0, 1, 0],
+            opacity: [0, 0.7, 0],
           }}
           transition={{
             duration: 1,
@@ -90,7 +90,7 @@ const DataPipelineVisualization = () => {
           animate={{
             cx: [400, 440, 480],
             cy: [80, 95, 110],
-            opacity: [0, 1, 0],
+            opacity: [0, 0.7, 0],
           }}
           transition={{
             duration: 1,
@@ -105,37 +105,37 @@ const DataPipelineVisualization = () => {
         {/* Extract */}
         <circle cx="80" cy="80" r="28" fill="#131316" stroke="#D96C4A" strokeWidth="1" opacity="0.8" />
         {/* Transform */}
-        <circle cx="200" cy="80" r="28" fill="#131316" stroke="#FFFFFF" strokeWidth="1" opacity="0.6" />
+        <circle cx="200" cy="80" r="28" fill="#131316" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
         {/* Load */}
         <circle cx="320" cy="80" r="28" fill="#131316" stroke="#D96C4A" strokeWidth="1" opacity="0.8" />
         {/* AI/ML */}
-        <circle cx="480" cy="50" r="24" fill="#131316" stroke="#FFFFFF" strokeWidth="1" opacity="0.6" />
+        <circle cx="480" cy="50" r="24" fill="#131316" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
         {/* Analyze */}
-        <circle cx="480" cy="110" r="24" fill="#131316" stroke="#FFFFFF" strokeWidth="1" opacity="0.6" />
+        <circle cx="480" cy="110" r="24" fill="#131316" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
       </svg>
 
       {/* Labels positioned with flexbox */}
       <div className="flex justify-between items-start px-2 -mt-2">
         <div className="flex flex-col items-center" style={{ width: '80px' }}>
           <Database size={16} className="text-[#D96C4A] mb-1" />
-          <span className="text-[10px] text-[#FFFFFF] text-center">Extract</span>
+          <span className="text-[10px] text-white/70 text-center">Extract</span>
         </div>
         <div className="flex flex-col items-center" style={{ width: '80px' }}>
-          <Workflow size={16} className="text-[#FFFFFF] mb-1" />
-          <span className="text-[10px] text-[#FFFFFF] text-center">Transform</span>
+          <Workflow size={16} className="text-white/70 mb-1" />
+          <span className="text-[10px] text-white/70 text-center">Transform</span>
         </div>
         <div className="flex flex-col items-center" style={{ width: '80px' }}>
           <Server size={16} className="text-[#D96C4A] mb-1" />
-          <span className="text-[10px] text-[#FFFFFF] text-center">Load</span>
+          <span className="text-[10px] text-white/70 text-center">Load</span>
         </div>
         <div className="flex flex-col items-center gap-6" style={{ width: '80px' }}>
           <div className="flex flex-col items-center">
-            <Brain size={14} className="text-[#FFFFFF] mb-1" />
-            <span className="text-[10px] text-[#FFFFFF] text-center">AI/ML</span>
+            <Brain size={14} className="text-white/70 mb-1" />
+            <span className="text-[10px] text-white/70 text-center">AI/ML</span>
           </div>
           <div className="flex flex-col items-center">
-            <BarChart3 size={14} className="text-[#FFFFFF] mb-1" />
-            <span className="text-[10px] text-[#FFFFFF] text-center">Analyze</span>
+            <BarChart3 size={14} className="text-white/70 mb-1" />
+            <span className="text-[10px] text-white/70 text-center">Analyze</span>
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1, ease: easing }}
-          className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF] mb-12"
+          className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white mb-12"
         >
           Building data infrastructure that scales
         </motion.h2>
@@ -178,16 +178,16 @@ const About = () => {
             transition={{ duration: 0.6, ease: easing }}
             className="space-y-6"
           >
-            <p className="text-[#FFFFFF] leading-relaxed opacity-80">
+            <p className="text-white/70 leading-relaxed">
               With 5+ years designing and shipping production data platforms across GCP and Azure, 
               I specialize in building pipelines that transform raw chaos into actionable insights.
             </p>
-            <p className="text-[#FFFFFF] leading-relaxed opacity-80">
+            <p className="text-white/70 leading-relaxed">
               Currently at EllisDon, I contribute to multi-cloud ETL/ELT pipelines processing 
               GBs to TBs of data daily. My focus includes zero-downtime migrations, real-time 
               streaming with Kafka and Datastream, and dimensional modeling.
             </p>
-            <p className="text-[#FFFFFF] leading-relaxed opacity-80">
+            <p className="text-white/70 leading-relaxed">
               I believe in monitoring that catches issues before they become incidents, 
               and infrastructure that scales without sacrificing reliability.
             </p>
@@ -202,7 +202,7 @@ const About = () => {
             className="neo-card p-6 sm:p-8"
           >
             <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-2">Data Flow</p>
-            <p className="text-sm text-[#FFFFFF] opacity-60 mb-4">How I architect data pipelines</p>
+            <p className="text-sm text-white/50 mb-4">How I architect data pipelines</p>
             <DataPipelineVisualization />
           </motion.div>
         </div>

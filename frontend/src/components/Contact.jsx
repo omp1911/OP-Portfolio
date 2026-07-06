@@ -32,7 +32,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1, ease: easing }}
-            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF] mb-6"
+            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white mb-6"
           >
             Let&apos;s connect
           </motion.h2>
@@ -42,7 +42,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2, ease: easing }}
-            className="text-lg sm:text-xl text-[#FFFFFF] leading-relaxed mb-12"
+            className="text-lg sm:text-xl text-white/70 leading-relaxed mb-12"
           >
             Got data stuck and need to have it{' '}
             <span className="text-[#D96C4A]">transformed</span> with{' '}
@@ -72,7 +72,7 @@ const Contact = () => {
                       <Icon size={18} className="text-[#D96C4A]" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs tracking-wide uppercase text-[#FFFFFF] opacity-50 mb-0.5">
+                      <p className="text-xs tracking-wide uppercase text-white/50 mb-0.5">
                         {item.label}
                       </p>
                       {item.href ? (
@@ -80,14 +80,14 @@ const Contact = () => {
                           href={item.href}
                           target={item.label === 'LinkedIn' ? '_blank' : undefined}
                           rel={item.label === 'LinkedIn' ? 'noopener noreferrer' : undefined}
-                          className="text-[#FFFFFF] hover:text-[#D96C4A] transition-colors text-sm break-all"
+                          className="text-white/70 hover:text-[#D96C4A] transition-colors text-sm break-all"
                           data-testid={`contact-${item.label.toLowerCase()}`}
                         >
                           {item.value}
                         </a>
                       ) : (
                         <p 
-                          className="text-[#FFFFFF] text-sm"
+                          className="text-white/70 text-sm"
                           data-testid={`contact-${item.label.toLowerCase()}`}
                         >
                           {item.value}
@@ -116,7 +116,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5, ease: easing }}
-            className="text-[#FFFFFF] opacity-50 text-sm"
+            className="text-white/50 text-sm"
           >
             Open to full-time roles, freelance data platform work, and interesting engineering problems.
           </motion.p>

@@ -36,7 +36,7 @@ const Header = () => {
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="font-heading font-medium text-lg text-[#FFFFFF] hover:text-[#D96C4A] transition-colors duration-300"
+            className="font-heading font-medium text-lg text-white hover:text-[#D96C4A] transition-colors duration-300"
             data-testid="brand-link"
           >
             Om Patel
@@ -51,7 +51,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * i, duration: 0.5, ease: easing }}
                 onClick={() => scrollTo(s.id)}
-                className="text-sm font-body text-[#FFFFFF] hover:text-[#D96C4A] transition-colors duration-300"
+                className="text-sm font-body text-white/70 hover:text-[#D96C4A] transition-colors duration-300"
                 data-testid={`nav-${s.id}`}
               >
                 {s.label}
@@ -72,7 +72,7 @@ const Header = () => {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 text-[#FFFFFF] hover:text-[#D96C4A] transition-colors"
+            className="md:hidden p-2 text-white hover:text-[#D96C4A] transition-colors"
             aria-label="Toggle menu"
             data-testid="mobile-menu-toggle"
           >
@@ -100,7 +100,7 @@ const Header = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 * i, duration: 0.4, ease: easing }}
                   onClick={() => scrollTo(s.id)}
-                  className="text-2xl font-heading font-medium text-left text-[#FFFFFF] hover:text-[#D96C4A] transition-colors"
+                  className="text-2xl font-heading font-medium text-left text-white hover:text-[#D96C4A] transition-colors"
                   data-testid={`mobile-nav-${s.id}`}
                 >
                   {s.label}

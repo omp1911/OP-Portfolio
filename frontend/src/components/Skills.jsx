@@ -16,7 +16,7 @@ const Skills = () => {
           className="mb-12"
         >
           <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Skills</p>
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FFFFFF]">
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-white">
             Technical toolkit
           </h2>
         </motion.div>

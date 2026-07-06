@@ -17,7 +17,7 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, ease: easing }}
-          className="text-xs text-[#FFFFFF] opacity-50"
+          className="text-xs text-white/50"
         >
           © {new Date().getFullYear()} {personalInfo.name}
         </motion.p>
@@ -29,7 +29,7 @@ const Footer = () => {
           whileHover={{ y: -2 }}
           transition={{ duration: 0.3, ease: easing }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center gap-2 text-xs text-[#FFFFFF] opacity-50 hover:text-[#D96C4A] hover:opacity-100 transition-all duration-300"
+          className="flex items-center gap-2 text-xs text-white/50 hover:text-[#D96C4A] transition-all duration-300"
           data-testid="footer-back-to-top"
         >
           Back to top

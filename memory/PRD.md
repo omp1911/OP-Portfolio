@@ -1,149 +1,132 @@
 # Om Patel - Data & DevOps Portfolio
 
 ## Original Problem Statement
-Build a modern, premium personal portfolio website for Om Patel with Luxury Dark Neumorphism aesthetic that impresses HR/Managers/Companies.
+Build a modern, premium personal portfolio website for Om Patel with refined dark theme that impresses HR/Managers/Companies.
 
-## User Personas
-- **Primary**: Hiring managers and recruiters looking for Data Engineers
-- **Secondary**: Potential collaborators and freelance clients needing data platform work
+## Design System
 
-## Core Requirements
+### Strict 2-Color Font System
+- **Orange #D96C4A** - Accents, labels, highlights, icons
+- **White #FFFFFF** - Main text, headings, body copy
 
-### Theme & Styling ✅ (Redesigned Dec 2025)
-- **Luxury Dark Neumorphism** with subtle color palette
-- Dark base: `#0C0C0E` (not pure black)
+### Theme
+- Dark base: `#0C0C0E`
 - Surface cards: `#131316`
-- Accent orange: `#D96C4A`
-- Accent beige: `#D4C4A8`
-- Custom fonts: Cabinet Grotesk (headings), Manrope (body)
-- Neumorphic shadows: `-4px -4px 10px rgba(255,255,255,0.02), 4px 4px 10px rgba(0,0,0,0.4)`
+- Minimal shadows, no glow effects
+- No hover effects on large containers
+
+### Typography
+- Headings: Cabinet Grotesk
+- Body: Manrope
+- Monospace: JetBrains Mono
+
+## Core Features
 
 ### Hero Section ✅
-- User's actual portrait (hero-om-converted.jpg) in circular avatar
-- "Data Engineer · Analytics · DevOps" tagline in beige
-- Clean "Om Patel" name (NO gradient effect)
+- 3D avatar displayed naturally (NO circular crop, NO border)
+- White name "Om Patel"
+- Orange tagline "DATA ENGINEER · ANALYTICS · DEVOPS"
 - Request Resume + Get in Touch buttons
-- NO "View Pipeline" button
 
 ### Header/Navigation ✅
-- Shows "Om Patel" text (NOT "OM_P.")
-- Navigation: About, Experience, Skills, Projects, Contact
-- Resume button with orange accent
-- Glass header on scroll
+- "Om Patel" in white
+- Navigation links in white, hover to orange
+- Orange Resume button
 
 ### About Section ✅
-- Bio text on left
-- Elegant Data Pipeline diagram on right with 4 stages:
-  - Extract → Transform → Load → Analyze
-- Neumorphic card styling
+- Bio text in white
+- Data Pipeline diagram with fork:
+  - Extract → Transform → Load → (AI/ML, Analyze)
+  - Animated data packets flowing
 
 ### Experience Section ✅
-- Vertical timeline with orange gradient line
-- Neomorphic cards for EllisDon and DIGIBEE
-- Beige border on bullet points
-- Skill pills at bottom
+- Timeline with orange line and dots
+- Static cards (NO hover effects)
+- White text, orange company names
 
 ### Skills Section ✅
-- Three categorized neomorphic cards:
-  - Data Engineering
-  - Analytics
-  - Cloud & DevOps
-- Rounded pill styling for skills
+- 3 categorized cards
+- Orange category labels
+- White skill pills
 
 ### Projects Section ✅
-- Grid of project cards with result badges
-- Orange accent on badges
-- Tech stack tags at bottom
+- Project cards with orange result badges
+- Hover only on small elements (arrow icon)
 
-### Education Section ✅ (Separate Container)
-- Sheridan College
-- BITS Pilani
-- Neomorphic card styling
-
-### Certifications Section ✅ (Separate Container)
-- Azure Data Fundamentals (DP-900)
-- Palantir Certified Foundry Data Engineer
-- Neomorphic card styling
+### Education & Certifications ✅
+- Separate containers
+- Orange icons (GraduationCap, Award)
+- White text
 
 ### Contact Section ✅
-- **Required Phrase**: "Got data stuck and need to have it transformed with analytics?"
-  - "transformed" in orange
-  - "analytics" in beige
-- Contact info grid
-- Request Resume button → mailto:patelomr07@gmail.com
+- Phrase: "Got data stuck and need to have it transformed with analytics?"
+- "transformed" and "analytics" in orange
+- Request Resume → mailto:patelomr07@gmail.com
 
 ## Technology Stack
-- **Frontend**: React.js, TailwindCSS
-- **Animations**: Framer Motion (smooth easing: [0.16, 1, 0.3, 1])
-- **Icons**: Lucide React
-- **Data**: Static mockData.js
+- React.js, TailwindCSS
+- Framer Motion (smooth animations)
+- Lucide React icons
 
 ## Design Inspirations
-- https://samxie.net/ - Clean minimal portfolio
-- https://neumorph-dashboard.webflow.io/ - Proper neomorphism
-- https://www.tasteskill.dev/ - Modern polished design
-- https://impeccable.style/designing/ - Smooth animations
+- samxie.net
+- neumorph-dashboard.webflow.io
+- tasteskill.dev
+- impeccable.style
 
 ## What's Been Implemented (Dec 2025)
 
-### Phase 1 - Initial Dark Neomorphism ✅
-- Created design guidelines
-- Installed framer-motion
-- Converted user's hero image
+### Phase 1 - Initial Setup ✅
+- Project scaffolding
+- Dark neomorphism base
 
 ### Phase 2 - Premium Redesign ✅
-- Redesigned color scheme (cyan/purple → orange/beige)
-- Removed "OM_P." branding
-- Removed "View Pipeline" button
-- Removed gradient effect on name
-- Implemented proper neumorphic shadows
-- Fixed responsive text overflow
-- Updated all 10 components with new design
-- Integrated user's actual photo
+- Strict 2-color system (orange + white)
+- 3D avatar (natural display)
+- Pipeline diagram with fork
+- Removed hover from large containers
+- Minimized glow effects
 
 ### Testing ✅
-- 100% frontend success rate (12/12 features)
-- Desktop (1920x1080) and mobile (390x844) verified
-- No horizontal overflow on mobile
-
-## Prioritized Backlog
-
-### P1 - Near-term
-- [ ] SEO & Metadata updates (title, favicon, meta tags for Om Patel)
-- [ ] Add GitHub profile link
-- [ ] Add project demo URLs
-
-### P2 - Future
-- [ ] Backend integration with FastAPI/MongoDB
-- [ ] Admin panel for content management
-- [ ] Blog section
-- [ ] Analytics integration
+- 100% frontend pass rate
+- Desktop and mobile verified
+- 2-color system verified
 
 ## File Structure
 ```
 /app/frontend/src/
 ├── assets/
-│   └── hero-om-converted.jpg (User's photo)
+│   └── avatar-3d.png (3D rendered avatar)
 ├── components/
 │   ├── Header.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Experience.jsx
+│   ├── Hero.jsx (natural avatar)
+│   ├── About.jsx (pipeline with fork)
+│   ├── Experience.jsx (no hover)
 │   ├── Skills.jsx
 │   ├── Projects.jsx
 │   ├── Education.jsx
 │   ├── Certifications.jsx
 │   ├── Contact.jsx
 │   └── Footer.jsx
-├── data/
-│   └── mockData.js
+├── data/mockData.js
 ├── App.js
-├── App.css
+├── App.css (2-color system)
 └── index.css
 ```
 
-## Contact Info
-- **Email**: patelomr07@gmail.com
-- **Phone**: +1 (647) 914-2834
-- **LinkedIn**: linkedin.com/in/om-patel
-- **Location**: Ontario, Canada
+## Backlog
+
+### P1
+- [ ] SEO & Metadata (title, favicon)
+- [ ] Add GitHub profile link
+
+### P2
+- [ ] Backend integration
+- [ ] Admin panel
+- [ ] Blog section
+
+## Contact
+- Email: patelomr07@gmail.com
+- Phone: +1 (647) 914-2834
+- LinkedIn: linkedin.com/in/om-patel
+- Location: Ontario, Canada

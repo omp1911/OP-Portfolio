@@ -17,7 +17,7 @@ const Certifications = () => {
           className="mb-8"
         >
           <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Certifications</p>
-          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-[#FFFFFF]">
+          <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-white">
             Professional credentials
           </h2>
         </motion.div>
@@ -36,7 +36,7 @@ const Certifications = () => {
               <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-dark-surface-hover flex items-center justify-center border border-white/5">
                 <Award size={20} className="text-[#D96C4A]" />
               </div>
-              <p className="text-sm font-medium text-[#FFFFFF] break-words">
+              <p className="text-sm font-medium text-white/70 break-words">
                 {cert}
               </p>
             </motion.div>
