@@ -8,77 +8,51 @@ Build a modern, premium personal portfolio website for Om Patel with refined dar
 ### Color Palette
 - **Background Base**: `#0C0C0E`
 - **Surface Cards**: `#131316`
-- **Orange Accent**: `#D96C4A` (labels, highlights, icons, buttons)
-- **White Heading**: `#FFFFFF` (headings, titles)
-- **White Content**: `rgba(255,255,255,0.7)` (body text, paragraphs)
-- **White Muted**: `rgba(255,255,255,0.5)` (dates, secondary info)
+- **Orange Accent**: `#D96C4A`
+- **White Heading**: `#FFFFFF`
+- **White Content**: `rgba(255,255,255,0.7)`
+- **White Muted**: `rgba(255,255,255,0.5)`
 
 ### Typography Hierarchy
-- **Headings (H1-H4)**: Pure white `#FFFFFF`
+- **Headings**: Pure white `#FFFFFF`
 - **Body/Content**: Subtle white `rgba(255,255,255,0.7)`
-- **Secondary/Muted**: Very subtle `rgba(255,255,255,0.5)`
+- **Muted**: Very subtle `rgba(255,255,255,0.5)`
 - **Accents**: Orange `#D96C4A`
-
-### Fonts
-- Headings: Cabinet Grotesk
-- Body: Manrope
-- Monospace: JetBrains Mono
 
 ## Core Features
 
 ### Hero Section ✅
-- 3D avatar with **soft blended edges** (radial gradient fade)
-- Pure white name "Om Patel"
-- Subtle white bio text (70% opacity)
-- Orange tagline "DATA ENGINEER · ANALYTICS · DEVOPS"
+- 3D avatar with soft blended edges (radial gradient fade)
+- Pure white name, subtle white bio
+- Orange tagline
 
-### Navigation ✅
-- "Om Patel" brand in white
-- Links in subtle white (70%), hover to orange
-- Orange Resume button
-
-### About Section ✅
-- Pure white heading
-- Subtle white bio paragraphs
-- Data Pipeline diagram with fork: Extract → Transform → Load → (AI/ML, Analyze)
+### Data Pipeline Diagram ✅ (Redesigned)
+- **5 icons only**: Extract → Transform → Load → AI/ML → Analyze
+- No circle nodes - just icons with labels
+- Single continuous horizontal flow line
+- **5 animated glowing particles** flowing continuously left to right
+- Particles fade in/out with glow effect
+- Smooth Framer Motion animations (repeat: Infinity)
+- Orange icons: Extract, Load, Analyze
+- White icons: Transform, AI/ML
 
 ### Experience Section ✅
-- Pure white role titles
-- Orange company names
-- Subtle white bullet points
-- No hover effects on cards
+- Timeline with orange line
+- Static cards (no hover)
+- White headings, subtle white content
 
-### Skills Section ✅
-- Pure white heading
-- Orange category labels
-- Subtle white skill pills
-
-### Projects Section ✅
-- Pure white project titles
-- Orange result badges
-- Subtle white descriptions
-
-### Education & Certifications ✅
-- Separate containers
-- Orange icons
-- White titles, subtle white degrees
+### Skills/Projects/Education/Certifications ✅
+- Consistent typography hierarchy
+- Orange accents for labels/icons
 
 ### Contact Section ✅
-- Pure white heading
-- Phrase: "Got data stuck and need to have it transformed with analytics?"
-  - "transformed" and "analytics" in orange
+- "transformed" and "analytics" in orange
 - Request Resume → mailto:patelomr07@gmail.com
-
-## Technology Stack
-- React.js, TailwindCSS
-- Framer Motion
-- Lucide React icons
 
 ## Testing Results (Dec 2025)
 - ✅ 100% frontend pass rate
-- ✅ Typography hierarchy verified (white headings, subtle white content)
-- ✅ Avatar blend verified (radial gradient fade)
-- ✅ Orange accents correctly applied
+- ✅ Pipeline animation verified (5 particles, continuous loop)
+- ✅ Typography hierarchy verified
 - ✅ Mobile responsive at 390px
 
 ## File Structure
@@ -86,9 +60,9 @@ Build a modern, premium personal portfolio website for Om Patel with refined dar
 /app/frontend/src/
 ├── assets/avatar-3d.png
 ├── components/
+│   ├── About.jsx (DataPipelineVisualization with animated particles)
 │   ├── Header.jsx
-│   ├── Hero.jsx (avatar-blend class)
-│   ├── About.jsx
+│   ├── Hero.jsx
 │   ├── Experience.jsx
 │   ├── Skills.jsx
 │   ├── Projects.jsx
@@ -96,13 +70,12 @@ Build a modern, premium personal portfolio website for Om Patel with refined dar
 │   ├── Certifications.jsx
 │   ├── Contact.jsx
 │   └── Footer.jsx
-├── App.css (avatar-blend gradient)
-└── index.css
+└── App.css
 ```
 
 ## Backlog
 - [ ] SEO & Metadata
-- [ ] Add GitHub profile link
+- [ ] GitHub profile link
 - [ ] Backend integration
 
 ## Contact
