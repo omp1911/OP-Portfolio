@@ -3,141 +3,97 @@ import { motion } from 'framer-motion';
 import { Database, Workflow, Server, Brain, BarChart3 } from 'lucide-react';
 
 const DataPipelineVisualization = () => {
-  const easing = [0.16, 1, 0.3, 1];
+  const stages = [
+    { id: 'extract', label: 'Extract', Icon: Database, isOrange: true },
+    { id: 'transform', label: 'Transform', Icon: Workflow, isOrange: false },
+    { id: 'load', label: 'Load', Icon: Server, isOrange: true },
+    { id: 'aiml', label: 'AI/ML', Icon: Brain, isOrange: false },
+    { id: 'analyze', label: 'Analyze', Icon: BarChart3, isOrange: true },
+  ];
 
   return (
-    <div className="w-full py-6" data-testid="data-pipeline-diagram">
-      <svg
-        viewBox="0 0 600 200"
-        className="w-full h-auto"
-        preserveAspectRatio="xMidYMid meet"
+    <div className="relative w-full py-8" data-testid="data-pipeline-diagram">
+      {/* Flow line SVG - positioned behind icons */}
+      <svg 
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        style={{ zIndex: 1 }}
       >
-        {/* Connection lines */}
         <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.2" />
+          {/* Gradient for static line */}
+          <linearGradient id="flowLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.15" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.1)" />
+            <stop offset="100%" stopColor="#D96C4A" stopOpacity="0.15" />
           </linearGradient>
         </defs>
-
-        {/* Main horizontal line: Extract -> Transform -> Load */}
-        <path
-          d="M 80 80 L 200 80 L 320 80"
-          stroke="url(#lineGradient)"
-          strokeWidth="2"
-          fill="none"
-          strokeDasharray="6 4"
-        />
         
-        {/* Fork lines from Load */}
-        <path
-          d="M 320 80 L 400 80 L 480 50"
-          stroke="url(#lineGradient)"
-          strokeWidth="2"
-          fill="none"
-          strokeDasharray="6 4"
+        {/* Static background line */}
+        <line 
+          x1="10" y1="35" 
+          x2="90" y2="35" 
+          stroke="url(#flowLineGrad)" 
+          strokeWidth="0.5"
+          strokeLinecap="round"
         />
-        <path
-          d="M 320 80 L 400 80 L 480 110"
-          stroke="url(#lineGradient)"
-          strokeWidth="2"
-          fill="none"
-          strokeDasharray="6 4"
-        />
-
-        {/* Animated packets - Main line */}
-        <motion.circle
-          r="4"
-          fill="#D96C4A"
-          initial={{ cx: 80, cy: 80, opacity: 0 }}
-          animate={{
-            cx: [80, 200, 320, 400],
-            cy: [80, 80, 80, 80],
-            opacity: [0, 1, 1, 0],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: 'linear',
-            repeatDelay: 1,
-          }}
-        />
-        
-        {/* Animated packet - Fork to AI/ML */}
-        <motion.circle
-          r="3"
-          fill="#FFFFFF"
-          initial={{ cx: 400, cy: 80, opacity: 0 }}
-          animate={{
-            cx: [400, 440, 480],
-            cy: [80, 65, 50],
-            opacity: [0, 0.7, 0],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            ease: 'linear',
-            delay: 2.5,
-            repeatDelay: 2.5,
-          }}
-        />
-        
-        {/* Animated packet - Fork to Analyze */}
-        <motion.circle
-          r="3"
-          fill="#FFFFFF"
-          initial={{ cx: 400, cy: 80, opacity: 0 }}
-          animate={{
-            cx: [400, 440, 480],
-            cy: [80, 95, 110],
-            opacity: [0, 0.7, 0],
-          }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            ease: 'linear',
-            delay: 2.8,
-            repeatDelay: 2.5,
-          }}
-        />
-
-        {/* Node circles */}
-        {/* Extract */}
-        <circle cx="80" cy="80" r="28" fill="#131316" stroke="#D96C4A" strokeWidth="1" opacity="0.8" />
-        {/* Transform */}
-        <circle cx="200" cy="80" r="28" fill="#131316" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
-        {/* Load */}
-        <circle cx="320" cy="80" r="28" fill="#131316" stroke="#D96C4A" strokeWidth="1" opacity="0.8" />
-        {/* AI/ML */}
-        <circle cx="480" cy="50" r="24" fill="#131316" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
-        {/* Analyze */}
-        <circle cx="480" cy="110" r="24" fill="#131316" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
       </svg>
 
-      {/* Labels positioned with flexbox */}
-      <div className="flex justify-between items-start px-2 -mt-2">
-        <div className="flex flex-col items-center" style={{ width: '80px' }}>
-          <Database size={16} className="text-[#D96C4A] mb-1" />
-          <span className="text-[10px] text-white/70 text-center">Extract</span>
-        </div>
-        <div className="flex flex-col items-center" style={{ width: '80px' }}>
-          <Workflow size={16} className="text-white/70 mb-1" />
-          <span className="text-[10px] text-white/70 text-center">Transform</span>
-        </div>
-        <div className="flex flex-col items-center" style={{ width: '80px' }}>
-          <Server size={16} className="text-[#D96C4A] mb-1" />
-          <span className="text-[10px] text-white/70 text-center">Load</span>
-        </div>
-        <div className="flex flex-col items-center gap-6" style={{ width: '80px' }}>
-          <div className="flex flex-col items-center">
-            <Brain size={14} className="text-white/70 mb-1" />
-            <span className="text-[10px] text-white/70 text-center">AI/ML</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <BarChart3 size={14} className="text-white/70 mb-1" />
-            <span className="text-[10px] text-white/70 text-center">Analyze</span>
-          </div>
-        </div>
+      {/* Animated particles layer */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
+        {[0, 1, 2, 3, 4].map((i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full"
+            style={{
+              background: 'radial-gradient(circle, #D96C4A 0%, rgba(217,108,74,0.5) 50%, transparent 70%)',
+              boxShadow: '0 0 8px #D96C4A, 0 0 12px rgba(217,108,74,0.5)',
+              top: '28%',
+              left: '8%',
+            }}
+            animate={{
+              left: ['8%', '92%'],
+              opacity: [0, 1, 1, 1, 0],
+            }}
+            transition={{
+              duration: 4,
+              delay: i * 0.8,
+              repeat: Infinity,
+              ease: 'linear',
+              times: [0, 0.1, 0.5, 0.9, 1],
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Icons and labels */}
+      <div className="relative flex justify-between items-start px-4" style={{ zIndex: 3 }}>
+        {stages.map((stage, index) => {
+          const IconComponent = stage.Icon;
+          
+          return (
+            <motion.div
+              key={stage.id}
+              className="flex flex-col items-center gap-3"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+            >
+              <div 
+                className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl bg-[#0C0C0E] transition-transform hover:scale-105"
+              >
+                <IconComponent 
+                  size={20} 
+                  className={stage.isOrange ? 'text-[#D96C4A]' : 'text-white/70'} 
+                />
+              </div>
+              <span className="text-[10px] sm:text-xs font-medium text-white/70 uppercase tracking-wide">
+                {stage.label}
+              </span>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
