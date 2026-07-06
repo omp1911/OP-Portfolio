@@ -5,17 +5,21 @@ Build a modern, premium personal portfolio website for Om Patel with refined dar
 
 ## Design System
 
-### Strict 2-Color Font System
-- **Orange #D96C4A** - Accents, labels, highlights, icons
-- **White #FFFFFF** - Main text, headings, body copy
+### Color Palette
+- **Background Base**: `#0C0C0E`
+- **Surface Cards**: `#131316`
+- **Orange Accent**: `#D96C4A` (labels, highlights, icons, buttons)
+- **White Heading**: `#FFFFFF` (headings, titles)
+- **White Content**: `rgba(255,255,255,0.7)` (body text, paragraphs)
+- **White Muted**: `rgba(255,255,255,0.5)` (dates, secondary info)
 
-### Theme
-- Dark base: `#0C0C0E`
-- Surface cards: `#131316`
-- Minimal shadows, no glow effects
-- No hover effects on large containers
+### Typography Hierarchy
+- **Headings (H1-H4)**: Pure white `#FFFFFF`
+- **Body/Content**: Subtle white `rgba(255,255,255,0.7)`
+- **Secondary/Muted**: Very subtle `rgba(255,255,255,0.5)`
+- **Accents**: Orange `#D96C4A`
 
-### Typography
+### Fonts
 - Headings: Cabinet Grotesk
 - Body: Manrope
 - Monospace: JetBrains Mono
@@ -23,110 +27,85 @@ Build a modern, premium personal portfolio website for Om Patel with refined dar
 ## Core Features
 
 ### Hero Section ✅
-- 3D avatar displayed naturally (NO circular crop, NO border)
-- White name "Om Patel"
+- 3D avatar with **soft blended edges** (radial gradient fade)
+- Pure white name "Om Patel"
+- Subtle white bio text (70% opacity)
 - Orange tagline "DATA ENGINEER · ANALYTICS · DEVOPS"
-- Request Resume + Get in Touch buttons
 
-### Header/Navigation ✅
-- "Om Patel" in white
-- Navigation links in white, hover to orange
+### Navigation ✅
+- "Om Patel" brand in white
+- Links in subtle white (70%), hover to orange
 - Orange Resume button
 
 ### About Section ✅
-- Bio text in white
-- Data Pipeline diagram with fork:
-  - Extract → Transform → Load → (AI/ML, Analyze)
-  - Animated data packets flowing
+- Pure white heading
+- Subtle white bio paragraphs
+- Data Pipeline diagram with fork: Extract → Transform → Load → (AI/ML, Analyze)
 
 ### Experience Section ✅
-- Timeline with orange line and dots
-- Static cards (NO hover effects)
-- White text, orange company names
+- Pure white role titles
+- Orange company names
+- Subtle white bullet points
+- No hover effects on cards
 
 ### Skills Section ✅
-- 3 categorized cards
+- Pure white heading
 - Orange category labels
-- White skill pills
+- Subtle white skill pills
 
 ### Projects Section ✅
-- Project cards with orange result badges
-- Hover only on small elements (arrow icon)
+- Pure white project titles
+- Orange result badges
+- Subtle white descriptions
 
 ### Education & Certifications ✅
 - Separate containers
-- Orange icons (GraduationCap, Award)
-- White text
+- Orange icons
+- White titles, subtle white degrees
 
 ### Contact Section ✅
+- Pure white heading
 - Phrase: "Got data stuck and need to have it transformed with analytics?"
-- "transformed" and "analytics" in orange
+  - "transformed" and "analytics" in orange
 - Request Resume → mailto:patelomr07@gmail.com
 
 ## Technology Stack
 - React.js, TailwindCSS
-- Framer Motion (smooth animations)
+- Framer Motion
 - Lucide React icons
 
-## Design Inspirations
-- samxie.net
-- neumorph-dashboard.webflow.io
-- tasteskill.dev
-- impeccable.style
-
-## What's Been Implemented (Dec 2025)
-
-### Phase 1 - Initial Setup ✅
-- Project scaffolding
-- Dark neomorphism base
-
-### Phase 2 - Premium Redesign ✅
-- Strict 2-color system (orange + white)
-- 3D avatar (natural display)
-- Pipeline diagram with fork
-- Removed hover from large containers
-- Minimized glow effects
-
-### Testing ✅
-- 100% frontend pass rate
-- Desktop and mobile verified
-- 2-color system verified
+## Testing Results (Dec 2025)
+- ✅ 100% frontend pass rate
+- ✅ Typography hierarchy verified (white headings, subtle white content)
+- ✅ Avatar blend verified (radial gradient fade)
+- ✅ Orange accents correctly applied
+- ✅ Mobile responsive at 390px
 
 ## File Structure
 ```
 /app/frontend/src/
-├── assets/
-│   └── avatar-3d.png (3D rendered avatar)
+├── assets/avatar-3d.png
 ├── components/
 │   ├── Header.jsx
-│   ├── Hero.jsx (natural avatar)
-│   ├── About.jsx (pipeline with fork)
-│   ├── Experience.jsx (no hover)
+│   ├── Hero.jsx (avatar-blend class)
+│   ├── About.jsx
+│   ├── Experience.jsx
 │   ├── Skills.jsx
 │   ├── Projects.jsx
 │   ├── Education.jsx
 │   ├── Certifications.jsx
 │   ├── Contact.jsx
 │   └── Footer.jsx
-├── data/mockData.js
-├── App.js
-├── App.css (2-color system)
+├── App.css (avatar-blend gradient)
 └── index.css
 ```
 
 ## Backlog
-
-### P1
-- [ ] SEO & Metadata (title, favicon)
+- [ ] SEO & Metadata
 - [ ] Add GitHub profile link
-
-### P2
 - [ ] Backend integration
-- [ ] Admin panel
-- [ ] Blog section
 
 ## Contact
 - Email: patelomr07@gmail.com
 - Phone: +1 (647) 914-2834
 - LinkedIn: linkedin.com/in/om-patel
-- Location: Ontario, Canada
