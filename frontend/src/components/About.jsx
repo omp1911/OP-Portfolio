@@ -3,97 +3,172 @@ import { motion } from 'framer-motion';
 import { Database, Workflow, Server, Brain, BarChart3 } from 'lucide-react';
 
 const DataPipelineVisualization = () => {
-  const stages = [
-    { id: 'extract', label: 'Extract', Icon: Database, isOrange: true },
-    { id: 'transform', label: 'Transform', Icon: Workflow, isOrange: false },
-    { id: 'load', label: 'Load', Icon: Server, isOrange: true },
-    { id: 'aiml', label: 'AI/ML', Icon: Brain, isOrange: false },
-    { id: 'analyze', label: 'Analyze', Icon: BarChart3, isOrange: true },
-  ];
-
   return (
-    <div className="relative w-full py-8" data-testid="data-pipeline-diagram">
-      {/* Flow line SVG - positioned behind icons */}
+    <div className="relative w-full" data-testid="data-pipeline-diagram" style={{ height: '160px' }}>
+      {/* SVG for dashed lines and animated packets */}
       <svg 
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        style={{ zIndex: 1 }}
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 400 140"
+        preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          {/* Gradient for static line */}
-          <linearGradient id="flowLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.15" />
-            <stop offset="50%" stopColor="rgba(255,255,255,0.1)" />
-            <stop offset="100%" stopColor="#D96C4A" stopOpacity="0.15" />
+          {/* Gradient for the dashed line */}
+          <linearGradient id="dashLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D96C4A" stopOpacity="0.5" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.3)" />
+            <stop offset="100%" stopColor="#D96C4A" stopOpacity="0.5" />
           </linearGradient>
+          
+          {/* Glow filter for particles */}
+          <filter id="glowFilter" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
-        
-        {/* Static background line */}
-        <line 
-          x1="10" y1="35" 
-          x2="90" y2="35" 
-          stroke="url(#flowLineGrad)" 
-          strokeWidth="0.5"
+
+        {/* Main horizontal dashed line through icon centers: Extract(40) -> Transform(120) -> Load(200) */}
+        <path
+          d="M 40 55 L 200 55"
+          stroke="url(#dashLineGrad)"
+          strokeWidth="2"
+          fill="none"
+          strokeDasharray="8 5"
           strokeLinecap="round"
         />
-      </svg>
+        
+        {/* Fork line to AI/ML (upper branch) from Load center */}
+        <path
+          d="M 200 55 L 280 55 L 340 30"
+          stroke="url(#dashLineGrad)"
+          strokeWidth="2"
+          fill="none"
+          strokeDasharray="8 5"
+          strokeLinecap="round"
+        />
+        
+        {/* Fork line to Analyze (lower branch) from Load center */}
+        <path
+          d="M 200 55 L 280 55 L 340 80"
+          stroke="url(#dashLineGrad)"
+          strokeWidth="2"
+          fill="none"
+          strokeDasharray="8 5"
+          strokeLinecap="round"
+        />
 
-      {/* Animated particles layer */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
-        {[0, 1, 2, 3, 4].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 rounded-full"
-            style={{
-              background: 'radial-gradient(circle, #D96C4A 0%, rgba(217,108,74,0.5) 50%, transparent 70%)',
-              boxShadow: '0 0 8px #D96C4A, 0 0 12px rgba(217,108,74,0.5)',
-              top: '28%',
-              left: '8%',
-            }}
+        {/* Animated packets on main line (Extract -> Transform -> Load) */}
+        {[0, 1, 2].map((i) => (
+          <motion.circle
+            key={`main-${i}`}
+            r="5"
+            fill="#D96C4A"
+            filter="url(#glowFilter)"
+            initial={{ cx: 40, cy: 55, opacity: 0 }}
             animate={{
-              left: ['8%', '92%'],
-              opacity: [0, 1, 1, 1, 0],
+              cx: [40, 120, 200],
+              cy: [55, 55, 55],
+              opacity: [0, 1, 1, 0.7],
             }}
             transition={{
-              duration: 4,
-              delay: i * 0.8,
+              duration: 1.8,
+              delay: i * 0.6,
               repeat: Infinity,
               ease: 'linear',
-              times: [0, 0.1, 0.5, 0.9, 1],
+              repeatDelay: 0,
             }}
           />
         ))}
+
+        {/* Animated packets on upper fork (Load -> AI/ML) */}
+        {[0, 1].map((i) => (
+          <motion.circle
+            key={`upper-${i}`}
+            r="4"
+            fill="#D96C4A"
+            filter="url(#glowFilter)"
+            initial={{ cx: 200, cy: 55, opacity: 0 }}
+            animate={{
+              cx: [200, 280, 340],
+              cy: [55, 55, 30],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 1.2,
+              delay: 1.8 + i * 0.8,
+              repeat: Infinity,
+              ease: 'linear',
+              repeatDelay: 0.4,
+            }}
+          />
+        ))}
+
+        {/* Animated packets on lower fork (Load -> Analyze) */}
+        {[0, 1].map((i) => (
+          <motion.circle
+            key={`lower-${i}`}
+            r="4"
+            fill="#D96C4A"
+            filter="url(#glowFilter)"
+            initial={{ cx: 200, cy: 55, opacity: 0 }}
+            animate={{
+              cx: [200, 280, 340],
+              cy: [55, 55, 80],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 1.2,
+              delay: 2.1 + i * 0.8,
+              repeat: Infinity,
+              ease: 'linear',
+              repeatDelay: 0.4,
+            }}
+          />
+        ))}
+      </svg>
+
+      {/* Icons positioned exactly where dashed line passes through their centers */}
+      
+      {/* Extract - x=40, y=55 center */}
+      <div className="absolute flex flex-col items-center" style={{ left: '10%', top: '35px', transform: 'translateX(-50%)' }}>
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
+          <Database size={20} className="text-[#D96C4A]" />
+        </div>
+        <span className="mt-3 text-[10px] font-medium text-white/70 uppercase tracking-wide">Extract</span>
       </div>
 
-      {/* Icons and labels */}
-      <div className="relative flex justify-between items-start px-4" style={{ zIndex: 3 }}>
-        {stages.map((stage, index) => {
-          const IconComponent = stage.Icon;
-          
-          return (
-            <motion.div
-              key={stage.id}
-              className="flex flex-col items-center gap-3"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-            >
-              <div 
-                className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl bg-[#0C0C0E] transition-transform hover:scale-105"
-              >
-                <IconComponent 
-                  size={20} 
-                  className={stage.isOrange ? 'text-[#D96C4A]' : 'text-white/70'} 
-                />
-              </div>
-              <span className="text-[10px] sm:text-xs font-medium text-white/70 uppercase tracking-wide">
-                {stage.label}
-              </span>
-            </motion.div>
-          );
-        })}
+      {/* Transform - x=120, y=55 center */}
+      <div className="absolute flex flex-col items-center" style={{ left: '30%', top: '35px', transform: 'translateX(-50%)' }}>
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
+          <Workflow size={20} className="text-white/70" />
+        </div>
+        <span className="mt-3 text-[10px] font-medium text-white/70 uppercase tracking-wide">Transform</span>
+      </div>
+
+      {/* Load - x=200, y=55 center (fork point) */}
+      <div className="absolute flex flex-col items-center" style={{ left: '50%', top: '35px', transform: 'translateX(-50%)' }}>
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
+          <Server size={20} className="text-[#D96C4A]" />
+        </div>
+        <span className="mt-3 text-[10px] font-medium text-white/70 uppercase tracking-wide">Load</span>
+      </div>
+
+      {/* AI/ML - x=340, y=30 center (upper fork) */}
+      <div className="absolute flex flex-col items-center" style={{ left: '85%', top: '10px', transform: 'translateX(-50%)' }}>
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
+          <Brain size={20} className="text-white/70" />
+        </div>
+        <span className="mt-3 text-[10px] font-medium text-white/70 uppercase tracking-wide">AI/ML</span>
+      </div>
+
+      {/* Analyze - x=340, y=80 center (lower fork) */}
+      <div className="absolute flex flex-col items-center" style={{ left: '85%', top: '60px', transform: 'translateX(-50%)' }}>
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
+          <BarChart3 size={20} className="text-[#D96C4A]" />
+        </div>
+        <span className="mt-3 text-[10px] font-medium text-white/70 uppercase tracking-wide">Analyze</span>
       </div>
     </div>
   );
