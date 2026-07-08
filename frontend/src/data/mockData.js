@@ -42,6 +42,8 @@ export const experiences = [
       "Docker",
       "Kubernetes",
       "Terraform",
+      "Data Security(RBAC/IAM)",
+      "Azure DevOps"
     ],
     keyProject: {
       title: "LLM-Powered Invoice Automation",
@@ -51,6 +53,18 @@ export const experiences = [
   },
   {
     id: 2,
+    company: "D-Tech Consulting",
+    role: "Data Engineer (Volunteer Work)",
+    // duration: "Jul 2020 — Jan 2021",
+    highlights: [
+      "Optimized complex JSON/XML transformations using Spark UDFs, CTEs, window functions, and robust data masking standards",
+      "Automated end-to-end data workflows and pipeline orchestration leveraging Oozie, Apache NiFi, and shell scripting",
+      "Engineered scalable batch and streaming pipelines using Spark (Scala/PySpark), Kafka, Hive, and HDFS for enterprise analytics",
+    ],
+    stack: ["Apache NiFi", "Python", "JSON/XML/PARQUET", "MySQL", "HDFS", "Hive", "CI/CD", "Shell Scripting", "Oozie"],
+  },
+  {
+    id: 3,
     company: "DIGIBEE",
     role: "Web Developer",
     // duration: "Jul 2020 — Jan 2021",
@@ -123,6 +137,7 @@ export const skills = {
     "Linux",
     "TryHackMe",
     "Security+ (in progress)",
+    "Data Security"
   ],
 };
 
@@ -134,6 +149,7 @@ export const education = [
   {
     institution: "BITS Pilani",
     degree: "Bachelor of Computer Science",
+    status: "in-progress",
   },
 ];
 

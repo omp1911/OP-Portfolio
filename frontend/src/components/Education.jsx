@@ -1,13 +1,17 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap } from 'lucide-react';
-import { education } from '../data/mockData';
+import React from "react";
+import { motion } from "framer-motion";
+import { GraduationCap } from "lucide-react";
+import { education } from "../data/mockData";
 
 const Education = () => {
   const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   return (
-    <section id="education" className="section bg-dark-base" data-testid="education-section">
+    <section
+      id="education"
+      className="section bg-dark-base"
+      data-testid="education-section"
+    >
       <div className="container max-w-[1200px] mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -16,7 +20,9 @@ const Education = () => {
           transition={{ duration: 0.5, ease: easing }}
           className="mb-8"
         >
-          <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">Education</p>
+          <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-4">
+            Education
+          </p>
           <h2 className="font-heading text-2xl sm:text-3xl font-medium tracking-tight text-white">
             Academic background
           </h2>
@@ -40,8 +46,13 @@ const Education = () => {
                 <h3 className="font-heading text-base font-medium text-white truncate">
                   {edu.institution}
                 </h3>
-                <p className="text-sm text-white/50 truncate">
-                  {edu.degree}
+                <p className="text-sm text-white/50 truncate flex items-center flex-wrap gap-2">
+                  <span>{edu.degree}</span>
+                  {edu.status === "in-progress" && (
+                    <span className="inline-block text-[10px] font-medium uppercase tracking-wide text-[#D96C4A] border border-[#D96C4A]/30 rounded-full px-2 py-0.5 align-middle">
+                      In Progress
+                    </span>
+                  )}
                 </p>
               </div>
             </motion.div>
