@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Mail } from 'lucide-react';
 import { navSections, personalInfo } from '../data/mockData';
 
 const Header = () => {
@@ -62,10 +62,11 @@ const Header = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5, ease: easing }}
               href={personalInfo.resumeMailto}
-              className="btn-primary text-sm py-2.5 px-5"
+              className="btn-primary text-sm py-2.5 px-5 inline-flex items-center gap-2"
               data-testid="resume-request-btn"
             >
-              Resume
+              <Mail size={16} />
+              Request Resume
             </motion.a>
           </nav>
 
@@ -111,9 +112,10 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.4, ease: easing }}
                 href={personalInfo.resumeMailto}
-                className="btn-primary mt-4 w-fit"
+                className="btn-primary mt-4 w-fit inline-flex items-center gap-2"
                 data-testid="mobile-resume-btn"
               >
+                <Mail size={16} />
                 Request Resume
               </motion.a>
             </nav>

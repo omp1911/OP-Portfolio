@@ -1,16 +1,36 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Linkedin, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, Linkedin, MapPin } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
 
 const Contact = () => {
   const easing = [0.34, 1.56, 0.64, 1]; // back-out: physical object settles with slight bounce
 
   const contactItems = [
-    { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
-    { icon: Phone, label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone.replace(/[^+\d]/g, '')}` },
-    { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/om-patel', href: personalInfo.linkedin },
-    { icon: MapPin, label: 'Location', value: personalInfo.location, href: null },
+    {
+      icon: Mail,
+      label: "Email",
+      value: personalInfo.email,
+      href: `mailto:${personalInfo.email}`,
+    },
+    {
+      icon: Phone,
+      label: "Phone",
+      value: personalInfo.phone,
+      href: `tel:${personalInfo.phone.replace(/[^+\d]/g, "")}`,
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "linkedin.com/in/patelomr",
+      href: personalInfo.linkedin,
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: personalInfo.location,
+      href: null,
+    },
   ];
 
   return (
@@ -106,7 +126,7 @@ const Contact = () => {
               className="btn-primary inline-flex items-center gap-2"
               data-testid="contact-resume-btn"
             >
-              <Send size={16} />
+              <Mail size={16} />
               Request Resume
             </motion.a>
           </motion.div>
@@ -118,7 +138,7 @@ const Contact = () => {
             transition={{ duration: 0.5, delay: 0.5, ease: easing }}
             className="text-white/50 text-sm"
           >
-            Open to full-time roles, freelance data platform work, and interesting engineering problems.
+            Open to full-time roles, freelance work, and interesting engineering problems.
           </motion.p>
         </div>
       </div>

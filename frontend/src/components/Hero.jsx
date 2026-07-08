@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Mail, MessageCircle } from 'lucide-react';
 import { personalInfo } from '../data/mockData';
 import avatarImage from '../assets/avatar-3d.png';
 import ScrambleText from './ScrambleText';
@@ -55,16 +55,18 @@ const Hero = () => {
             >
               <a
                 href={personalInfo.resumeMailto}
-                className="btn-primary"
+                className="btn-primary inline-flex items-center gap-2"
                 data-testid="hero-resume-btn"
               >
+                <Mail size={16} />
                 Request Resume
               </a>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-secondary"
+                className="btn-secondary inline-flex items-center gap-2"
                 data-testid="hero-contact-btn"
               >
+                <MessageCircle size={16} />
                 Get in Touch
               </button>
             </motion.div>

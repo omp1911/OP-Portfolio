@@ -9,7 +9,7 @@ const DataPipelineVisualization = () => {
       <svg 
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 400 160"
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio="none"
       >
         <defs>
           {/* Gradient for the dashed line */}
@@ -159,7 +159,7 @@ const DataPipelineVisualization = () => {
       </div>
 
       {/* AI/ML - x=340, y=30 center (upper fork) */}
-      <div className="absolute flex flex-col items-center" style={{ left: '85%', top: '10px', transform: 'translateX(-50%)' }}>
+      <div className="absolute flex flex-row items-center" style={{ left: '87%', top: '10px', transform: 'translateX(-50%)' }}>
         <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
           <Brain size={20} className="text-white/70" />
         </div>
@@ -167,7 +167,7 @@ const DataPipelineVisualization = () => {
       </div>
 
       {/* Analyze - x=340, y=80 center (lower fork) */}
-      <div className="absolute flex flex-col items-center" style={{ left: '85%', top: '60px', transform: 'translateX(-50%)' }}>
+      <div className="absolute flex flex-row items-center" style={{ left: '89%', top: '60px', transform: 'translateX(-50%)' }}>
         <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#0C0C0E]">
           <BarChart3 size={20} className="text-[#D96C4A]" />
         </div>
@@ -233,10 +233,11 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2, ease: easing }}
-            className="neo-card p-6 sm:p-8"
+            // {/* Added classes: flex, flex-col, justify-center, items-center, and h-full */}
+            className="neo-card p-6 sm:p-8 flex flex-col justify-center items-center h-full min-h-[220px]"
           >
-            <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-2">Data Flow</p>
-            <p className="text-sm text-white/50 mb-4">How I architect data pipelines</p>
+            {/* <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-2">Data Flow</p>
+            <p className="text-sm text-white/50 mb-4">How I architect data pipelines</p> */}
             <DataPipelineVisualization />
           </motion.div>
         </div>

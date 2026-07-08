@@ -40,6 +40,14 @@ const ExperienceItem = ({ exp, index }) => {
           ))}
         </ul>
 
+        {exp.keyProject && (
+          <div className="border-t border-white/5 pt-5 mb-6">
+            <p className="text-[#D96C4A] text-xs font-medium tracking-[0.2em] uppercase mb-2">Key Project</p>
+            <p className="text-white text-sm font-medium mb-1">{exp.keyProject.title}</p>
+            <p className="text-white/60 text-sm leading-relaxed">{exp.keyProject.description}</p>
+          </div>
+        )}
+
         <div className="flex flex-wrap gap-2">
           {exp.stack.map((tech) => (
             <span key={tech} className="skill-pill text-xs">
