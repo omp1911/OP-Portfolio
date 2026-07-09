@@ -9,7 +9,7 @@ export const personalInfo = {
   linkedin: "https://www.linkedin.com/in/patelomr/",
   location: "Ontario, Canada",
   resumeMailto:
-    "mailto:patelomr07@gmail.com?subject=Resume%20Request%20-%20Data%20Engineer&body=Hi%20Om,%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20request%20a%20copy%20of%20your%20resume.%0A%0ABest%20regards,",
+    "mailto:patelomr07@gmail.com?subject=Resume%20Request%20-%20Data%20Engineer&body=Hi%20Om,%0A%0AI%20came%20across%20your%20portfolio%20and%20was%20genuinely%20impressed%20by%20your%20work%20and%20skills.%20Would%20you%20be%20able%20to%20share%20a%20copy%20of%20your%20resume%3F%0A%0ABest%20regards,",
   bio: "I architect data platforms that transform raw chaos into actionable insights. With 5+ years across GCP, Azure, and AWS, I build pipelines that scale from GBs to TBs - handling real-time streaming, CDC, orchestration, and analytics that drive decisions.",
 };
 
